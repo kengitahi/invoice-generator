@@ -14,7 +14,7 @@
                 make it fun and easy!</p>
             <div class="relative flex items-center mx-auto mt-8 overflow-hidden text-center md:justify-center">
                 <div class="space-y-2">
-                    <x-links.link type="secondary" :href="route('create-invoice')">
+                    <x-links.link type="secondary" :href="route('invoices.create')">
                         Get Started
                     </x-links.link>
                     <x-links.link type="primary" href="about">

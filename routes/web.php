@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\InvoiceController;
 use App\Livewire\Home;
-use App\Livewire\Pages\Invoice;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
