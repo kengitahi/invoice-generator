@@ -1,10 +1,12 @@
 @props(['reverse' => ''])
 
 @php
-    $classes = 'flex items-center justify-center space-y-4 md:space-y-0 md:space-x-4 ';
+    $classes = 'flex flex-col items-center justify-center space-y-4 md:space-y-0 md:space-x-4 ';
 
     if ($reverse) {
-        $classes .= 'flex-row-reverse';
+        $classes .= 'md:flex-row-reverse ';
+    }else{
+        $classes .= 'md:flex-row';
     }
 @endphp
 

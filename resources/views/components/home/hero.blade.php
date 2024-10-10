@@ -12,8 +12,8 @@
                 If you are ready to change and simplify how you create and send invoices, then you'll want to use our
                 invoice builder to
                 make it fun and easy!</p>
-            <div class="relative flex items-center justify-center mx-auto mt-12 overflow-hidden text-center">
-                <div>
+            <div class="relative flex items-center mx-auto mt-8 overflow-hidden text-center md:justify-center">
+                <div class="space-y-2">
                     <x-links.link type="secondary" :href="route('create-invoice')">
                         Get Started
                     </x-links.link>
