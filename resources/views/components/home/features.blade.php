@@ -1,4 +1,5 @@
-<section class="w-full px-3 antialiased bg-gradient-to-br from-gray-900 via-black to-gray-800 lg:px-6">
+<section class="w-full px-3 antialiased bg-gradient-to-br from-gray-900 via-black to-gray-800 lg:px-6" id="home-features
+">
     <div class="mx-auto max-w-7xl">
         <div class="container px-6 py-20 mx-auto md:px-4">
             <div class="max-w-screen-lg mb-8 space-y-4 lg:mb-16">
@@ -6,8 +7,8 @@
                     Designed for business teams like yours
                 </x-typography.section-h2>
                 <p class="text-gray-500 sm:text-xl dark:text-gray-400">
-                    Here at Flowbite we focus on markets where
-                    technology, innovation, and capital can unlock long-term value and drive economic growth.
+                    We focus on markets where
+                    technology, innovation, and fast payments can unlock long-term value, enhance business relationships and drive growth.
                 </p>
             </div>
             <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">

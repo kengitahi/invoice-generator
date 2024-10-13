@@ -17,7 +17,7 @@
                     <x-links.link type="secondary" :href="route('invoices.create')">
                         Get Started
                     </x-links.link>
-                    <x-links.link type="primary" href="about">
+                    <x-links.link type="primary" href="#home-features">
                         Learn More
                     </x-links.link>
                 </div>
