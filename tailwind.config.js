@@ -21,8 +21,8 @@ export default {
                 'text-primary': '#202124',
             },
             fontFamily: {
-                sans: ['Open Sans', 'sans-serif'],
-                heading: ['Roboto', 'sans-serif'],
+                sans: ['Josefin Sans', 'sans-serif'],
+                heading: ['Alike', 'sans-serif'],
             },
         },
     },
