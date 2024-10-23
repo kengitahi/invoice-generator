@@ -129,71 +129,52 @@
                         <hr class="h-1 my-8 bg-gray-200 border-gray-200">
 
                         {{-- Line items --}}
-                        <div class="mt-4 space-y-4">
-                            <p class="text-xl font-bold text-gray-900">Items/Services</p>
-                            <hr class="my-4 border-gray-300">
-                            {{-- Line items --}}
-                            <div class="mt-4" id="itemRows">
+                        <div class="space-y-4">
+                            youou
+                            @foreach ($items as $index => $item)
                                 {{-- Single Item --}}
-                                <div class="flex flex-col p-4 mt-4 mb-4 border-[2px] border-gray-300 rounded-md item-row">
-                                    <div>
-                                        <x-inputs.label for="items[0][name]">
-                                            Item Name
-                                        </x-inputs.label>
-                                        <x-inputs.text class="p-2 border" name="items[0][name]"
-                                            placeholder="Lawn chair, web development, etc" required type="text" />
-                                    </div>
+                                <div class="flex space-x-4" wire:key="item-{{ $item['id'] }}">
+                                    <input class="form-input" placeholder="Item name" type="text"
+                                        wire:model="items.{{ $index }}.name">
 
-                                    <div class="mt-2">
-                                        <x-inputs.label for="items[0][description]" optional>
-                                            Item Description
-                                        </x-inputs.label>
-                                        <x-inputs.textarea class="w-full p-2 border" name="items[0][description]"
-                                            placeholder="Description or additional details" type="text" />
-                                    </div>
+                                    <input class="form-input" placeholder="Description" type="text"
+                                        wire:model="items.{{ $index }}.description">
 
-                                    <div class="flex mt-2 space-x-4">
-                                        <div class="w-1/2">
-                                            <x-inputs.label for="items[0][quantity]">
-                                                Quantity (Number)
-                                            </x-inputs.label>
-                                            <x-inputs.text class="p-2 border" name="items[0][quantity]"
-                                                placeholder="1" required type="number" />
-                                        </div>
-                                        <div class="w-1/2">
-                                            <x-inputs.label for="items[0][quantity]">
-                                                Price (in currency)
-                                            </x-inputs.label>
-                                            <x-inputs.prepend class="p-2 border" name="items[0][price]"
-                                                placeholder="30" required type="number" />
-                                        </div>
-                                    </div>
-                                    <div class="flex mt-2 space-x-4">
-                                        <div class="w-1/2">
-                                            <x-inputs.label for="items[0][quantity]" optional>
-                                                Discount (Percentage)
-                                            </x-inputs.label>
-                                            <x-inputs.append class="p-2 border" name="items[0][discount]"
-                                                placeholder="20" type="number" />
-                                        </div>
-                                        <div class="w-1/2">
-                                            <x-inputs.label for="items[0][shipping]" optional>
-                                                Shipping Cost (Percentage)
-                                            </x-inputs.label>
-                                            <x-inputs.append class="p-2 border" name="items[0][shipping]"
-                                                placeholder="3" required type="number" />
-                                        </div>
-                                    </div>
+                                    <input class="w-24 form-input" type="number"
+                                        wire:change="calculateTotal({{ $index }})"
+                                        wire:model="items.{{ $index }}.quantity">
 
+                                    <input class="w-32 form-input" step="0.01" type="number"
+                                        wire:change="calculateTotal({{ $index }})"
+                                        wire:model="items.{{ $index }}.price">
+
+                                    <input class="w-24 form-input" type="number"
+                                        wire:change="calculateTotal({{ $index }})"
+                                        wire:model="items.{{ $index }}.discount">
+
+                                    <input class="w-24 form-input" step="0.01" type="number"
+                                        wire:change="calculateTotal({{ $index }})"
+                                        wire:model="items.{{ $index }}.shipping">
+
+                                    <span class="py-2">
+                                        ${{ number_format($item['total'] ?? 0, 2) }}
+                                    </span>
+
+                                    <button class="text-red-500" wire:click="removeLineItem({{ $index }})">
+                                        Remove
+                                    </button>
                                 </div>
-                            </div>
-                            <x-buttons.btn btn="primary" class="space-x-1" id="addRow">
-                                <span>Add Item</span>
-                                <svg class="size-4" fill="none" stroke-width="1.5" stroke="currentColor"
-                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 4.5v15m7.5-7.5h-15" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </x-buttons.btn>
+                            @endforeach
+                        </div>
+
+                        <div class="mt-4">
+                            <button class="btn btn-primary" wire:click="addLineItem">
+                                Add Line Item
+                            </button>
+                        </div>
+
+                        <div class="mt-4 text-xl font-bold">
+                            Total: ${{ number_format($total, 2) }}
                         </div>
 
                         <hr class="h-1 my-8 bg-gray-200 border-gray-200">
@@ -216,7 +197,7 @@
                                     placeholder="Please make the payment by the due date." type="text" />
                             </div>
                         </div>
-                        
+
                         <hr class="h-1 my-8 bg-gray-200 border-gray-200">
 
                         {{-- Send button --}}
