@@ -47,12 +47,17 @@
                 <div
                     class="flex-col items-center w-full h-full p-3 overflow-hidden bg-black bg-opacity-50 rounded-lg select-none md:p-0 backdrop-blur-lg md:h-auto md:bg-transparent md:rounded-none md:relative md:flex md:flex-row md:overflow-auto">
                     <div class="flex flex-col items-center justify-end w-full h-full pt-2 md:w-full md:flex-row md:py-0">
+                        @auth
+                            <x-partials.user-dropdown />
+                        @endauth
+                        @guest
                         <x-links.link type="tertiary" :href="route('login')">
                             Sign In
                         </x-links.link>
                          <x-links.link type="secondary" :href="route('register')">
                             Sign Up
                         </x-links.link>
+                        @endguest
                     </div>
                 </div>
             </div>
