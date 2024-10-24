@@ -7,7 +7,7 @@
     <section class="w-full px-3 antialiased lg:px-6">
         <div class="flex flex-col mx-auto max-w-7xl">
             <div class="pt-12 mb-8 space-y-8 md:px-4 lg:mb-14">
-                <x-typography.section-h2 class="text-grey">
+                <x-typography.section-h2 class="text-gray-900">
                     Create Invoice
                 </x-typography.section-h2>
                 <form action="" class="p-4 border border-gray-300 rounded-md">
@@ -194,7 +194,7 @@
 
                                 <hr class="my-4 h-[2px] border-gray-200 bg-gray-200">
 
-                                <div class="flex space-x-4 text-lg font-semibold">
+                                <div class="flex space-x-4 text-lg font-semibold text-gray-900">
                                     This Item's total <small class="text-gray-400"> (After discount and shipping)</small>: ${{ number_format($item['total'] ?? 0, 2) }}
                                 </div>
 
@@ -231,8 +231,8 @@
 
                     <hr class="my-4 h-[2px] border-gray-200 bg-gray-200">
 
-                    <div class="mt-4 text-xl font-bold">
-                        Grand Total <small class="text-gray-400"> (After discount and shipping)</small>: ${{ number_format($total, 2) }}
+                    <div class="mt-4 text-xl font-bold text-gray-900">
+                        Grand Total <small class="text-gray-400 font-semibold"> (After discount and shipping)</small>: ${{ number_format($total, 2) }}
                     </div>
 
                     <hr class="h-1 my-8 bg-gray-200 border-gray-200">

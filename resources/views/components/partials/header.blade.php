@@ -1,3 +1,3 @@
 <header>
-    <x-partials.nav />
+    <x-partials.main-nav />
 </header>

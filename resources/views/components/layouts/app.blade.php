@@ -13,7 +13,7 @@
         @endif
     </title>
 
-    <script src="//unpkg.com/alpinejs" defer></script>
+    {{-- <script src="//unpkg.com/alpinejs" defer></script> --}}
 
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
@@ -24,7 +24,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased bg-white">
     {{ $slot }}
     <x-partials.footer />
 </body>

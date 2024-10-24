@@ -1,4 +1,4 @@
-<section class="w-full px-3 antialiased bg-gradient-to-br from-gray-900 via-black to-gray-800 lg:px-6">
+<section class="w-full px-3 antialiased bg-gradient-to-br from-gray-900 via-black to-gray-800 lg:px-6" id="features">
     <div class="flex flex-col mx-auto max-w-7xl">
         <div class="container max-w-screen-lg px-6 pt-20 mx-auto mb-8 space-y-4 text-center md:px-4 lg:mb-14">
             <x-typography.section-h2>
