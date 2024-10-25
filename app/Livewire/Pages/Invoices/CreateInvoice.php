@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Pages;
+namespace App\Livewire\Pages\Invoices;
 
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -59,6 +59,6 @@ class CreateInvoice extends Component
     #[Title('Create Invoice')]
     public function render()
     {
-        return view('livewire.invoices.create');
+        return view('livewire.pages.invoices.create');
     }
 }

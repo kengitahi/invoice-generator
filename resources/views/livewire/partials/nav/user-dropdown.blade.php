@@ -33,18 +33,18 @@ new class extends Component {
                 </div>
             </div>
             <div>
-                <h6 class="text-base font-semibold text-base-content/90">John Doe</h6>
-                <small class="text-base-content/50">Admin</small>
+                <h6 class="text-base font-semibold text-base-content/90">{{ auth()->user()->name }}</h6>
+                <small class="text-base-content/50">{{ auth()->user()->email }}</small>
             </div>
         </li>
         <li>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="{{route('profile')}}">
                 <span class="icon-[tabler--user]"></span>
                 My Profile
             </a>
         </li>
         <li>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="{{route('dashboard')}}">
                 <span class="icon-[tabler--settings]"></span>
                 Settings
             </a>
@@ -52,13 +52,7 @@ new class extends Component {
         <li>
             <a class="dropdown-item" href="#">
                 <span class="icon-[tabler--receipt-rupee]"></span>
-                Billing
-            </a>
-        </li>
-        <li>
-            <a class="dropdown-item" href="#">
-                <span class="icon-[tabler--help-triangle]"></span>
-                FAQs
+                Invoices
             </a>
         </li>
         <li class="gap-2 dropdown-footer">

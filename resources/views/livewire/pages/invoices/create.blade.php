@@ -150,8 +150,8 @@
                                         wire:model="items.{{ $index }}.description" />
                                 </div>
 
-                                <div class="flex mt-2 space-x-4">
-                                    <div class="w-1/2">
+                                <div class="flex mt-2 md:space-x-4 flex-col md:flex-row gap-4 md:gap-0">
+                                    <div class="w-full md:w-1/2">
                                         <x-inputs.label for="items.{{ $index }}.quantity">
                                             Quantity (Number)
                                         </x-inputs.label>
@@ -160,7 +160,7 @@
                                             wire:change="calculateTotal({{ $index }})"
                                             wire:model="items.{{ $index }}.quantity" />
                                     </div>
-                                    <div class="w-1/2">
+                                    <div class="w-full md:w-1/2">
                                         <x-inputs.label for="items.{{ $index }}.price">
                                             Price (in currency)
                                         </x-inputs.label>
@@ -171,8 +171,8 @@
                                     </div>
                                 </div>
 
-                                <div class="flex mt-2 space-x-4">
-                                    <div class="w-1/2">
+                                <div class="flex mt-2 md:space-x-4 flex-col md:flex-row gap-4 md:gap-0">
+                                    <div class="w-full md:w-1/2">
                                         <x-inputs.label for="items.{{ $index }}.discount" optional>
                                             Discount (Percentage)
                                         </x-inputs.label>
@@ -181,7 +181,7 @@
                                             wire:change="calculateTotal({{ $index }})"
                                             wire:model="items.{{ $index }}.discount" />
                                     </div>
-                                    <div class="w-1/2">
+                                    <div class="w-full md:w-1/2">
                                         <x-inputs.label for="items.{{ $index }}.shipping" optional>
                                             Shipping Cost (Percentage)
                                         </x-inputs.label>
@@ -261,10 +261,10 @@
                     {{-- Send button --}}
                     <div class="flex justify-end">
                         <x-buttons.btn btn="primary"
-                            class="text-lg font-semibold text-black border-none gap-x-1 bg-accent hover:bg-accent hover:underline"
+                            class="text-lg font-semibold text-black border-none gap-x-1 bg-accent hover:bg-accent hover:underline group transition duration-300 ease-in-out"
                             type="submit">
                             <span>Create Invoice</span>
-                            <svg class="size-6" fill="none" stroke-width="1.5" stroke="currentColor"
+                            <svg class="size-6 transition duration-300 ease-in-out group-hover:translate-x-2" fill="none" stroke-width="1.5" stroke="currentColor"
                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" stroke-linecap="round"
                                     stroke-linejoin="round" />

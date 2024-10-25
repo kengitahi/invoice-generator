@@ -12,7 +12,7 @@
                 </a>
             </div>
             <div class="px-5 py-2">
-                <a href="#home-features" class="text-base leading-6 text-gray-500 hover:text-gray-900">
+                <a href="/#features" class="text-base leading-6 text-gray-500 hover:text-gray-900">
                     Features
                 </a>
             </div>
@@ -24,7 +24,7 @@
         </nav>
 
         {{-- Icons-hidden for now --}}
-        <div class="flex justify-center hidden mt-8 space-x-6">
+        <div class="justify-center hidden mt-8 space-x-6">
             <a href="#" class="text-gray-400 hover:text-gray-500">
                 <span class="sr-only">Facebook</span>
                 <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">

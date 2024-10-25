@@ -30,7 +30,7 @@
         <x-typography.card-text>
             {{ $body }}
         </x-typography.card-text>
-        <x-links.link class="flex gap-1 w-fit" href="{{ $href }}" target="{{ $target }}" type="primary">
+        <x-links.link class="flex gap-1 w-fit group transition duration-300 ease-in-out" href="{{ $href }}" target="{{ $target }}" type="primary">
             {{ $linkText }}
             {{ $icon }}
         </x-links.link>

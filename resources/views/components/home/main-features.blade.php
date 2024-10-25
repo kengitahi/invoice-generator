@@ -1,6 +1,6 @@
-<section class="w-full px-3 antialiased bg-gradient-to-br from-gray-900 via-black to-gray-800 lg:px-6" id="features">
-    <div class="flex flex-col mx-auto max-w-7xl">
-        <div class="container max-w-screen-lg px-6 pt-20 mx-auto mb-8 space-y-4 text-center md:px-4 lg:mb-14">
+<section class="w-full bg-gradient-to-br from-gray-900 via-black to-gray-800 px-3 antialiased lg:px-6" id="features">
+    <div class="mx-auto flex max-w-7xl flex-col">
+        <div class="container mx-auto mb-8 max-w-screen-lg space-y-4 px-6 pt-20 text-center md:px-4 lg:mb-14">
             <x-typography.section-h2>
                 A Suite of Modern Invoicing Tools and Features
             </x-typography.section-h2>
@@ -8,8 +8,8 @@
                 Enhance your business and provide customers and clients with a better invoicing experience.
             </x-typography.section-subheading>
         </div>
-        <div class="container max-w-screen-lg px-6 mx-auto mb-20 space-y-4 md:px-4 lg:mb-16">
-            <x-cards.feature href="{{ route('invoices.create') }}" target="blank">
+        <div class="container mx-auto mb-20 max-w-screen-lg space-y-4 px-6 md:px-4 lg:mb-16">
+            <x-cards.feature href="{{route('invoices.create')}}" target="blank">
                 <x-slot:image>
                     lady-holding-laptop-3.jpg
                 </x-slot>
@@ -29,17 +29,19 @@
                     </x-typography.card-paragraph>
                 </x-slot>
                 <x-slot:linkText>
-                    Create invoice
+                    {{ auth()->check() ? 'Create Invoice' : 'Get Started' }}
                     <x-slot:icon>
-                        <svg class="size-6" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
+                        <svg class="size-6 transition duration-300 ease-in-out group-hover:translate-x-2" fill="none"
+                            stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" stroke-linecap="round"
+                            <path d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" stroke-linecap="round"
                                 stroke-linejoin="round" />
                         </svg>
                     </x-slot:icon>
                 </x-slot>
             </x-cards.feature>
-            <x-cards.feature href="{{ route('login') }}" reverse target="blank">
+            <x-cards.feature href="{{ auth()->check() ? route('invoices.index') : route('invoices.create') }}" reverse
+                target="blank">
                 <x-slot:image>
                     lady-holding-laptop-3.jpg
                 </x-slot>
@@ -58,17 +60,18 @@
                     </x-typography.card-paragraph>
                 </x-slot>
                 <x-slot:linkText>
-                    Manage Invoices
+                    {{ auth()->check() ? 'Manage Invoices' : 'Create Invoice' }}
                     <x-slot:icon>
-                        <svg class="size-6" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
+                        <svg class="size-6 transition duration-300 ease-in-out group-hover:translate-x-2" fill="none"
+                            stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" stroke-linecap="round"
+                            <path d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" stroke-linecap="round"
                                 stroke-linejoin="round" />
                         </svg>
                     </x-slot:icon>
                 </x-slot>
             </x-cards.feature>
-            <x-cards.feature href="{{ route('login') }}" target="blank">
+            <x-cards.feature href="{{ auth()->check() ? route('payments.index') : route('register') }}" target="blank">
                 <x-slot:image>
                     lady-holding-laptop-3.jpg
                 </x-slot>
@@ -87,17 +90,19 @@
                     </x-typography.card-paragraph>
                 </x-slot>
                 <x-slot:linkText>
-                    Manage Payments
+                    {{ auth()->check() ? 'Manage Payments' : 'Create Account' }}
                     <x-slot:icon>
-                        <svg class="size-6" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
+                        <svg class="size-6 transition duration-300 ease-in-out group-hover:translate-x-2" fill="none"
+                            stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" stroke-linecap="round"
+                            <path d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" stroke-linecap="round"
                                 stroke-linejoin="round" />
                         </svg>
                     </x-slot:icon>
                 </x-slot>
             </x-cards.feature>
-            <x-cards.feature href="{{ route('invoices.create') }}" reverse target="blank">
+            <x-cards.feature href="{{ auth()->check() ? route('invoices.create') : route('register') }}" reverse
+                target="blank">
                 <x-slot:image>
                     lady-holding-laptop-3.jpg
                 </x-slot>
@@ -115,11 +120,12 @@
                     </x-typography.card-paragraph>
                 </x-slot>
                 <x-slot:linkText>
-                    Create Invoice
+                    {{ auth()->check() ? 'Create Invoice' : 'Get Started' }}
                     <x-slot:icon>
-                        <svg class="size-6" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
+                        <svg class="size-6 transition duration-300 ease-in-out group-hover:translate-x-2" fill="none"
+                            stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" stroke-linecap="round"
+                            <path d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" stroke-linecap="round"
                                 stroke-linejoin="round" />
                         </svg>
                     </x-slot:icon>
