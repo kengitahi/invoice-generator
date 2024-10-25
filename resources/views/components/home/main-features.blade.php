@@ -9,7 +9,7 @@
             </x-typography.section-subheading>
         </div>
         <div class="container mx-auto mb-20 max-w-screen-lg space-y-4 px-6 md:px-4 lg:mb-16">
-            <x-cards.feature href="{{route('invoices.create')}}" target="blank">
+            <x-cards.feature href="{{route('invoices.create')}}">
                 <x-slot:image>
                     lady-holding-laptop-3.jpg
                 </x-slot>
@@ -40,8 +40,7 @@
                     </x-slot:icon>
                 </x-slot>
             </x-cards.feature>
-            <x-cards.feature href="{{ auth()->check() ? route('invoices.index') : route('invoices.create') }}" reverse
-                target="blank">
+            <x-cards.feature href="{{ auth()->check() ? route('invoices.index') : route('invoices.create') }}" reverse>
                 <x-slot:image>
                     lady-holding-laptop-3.jpg
                 </x-slot>
@@ -71,7 +70,7 @@
                     </x-slot:icon>
                 </x-slot>
             </x-cards.feature>
-            <x-cards.feature href="{{ auth()->check() ? route('payments.index') : route('register') }}" target="blank">
+            <x-cards.feature href="{{ auth()->check() ? route('payments.index') : route('register') }}">
                 <x-slot:image>
                     lady-holding-laptop-3.jpg
                 </x-slot>
@@ -101,8 +100,7 @@
                     </x-slot:icon>
                 </x-slot>
             </x-cards.feature>
-            <x-cards.feature href="{{ auth()->check() ? route('invoices.create') : route('register') }}" reverse
-                target="blank">
+            <x-cards.feature href="{{ auth()->check() ? route('invoices.create') : route('register') }}" reverse>
                 <x-slot:image>
                     lady-holding-laptop-3.jpg
                 </x-slot>
