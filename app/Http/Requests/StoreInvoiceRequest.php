@@ -11,7 +11,8 @@ class StoreInvoiceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        //TODO: Add Gate for permisisons here
+        return true;
     }
 
     /**

@@ -50,7 +50,7 @@ new class extends Component {
             </a>
         </li>
         <li>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="{{route('invoices.index')}}">
                 <span class="icon-[tabler--receipt-rupee]"></span>
                 Invoices
             </a>

@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\InvoiceController;
 use App\Livewire\Home;
 use App\Livewire\Pages\Contact;
 use App\Livewire\Pages\Invoices\CreateInvoice;
 use App\Livewire\Pages\Invoices\IndexInvoices;
+use App\Livewire\Pages\Invoices\StoreInvoice;
 use App\Livewire\Pages\Payments\CreatePayment;
 use App\Livewire\Pages\Payments\IndexPayments;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +18,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::name('invoices.')->group(function () {
             Route::get('/index', IndexInvoices::class)->name('index');
             Route::get('/create', CreateInvoice::class)->name('create');
+            Route::get('/store', [InvoiceController::class, 'store'])->name('store');
         });
     });
 

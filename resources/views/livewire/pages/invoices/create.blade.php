@@ -1,16 +1,16 @@
 <section>
-    <div class="w-full px-3 antialiased bg-gradient-to-br from-gray-900 via-black to-gray-800 lg:px-6">
+    <div class="w-full bg-gradient-to-br from-gray-900 via-black to-gray-800 px-3 antialiased lg:px-6">
         <div class="mx-auto max-w-7xl">
             <x-partials.header />
         </div>
     </div>
     <section class="w-full px-3 antialiased lg:px-6">
-        <div class="flex flex-col mx-auto max-w-7xl">
-            <div class="pt-12 mb-8 space-y-8 md:px-4 lg:mb-14">
+        <div class="mx-auto flex max-w-7xl flex-col">
+            <div class="mb-8 space-y-8 pt-12 md:px-4 lg:mb-14">
                 <x-typography.section-h2 class="text-gray-900">
                     Create Invoice
                 </x-typography.section-h2>
-                <form action="" class="p-4 border border-gray-300 rounded-md">
+                <form action="{{ route('invoices.store') }}" class="rounded-md border border-gray-300 p-4">
                     @csrf
                     {{-- Invoice Details --}}
                     <div>
@@ -37,10 +37,10 @@
                         </div>
                     </div>
 
-                    <hr class="h-1 my-8 bg-gray-200 border-gray-200">
+                    <hr class="my-8 h-1 border-gray-200 bg-gray-200">
 
                     {{-- Sender and recipient details section --}}
-                    <div class="grid mt-4 space-y-8 md:grid-cols-2 md:space-x-4 md:space-y-0">
+                    <div class="mt-4 grid space-y-8 md:grid-cols-2 md:space-x-4 md:space-y-0">
                         {{-- Sender --}}
                         <div class="">
                             <p class="text-xl font-bold text-gray-900">Your Details (Sender)</p>
@@ -52,11 +52,11 @@
                                 <x-inputs.text name="sender_name" placeholder="John Doe" required type="text" />
                             </div>
                             <div class="relative mt-2">
-                                <x-inputs.label for="business_name" optional>
+                                <x-inputs.label for="sender_business_name" optional>
                                     Your Business Name
                                 </x-inputs.label>
                                 <div class="relative">
-                                    <x-inputs.text name="business_name" placeholder="Business Doe" type="text" />
+                                    <x-inputs.text name="sender_business_name" placeholder="Business Doe" type="text" />
                                 </div>
                             </div>
                             <div class="mt-2">
@@ -66,6 +66,7 @@
                                 <x-inputs.text name="sender_email" placeholder="john.doe@company.com" required
                                     type="email" />
                             </div>
+
                             <div class="relative mt-2">
                                 <x-inputs.label for="sender_tel">
                                     Your Phone Number
@@ -84,10 +85,10 @@
                                 </div>
                             </div>
                             <div class="mt-2">
-                                <x-inputs.label for="business_number" optional>
+                                <x-inputs.label for="sender_business_number" optional>
                                     Business Number
                                 </x-inputs.label>
-                                <x-inputs.text name="business_number" placeholder="A3Be" type="text" />
+                                <x-inputs.text name="sender_business_number" placeholder="A3Be" type="text" />
                             </div>
                         </div>
                         {{-- Client --}}
@@ -124,7 +125,7 @@
                         </div>
                     </div>
 
-                    <hr class="h-1 my-8 bg-gray-200 border-gray-200">
+                    <hr class="my-8 h-1 border-gray-200 bg-gray-200">
 
                     {{-- Line items --}}
                     <div class="space-y-4">
@@ -135,7 +136,7 @@
                                     <x-inputs.label for="items.{{ $index }}.name">
                                         Item Name
                                     </x-inputs.label>
-                                    <x-inputs.text class="p-2 border" name="items.{{ $index }}.name"
+                                    <x-inputs.text class="border p-2" name="items.{{ $index }}.name"
                                         placeholder="Lawn chair, web development, etc" required type="text"
                                         wire:model="items.{{ $index }}.name" />
                                 </div>
@@ -144,18 +145,18 @@
                                     <x-inputs.label for="items.{{ $index }}.description" optional>
                                         Item Description
                                     </x-inputs.label>
-                                    <x-inputs.textarea class="w-full p-2 border"
+                                    <x-inputs.textarea class="w-full border p-2"
                                         name="items.{{ $index }}.description"
                                         placeholder="Description or additional details" type="text"
                                         wire:model="items.{{ $index }}.description" />
                                 </div>
 
-                                <div class="flex mt-2 md:space-x-4 flex-col md:flex-row gap-4 md:gap-0">
+                                <div class="mt-2 flex flex-col gap-4 md:flex-row md:gap-0 md:space-x-4">
                                     <div class="w-full md:w-1/2">
                                         <x-inputs.label for="items.{{ $index }}.quantity">
-                                            Quantity (Number)
+                                            Quantity (Number of Items)
                                         </x-inputs.label>
-                                        <x-inputs.text class="p-2 border" name="items.{{ $index }}.quantity"
+                                        <x-inputs.text class="border p-2" name="items.{{ $index }}.quantity"
                                             placeholder="1" required type="number"
                                             wire:change="calculateTotal({{ $index }})"
                                             wire:model="items.{{ $index }}.quantity" />
@@ -164,28 +165,28 @@
                                         <x-inputs.label for="items.{{ $index }}.price">
                                             Price (in currency)
                                         </x-inputs.label>
-                                        <x-inputs.prepend class="p-2 border" name="items.{{ $index }}.price"
+                                        <x-inputs.prepend class="border p-2" name="items.{{ $index }}.price"
                                             placeholder="30" required type="number"
                                             wire:change="calculateTotal({{ $index }})"
                                             wire:model="items.{{ $index }}.price" />
                                     </div>
                                 </div>
 
-                                <div class="flex mt-2 md:space-x-4 flex-col md:flex-row gap-4 md:gap-0">
+                                <div class="mt-2 flex flex-col gap-4 md:flex-row md:gap-0 md:space-x-4">
                                     <div class="w-full md:w-1/2">
                                         <x-inputs.label for="items.{{ $index }}.discount" optional>
                                             Discount (Percentage)
                                         </x-inputs.label>
-                                        <x-inputs.append class="p-2 border" name="items.{{ $index }}.discount"
+                                        <x-inputs.append class="border p-2" name="items.{{ $index }}.discount"
                                             placeholder="20" type="number"
                                             wire:change="calculateTotal({{ $index }})"
                                             wire:model="items.{{ $index }}.discount" />
                                     </div>
                                     <div class="w-full md:w-1/2">
                                         <x-inputs.label for="items.{{ $index }}.shipping" optional>
-                                            Shipping Cost (Percentage)
+                                            Shipping Cost (in currency)
                                         </x-inputs.label>
-                                        <x-inputs.append class="p-2 border" name="items.{{ $index }}.shipping"
+                                        <x-inputs.prepend class="border p-2" name="items.{{ $index }}.shipping"
                                             placeholder="3" required type="number"
                                             wire:change="calculateTotal({{ $index }})"
                                             wire:model="items.{{ $index }}.shipping" />
@@ -195,14 +196,17 @@
                                 <hr class="my-4 h-[2px] border-gray-200 bg-gray-200">
 
                                 <div class="flex space-x-4 text-lg font-semibold text-gray-900">
-                                    This Item's total <small class="text-gray-400"> (After discount and shipping)</small>: ${{ number_format($item['total'] ?? 0, 2) }}
+                                    This Item's total <small class="text-gray-400"> (After discount and
+                                        shipping)</small>: ${{ number_format($item['total'] ?? 0, 2) }}
                                 </div>
 
                                 <hr class="my-4 h-[2px] border-gray-200 bg-gray-200">
 
                                 <div class="flex space-x-4">
                                     <x-buttons.btn btn="danger" class="gap-1 font-semibold"
-                                        wire:click="removeLineItem({{ $index }})" disabled="{{count($items) <= 1 ? true : false}}" title="{{count($items) <= 1 ? 'The invoice should have at least one item' : 'Remove this item from the list'}}">
+                                        disabled="{{ count($items) <= 1 ? true : false }}"
+                                        title="{{ count($items) <= 1 ? 'The invoice should have at least one item' : 'Remove this item from the list' }}"
+                                        wire:click="removeLineItem({{ $index }})">
                                         Remove This Item
                                         <svg class="size-6" fill="currentColor" viewBox="0 0 24 24"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -232,10 +236,11 @@
                     <hr class="my-4 h-[2px] border-gray-200 bg-gray-200">
 
                     <div class="mt-4 text-xl font-bold text-gray-900">
-                        Grand Total <small class="text-gray-400 font-semibold"> (After discount and shipping)</small>: ${{ number_format($total, 2) }}
+                        Grand Total <small class="font-semibold text-gray-400"> (After discount and shipping)</small>:
+                        ${{ number_format($total, 2) }}
                     </div>
 
-                    <hr class="h-1 my-8 bg-gray-200 border-gray-200">
+                    <hr class="my-8 h-1 border-gray-200 bg-gray-200">
 
                     <div class="mt-4 space-y-4">
                         <p class="text-xl font-bold text-gray-900">Additional Details</p>
@@ -244,28 +249,29 @@
                             <x-inputs.label for="invoice_notes" optional>
                                 Notes
                             </x-inputs.label>
-                            <x-inputs.textarea class="w-full p-2 border" name="invoice_notes" placeholder="Thank you"
+                            <x-inputs.textarea class="w-full border p-2" name="invoice_notes" placeholder="Thank you"
                                 type="text" />
                         </div>
                         <div class="mt-2">
-                            <x-inputs.label for="invoice_terms" optional>
+                            <x-inputs.label for="invoice_conditions" optional>
                                 Terms and conditions
                             </x-inputs.label>
-                            <x-inputs.textarea class="w-full p-2 border" name="invoice_terms"
+                            <x-inputs.textarea class="w-full border p-2" name="invoice_conditions"
                                 placeholder="Please make the payment by the due date." type="text" />
                         </div>
                     </div>
 
-                    <hr class="h-1 mb-8 bg-gray-200 border-gray-200">
+                    <hr class="mb-8 h-1 border-gray-200 bg-gray-200">
 
                     {{-- Send button --}}
                     <div class="flex justify-end">
                         <x-buttons.btn btn="primary"
-                            class="text-lg font-semibold text-black border-none gap-x-1 bg-accent hover:bg-accent hover:underline group transition duration-300 ease-in-out"
+                            class="group gap-x-1 border-none bg-accent text-lg font-semibold text-black transition duration-300 ease-in-out hover:bg-accent hover:underline"
                             type="submit">
                             <span>Create Invoice</span>
-                            <svg class="size-6 transition duration-300 ease-in-out group-hover:translate-x-2" fill="none" stroke-width="1.5" stroke="currentColor"
-                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="size-6 transition duration-300 ease-in-out group-hover:translate-x-2"
+                                fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
                                 <path d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
