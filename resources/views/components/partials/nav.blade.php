@@ -27,7 +27,7 @@
                 <span
                     class="absolute bottom-0 left-1/2 h-px w-0 translate-y-px bg-gradient-to-r from-gray-900 via-gray-600 to-gray-900 duration-300 ease-out group-hover:left-0 group-hover:w-full md:from-gray-700 md:via-gray-400 md:to-gray-700"></span>
             </a>
-            {{-- TODO: Reroute to login using middleware --}}
+            {{-- //TODO: Reroute to login using middleware --}}
             <a class="group relative mx-2 inline-block h-full w-full px-4 py-5 text-center font-medium leading-tight duration-300 ease-out hover:text-white md:w-auto md:px-2 md:py-2 md:text-center lg:mx-3"
                 href="{{ route('invoices.create') }}">
                 <span>Create Invoice</span>

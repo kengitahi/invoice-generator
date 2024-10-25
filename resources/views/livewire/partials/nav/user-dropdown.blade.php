@@ -64,7 +64,7 @@ new class extends Component {
             </a>
         </li>
         <li class="dropdown-footer gap-2">
-            <a class="btn btn-error btn-soft btn-block" href="#">
+            <a class="btn btn-error btn-soft btn-block" href="#" wire:click="logout">
                 <span class="icon-[tabler--logout]"></span>
                 Sign out
             </a>

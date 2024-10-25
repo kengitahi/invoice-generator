@@ -13,7 +13,7 @@
                     <span class="size-4 icon-[tabler--x] hidden collapse-open:block"></span>
                 </button>
 
-                <x-partials.nav.user-dropdown />
+                <x-livewire.partials.nav.user-dropdown />
 
             </div>
         </div>
@@ -21,6 +21,7 @@
 
     <div class="collapse hidden grow basis-full overflow-hidden transition-[height] duration-300 md:navbar-end max-md:w-full"
         id="navbar-collapse">
+        {{-- //TODO: Create link component and ensure different CSS for active links --}}
         <ul class="menu gap-2 bg-black md:bg-transparent p-0 text-base backdrop-blur-lg md:menu-horizontal">
 
             <a class="group relative mx-2 inline-block h-full w-full px-4 py-5 text-center font-medium leading-tight text-white md:w-auto md:px-2 md:py-2 md:text-center lg:mx-3"
@@ -35,7 +36,7 @@
                 <span
                     class="absolute bottom-0 left-1/2 h-px w-0 translate-y-px bg-gradient-to-r from-gray-900 via-gray-600 to-gray-900 duration-300 ease-out group-hover:left-0 group-hover:w-full md:from-gray-700 md:via-gray-400 md:to-gray-700"></span>
             </a>
-            {{-- TODO: Reroute to login using middleware --}}
+            {{-- //TODO: Reroute to login using middleware --}}
             <a class="group relative mx-2 inline-block h-full w-full px-4 py-5 text-center font-medium leading-tight duration-300 ease-out hover:text-white md:w-auto md:px-2 md:py-2 md:text-center lg:mx-3"
                 href="{{ route('invoices.create') }}">
                 <span>Create Invoice</span>
@@ -49,7 +50,7 @@
                     class="absolute bottom-0 left-1/2 h-px w-0 translate-y-px bg-gradient-to-r from-gray-900 via-gray-600 to-gray-900 duration-300 ease-out group-hover:left-0 group-hover:w-full md:from-gray-700 md:via-gray-400 md:to-gray-700"></span>
             </a>
         </ul>
-        <x-partials.nav.user-dropdown class="hidden md:flex" />
+        <x-livewire.partials.nav.user-dropdown class="hidden md:flex" />
     </div>
 
 </nav>
