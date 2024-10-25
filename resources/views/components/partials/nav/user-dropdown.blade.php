@@ -15,7 +15,10 @@ new class extends Component {
     }
 }; ?>
 
-<div class='dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]'>
+<div
+    {{ $attributes->twMerge([
+        'class' => 'dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]',
+    ]) }}>
     <button aria-expanded="false" aria-haspopup="menu" aria-label="Dropdown" class="flex items-center dropdown-toggle"
         id="dropdown-scrollable" type="button">
         <div class="avatar">
