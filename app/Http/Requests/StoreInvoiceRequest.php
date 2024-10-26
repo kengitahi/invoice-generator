@@ -28,7 +28,7 @@ class StoreInvoiceRequest extends FormRequest
         dd($request->all());
 
         return [
-            'invoice_number' => ['required', 'string', 'max:255', 'unique:'.Invoice::class],
+            'invoice_number' => ['required', 'string', 'max:255', 'unique:' . Invoice::class],
             'invoice_date' => ['required', 'date'],
             'invoice_terms' => ['string', 'max:2000'],
             'invoice_conditions' => ['string', 'max:2000'],
@@ -36,7 +36,7 @@ class StoreInvoiceRequest extends FormRequest
 
             'sender_name' => ['required', 'string', 'max:255'],
             'sender_business_name' => ['string', 'max:255'],
-            'sender_email' => ['required', 'lowercase', 'email:rfc,dns', 'max:255', 'unique:'.User::class],
+            'sender_email' => ['required', 'lowercase', 'email:rfc,dns', 'max:255'],
             'sender_tel' => ['required', 'string', 'max:25'],
             'sender_website' => ['string', 'max:255'],
             'sender_business_number' => ['string', 'max:255'],
@@ -48,9 +48,9 @@ class StoreInvoiceRequest extends FormRequest
 
             'item.*.name' => ['required', 'string', 'max:255'],
             'item.*.description' => ['string', 'max:255'],
-            'item.*.quantity' => ['required', 'numeric', 'max:255'],
+            'item.*.quantity' => ['required', 'numeric'],
             'item.*.price' => ['required', 'decimal:0,2'],
-            'item.*.discount' => ['required', 'decimal:0,2'],
+            'item.*.discount' => ['required', 'numeric', 'gte:0', 'lte:100'],
             'item.*.shipping' => ['required', 'decimal:0,2'],
 
             'grand_total' => ['required'],

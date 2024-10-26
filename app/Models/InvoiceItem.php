@@ -19,6 +19,13 @@ class InvoiceItem extends Model
         'item_shipping',
     ];
 
+    protected $casts = [
+        'item_quantity' => 'integer',
+        'item_price' => 'float',
+        'item_discount' => 'float',
+        'item_shipping' => 'float',
+    ];
+
     public function Invoice()
     {
         $this->belongsTo(Invoice::class);

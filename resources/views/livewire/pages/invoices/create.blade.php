@@ -42,7 +42,7 @@
                             <x-inputs.label for="invoice_terms" optional>
                                 Invoice terms
                             </x-inputs.label>
-                            <x-inputs.text name="invoice_terms" placeholder="On Receipt, one day, or due date"
+                            <x-inputs.text name="invoice_terms" placeholder="On Receipt, one day, due date, etc."
                                 type="text" />
                         </div>
                     </div>
@@ -192,6 +192,9 @@
                                             placeholder="20" type="number"
                                             wire:change="calculateTotal({{ $index }})"
                                             wire:model="items.{{ $index }}.discount" />
+                                        @if ($discountError)
+                                            <p class="mt-2 text-red-500">The discount should be between 0 and 100%</p>
+                                        @endif
                                     </div>
                                     <div class="w-full md:w-1/2">
                                         <x-inputs.label for="items.{{ $index }}.shipping" optional>
@@ -294,7 +297,10 @@
                     <div class="flex justify-end">
                         <x-buttons.btn btn="primary"
                             class="group gap-x-1 border-none bg-accent text-lg font-semibold text-black transition duration-300 ease-in-out hover:bg-accent hover:underline"
-                            type="submit">
+                            type="submit"
+                            disabled={{$totalError}}
+                            title="{{$totalError ? 'Please correct the errors above.' : ''}}"                        
+                            >
                             <span>Create Invoice</span>
                             <svg class="size-6 transition duration-300 ease-in-out group-hover:translate-x-2"
                                 fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"

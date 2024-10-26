@@ -11,6 +11,10 @@ class CreateInvoice extends Component
 
     public $grandTotal = 0;
 
+    public $discountError = false;
+
+    public $totalError = false;
+
     protected $listeners = ['addLineItem', 'calculateTotal'];
 
     public function mount()
@@ -36,14 +40,23 @@ class CreateInvoice extends Component
 
     public function calculateTotal($index)
     {
-        if (! isset($this->items[$index])) {
+        if (!isset($this->items[$index])) {
             return;
         }
 
         $item = $this->items[$index];
-        $subtotal = $item['quantity'] * $item['price'];
-        $discountAmount = ($subtotal * $item['discount']) / 100;
-        $this->items[$index]['total'] = $subtotal - $discountAmount + $item['shipping'];
+
+        if (0 > (float)$item['discount'] || (float)$item['discount'] > 100) {
+            $this->discountError = true;
+            $this->totalError = true;
+        }else{
+            $this->discountError = false;
+            $this->totalError = false;
+        }
+
+        $subtotal = (integer) $item['quantity'] * (integer) $item['price'];
+        $discountAmount = ($subtotal * (float) $item['discount']) / (float) 100;
+        $this->items[$index]['total'] = (float) $subtotal - (float) $discountAmount + (float) $item['shipping'];
 
         // Calculate grand total
         $this->grandTotal = collect($this->items)->sum('total');
