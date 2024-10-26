@@ -10,8 +10,18 @@
                 <x-typography.section-h2 class="text-gray-900">
                     Create Invoice
                 </x-typography.section-h2>
+                @if ($errors->any())
+                    <div class="rounded-md bg-red-500 p-4">
+                        <ul class="list-disc">
+                            @foreach ($errors->all() as $error)
+                                <li class="ml-4 text-lg font-semibold tracking-wider text-white">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form action="{{ route('invoices.store') }}" class="rounded-md border border-gray-300 p-4">
                     @csrf
+                    @method('POST')
                     {{-- Invoice Details --}}
                     <div>
                         <p class="text-xl font-bold text-gray-900">Invoice Details</p>
@@ -56,7 +66,8 @@
                                     Your Business Name
                                 </x-inputs.label>
                                 <div class="relative">
-                                    <x-inputs.text name="sender_business_name" placeholder="Business Doe" type="text" />
+                                    <x-inputs.text name="sender_business_name" placeholder="Business Doe"
+                                        type="text" />
                                 </div>
                             </div>
                             <div class="mt-2">
@@ -186,9 +197,9 @@
                                         <x-inputs.label for="items.{{ $index }}.shipping" optional>
                                             Shipping Cost (in currency)
                                         </x-inputs.label>
-                                        <x-inputs.prepend class="border p-2" name="items.{{ $index }}.shipping"
-                                            placeholder="3" required type="number"
-                                            wire:change="calculateTotal({{ $index }})"
+                                        <x-inputs.prepend class="border p-2"
+                                            name="items.{{ $index }}.shipping" placeholder="3" required
+                                            type="number" wire:change="calculateTotal({{ $index }})"
                                             wire:model="items.{{ $index }}.shipping" />
                                     </div>
                                 </div>
@@ -235,9 +246,25 @@
 
                     <hr class="my-4 h-[2px] border-gray-200 bg-gray-200">
 
-                    <div class="mt-4 text-xl font-bold text-gray-900">
-                        Grand Total <small class="font-semibold text-gray-400"> (After discount and shipping)</small>:
-                        ${{ number_format($total, 2) }}
+                    <div class="mt-4 flex gap-2 text-xl font-bold text-gray-900">
+                        <x-inputs.label class="flex flex-col" for="grand_total">
+                            <span>
+                                Grand Total:
+                            </span>
+
+                            <small class="font-semibold text-gray-400">
+                                (After discount and shipping)
+                            </small>
+                        </x-inputs.label>
+
+                        <div class='flex items-center w-full px-4 mt-2 text-base border-0 border-gray-400 focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent focus:ring-opacity-50 has-[:focus]:ring-1 has-[:focus]:ring-primary has-[:focus]:border-transparent has-[:focus]:ring-opacity-90'>
+                            <span class="font-bold text-gray-900">$</span>
+                            <p class='m-0 flex items-center rounded-none border-0 border-b-4 border-gray-800 pb-0 !text-3xl'>
+                                {{ number_format($grandTotal, 2) }}
+                            </p>
+                        </div>
+
+                        <input type="hidden" name="grand_total" value="{{ number_format($grandTotal, 2) }}" wire:model="grandTotal">
                     </div>
 
                     <hr class="my-8 h-1 border-gray-200 bg-gray-200">

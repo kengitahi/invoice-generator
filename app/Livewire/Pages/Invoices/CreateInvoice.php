@@ -9,7 +9,7 @@ class CreateInvoice extends Component
 {
     public $items = [];
 
-    public $total = 0;
+    public $grandTotal = 0;
 
     protected $listeners = ['addLineItem', 'calculateTotal'];
 
@@ -46,7 +46,7 @@ class CreateInvoice extends Component
         $this->items[$index]['total'] = $subtotal - $discountAmount + $item['shipping'];
 
         // Calculate grand total
-        $this->total = collect($this->items)->sum('total');
+        $this->grandTotal = collect($this->items)->sum('total');
     }
 
     public function removeLineItem($index)

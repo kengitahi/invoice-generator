@@ -5,18 +5,17 @@ use App\Livewire\Home;
 use App\Livewire\Pages\Contact;
 use App\Livewire\Pages\Invoices\CreateInvoice;
 use App\Livewire\Pages\Invoices\IndexInvoices;
-use App\Livewire\Pages\Invoices\StoreInvoice;
 use App\Livewire\Pages\Payments\CreatePayment;
 use App\Livewire\Pages\Payments\IndexPayments;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', Home::class);
+Route::get('/', Home::class)->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     //Invoice routes
     Route::prefix('invoices')->group(function () {
         Route::name('invoices.')->group(function () {
-            Route::get('/index', IndexInvoices::class)->name('index');
+            Route::get('/', IndexInvoices::class)->name('index');
             Route::get('/create', CreateInvoice::class)->name('create');
             Route::get('/store', [InvoiceController::class, 'store'])->name('store');
         });
@@ -25,7 +24,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Payment Routes
     Route::prefix('payments')->group(function () {
         Route::name('payments.')->group(function () {
-            Route::get('/index', IndexPayments::class)->name('index');
+            Route::get('/', IndexPayments::class)->name('index');
             Route::get('/create', CreatePayment::class)->name('create');
         });
     });

@@ -12,8 +12,7 @@
             <div class="flex flex-col justify-center gap-2 sm:flex-row">
                 <x-links.link :href="route('login')" class="group gap-2 text-lg" type="primary">
                     Sign In
-                    <span
-                        class="icon-[tabler--login] transition duration-300 ease-in-out group-hover:-translate-x-2"></span>
+                    <span class="icon-[tabler--login] transition duration-300 ease-in-out group-hover:-translate-x-2"></span>
                 </x-links.link>
                 <x-links.link class="group border border-gray-500 text-lg transition duration-300 ease-in-out"
                     href="#features" type="secondary">

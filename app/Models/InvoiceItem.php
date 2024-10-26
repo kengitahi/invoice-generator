@@ -10,15 +10,14 @@ class InvoiceItem extends Model
     use HasFactory;
 
     protected $fillable = [
-        "invoice_id", //Each invoiceItem belongs to invoice
-        "item_name",
-        "item_description",
-        "item_quantity",
-        "item_price",
-        "item_discount",
-        "item_shipping",
+        'invoice_id', //Each invoiceItem belongs to invoice
+        'item_name',
+        'item_description',
+        'item_quantity',
+        'item_price',
+        'item_discount',
+        'item_shipping',
     ];
-
 
     public function Invoice()
     {
