@@ -100,6 +100,13 @@ class CreateInvoice extends Component
     }
 
     //TODO:Add calculations for single item subtotal and all items subtotal
+    //TODO:Add functionality for setting invoice status, this will be an enum
+    //TODO:Add functionality for deleting invoice
+    //TODO:Add functionality for updating invoice
+    //TODO:Add functionality for sending invoice, email
+    //TODO:Add functionality for printing and previewing invoice
+    //TODO:Add functionality for exporting invoice adn PDF
+    //TODO:Add functionality for choosing currency
 
     public function calculateTotal($index)
     {
@@ -139,6 +146,7 @@ class CreateInvoice extends Component
 
         $this->validate();
         $invoice = Invoice::create([
+            'user_id' => auth()->user()->id,
             'invoice_number' => $this->invoice_number,
             'invoice_date' => $this->invoice_date,
             'invoice_terms' => $this->invoice_terms,

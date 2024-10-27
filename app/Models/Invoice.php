@@ -11,6 +11,7 @@ class Invoice extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'user_id',
         'invoice_number',
         'invoice_date',
         'invoice_terms',
@@ -38,6 +39,11 @@ class Invoice extends Model
             'invoice_date' => 'datetime:Y-m-d',
             'grand_total' => 'float',
         ];
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function items()
