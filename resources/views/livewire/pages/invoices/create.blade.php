@@ -19,7 +19,8 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('invoices.store') }}" class="rounded-md border border-gray-300 p-4">
+                <form action="{{ route('invoices.store') }}" c
+                lass="rounded-md border border-gray-300 p-4">
                     @csrf
                     @method('POST')
                     {{-- Invoice Details --}}
