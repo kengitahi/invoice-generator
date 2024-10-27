@@ -260,14 +260,16 @@
                             </small>
                         </x-inputs.label>
 
-                        <div class='flex items-center w-full px-4 mt-2 text-base border-0 border-gray-400 focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent focus:ring-opacity-50 has-[:focus]:ring-1 has-[:focus]:ring-primary has-[:focus]:border-transparent has-[:focus]:ring-opacity-90'>
+                        <div
+                            class='has-[:focus]:ring-1 has-[:focus]:ring-primary has-[:focus]:border-transparent has-[:focus]:ring-opacity-90 mt-2 flex w-full items-center border-0 border-gray-400 px-4 text-base focus:border-transparent focus:outline-none focus:ring-1 focus:ring-primary focus:ring-opacity-50'>
                             <span class="font-bold text-gray-900">$</span>
-                            <p class='m-0 flex items-center rounded-none border-0 border-b-4 border-gray-800 pb-0 !text-3xl'>
+                            <p
+                                class='m-0 flex items-center rounded-none border-0 border-b-4 border-gray-800 pb-0 !text-3xl'>
                                 {{ number_format($grandTotal, 2) }}
                             </p>
                         </div>
 
-                        <input type="hidden" name="grand_total" value="{{ number_format($grandTotal, 2) }}" wire:model="grandTotal">
+                        <input name="grand_total" type="number" value="{{ number_format($grandTotal, 2) }}" wire:model="grandTotal" step="0.01" hidden>
                     </div>
 
                     <hr class="my-8 h-1 border-gray-200 bg-gray-200">
@@ -293,23 +295,40 @@
 
                     <hr class="mb-8 h-1 border-gray-200 bg-gray-200">
 
-                    {{-- Send button --}}
-                    <div class="flex justify-end">
-                        <x-buttons.btn btn="primary"
-                            class="group gap-x-1 border-none bg-accent text-lg font-semibold text-black transition duration-300 ease-in-out hover:bg-accent hover:underline"
-                            type="submit"
-                            disabled={{$totalError}}
-                            title="{{$totalError ? 'Please correct the errors above.' : ''}}"                        
-                            >
-                            <span>Create Invoice</span>
-                            <svg class="size-6 transition duration-300 ease-in-out group-hover:translate-x-2"
-                                fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </x-buttons.btn>
-                    </div>
+                    @if (!$totalError)
+                        {{-- Send button --}}
+                        <div class="flex justify-end">
+                            <x-buttons.btn btn="primary"
+                                class="group gap-x-1 border-none bg-accent text-lg font-semibold text-black transition duration-300 ease-in-out hover:bg-accent hover:underline"
+                                type="submit">
+                                <span>Create Invoice</span>
+                                <svg class="size-6 transition duration-300 ease-in-out group-hover:translate-x-2"
+                                    fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </x-buttons.btn>
+                        </div>
+                    @else
+                        <div class="flex justify-end">
+                            <div class="flex flex-col space-y-2 text-center">
+                                <x-buttons.btn btn="danger"
+                                    class="group gap-x-1 border-none text-lg font-semibold text-white transition duration-300 ease-in-out hover:underline"
+                                    disabled>
+                                    Cannot Create Invoice
+                                    <svg class="size-6" fill="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path clip-rule="evenodd"
+                                            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z"
+                                            fill-rule="evenodd" />
+                                    </svg>
+                                </x-buttons.btn>
+                                <small class="text-gray-400">Please correct the errors above.</small>
+                            </div>
+
+                        </div>
+                    @endif
                 </form>
             </div>
         </div>

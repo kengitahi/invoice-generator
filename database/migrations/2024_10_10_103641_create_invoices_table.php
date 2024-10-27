@@ -30,9 +30,12 @@ return new class extends Migration
 
             //Client Details
             $table->string('client_name');
-            $table->string('client_business_naumber')->nullable();
+            $table->string('client_business_number')->nullable();
             $table->string('client_email');
             $table->string('client_tel');
+
+            //From calculations
+            $table->decimal('grand_total', 15, 2);
 
             $table->timestamps();
             $table->softDeletes();

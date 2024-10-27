@@ -36,6 +36,7 @@ class Invoice extends Model
     {
         return [
             'invoice_date' => 'datetime:Y-m-d',
+            'grand_total' => 'float',
         ];
     }
 

@@ -40,21 +40,23 @@ class CreateInvoice extends Component
 
     public function calculateTotal($index)
     {
-        if (!isset($this->items[$index])) {
+        if (! isset($this->items[$index])) {
             return;
         }
 
         $item = $this->items[$index];
 
-        if (0 > (float)$item['discount'] || (float)$item['discount'] > 100) {
+        if ((float) $item['discount'] < 0 || (float) $item['discount'] > 100) {
             $this->discountError = true;
             $this->totalError = true;
-        }else{
+
+            return;
+        } else {
             $this->discountError = false;
             $this->totalError = false;
         }
 
-        $subtotal = (integer) $item['quantity'] * (integer) $item['price'];
+        $subtotal = (int) $item['quantity'] * (int) $item['price'];
         $discountAmount = ($subtotal * (float) $item['discount']) / (float) 100;
         $this->items[$index]['total'] = (float) $subtotal - (float) $discountAmount + (float) $item['shipping'];
 

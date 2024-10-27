@@ -25,10 +25,10 @@ class StoreInvoiceRequest extends FormRequest
      */
     public function rules(Request $request): array
     {
-        dd($request->all());
+        //dd($request->all());
 
         return [
-            'invoice_number' => ['required', 'string', 'max:255', 'unique:' . Invoice::class],
+            'invoice_number' => ['required', 'string', 'max:255', 'unique:'.Invoice::class],
             'invoice_date' => ['required', 'date'],
             'invoice_terms' => ['string', 'max:2000'],
             'invoice_conditions' => ['string', 'max:2000'],
@@ -42,7 +42,7 @@ class StoreInvoiceRequest extends FormRequest
             'sender_business_number' => ['string', 'max:255'],
 
             'client_name' => ['required', 'string', 'max:255'],
-            'client_email' => ['required', 'email, rfc,dns', 'max:255'],
+            'client_email' => ['required', 'email: rfc,dns', 'max:255'],
             'client_tel' => ['required', 'string', 'max:25'],
             'client_business_number' => ['string', 'max:255'],
 
@@ -50,7 +50,7 @@ class StoreInvoiceRequest extends FormRequest
             'item.*.description' => ['string', 'max:255'],
             'item.*.quantity' => ['required', 'numeric'],
             'item.*.price' => ['required', 'decimal:0,2'],
-            'item.*.discount' => ['required', 'numeric', 'gte:0', 'lte:100'],
+            'item.*.discount' => ['required', 'numeric', 'min:0', 'max:100'],
             'item.*.shipping' => ['required', 'decimal:0,2'],
 
             'grand_total' => ['required'],

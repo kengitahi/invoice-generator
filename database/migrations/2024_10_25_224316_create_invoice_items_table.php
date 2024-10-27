@@ -17,13 +17,11 @@ return new class extends Migration
             $table->foreignIdFor(Invoice::class)->constrained()->onDelete('cascade');
             $table->string('item_name');
             $table->string('item_description')->nullable();
-            $table->integer('quantity');
+            $table->integer('item_quantity');
             $table->decimal('item_price', 10, 2);
             $table->decimal('item_discount', 5, 2);
             $table->decimal('item_shipping', 10, 2);
-
-            //From calculations
-            $table->decimal('total', 10, 2);
+            $table->softDeletes();
 
             $table->timestamps();
         });

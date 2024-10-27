@@ -30,7 +30,9 @@ class InvoiceController extends Controller
     public function store(StoreInvoiceRequest $request)
     {
         //Create and store the invoice
-        dd($request->all());
+        $invoice = Invoice::create($request->all());
+
+        return redirect()->route('invoices.index')->with('success', 'Invoice Created Successfully');
     }
 
     /**
