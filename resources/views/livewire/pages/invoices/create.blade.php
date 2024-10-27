@@ -19,10 +19,8 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('invoices.store') }}" c
-                lass="rounded-md border border-gray-300 p-4">
+                <form wire:submit.prevent="save" class="rounded-md border border-gray-300 p-4">
                     @csrf
-                    @method('POST')
                     {{-- Invoice Details --}}
                     <div>
                         <p class="text-xl font-bold text-gray-900">Invoice Details</p>
@@ -31,20 +29,20 @@
                             <x-inputs.label for="invoice_number">
                                 Invoice Number
                             </x-inputs.label>
-                            <x-inputs.text name="invoice_number" placeholder="INV001" required type="text" />
+                            <x-inputs.text name="invoice_number" placeholder="INV001" required type="text" wire:model="invoice_number"/>
                         </div>
                         <div class="relative mt-4">
                             <x-inputs.label for="invoice_date">
                                 Invoice Date
                             </x-inputs.label>
-                            <x-inputs.text name="invoice_date" placeholder="10/10/24" required type="date" />
+                            <x-inputs.text name="invoice_date" placeholder="10/10/24" required type="date" wire:model="invoice_date"/>
                         </div>
                         <div class="relative mt-4">
                             <x-inputs.label for="invoice_terms" optional>
                                 Invoice terms
                             </x-inputs.label>
                             <x-inputs.text name="invoice_terms" placeholder="On Receipt, one day, due date, etc."
-                                type="text" />
+                                type="text" wire:model="invoice_terms"/>
                         </div>
                     </div>
 
@@ -60,7 +58,7 @@
                                 <x-inputs.label for="sender_name">
                                     Your Name
                                 </x-inputs.label>
-                                <x-inputs.text name="sender_name" placeholder="John Doe" required type="text" />
+                                <x-inputs.text name="sender_name" placeholder="John Doe" required type="text" wire:model="sender_name"/>
                             </div>
                             <div class="relative mt-2">
                                 <x-inputs.label for="sender_business_name" optional>
@@ -68,7 +66,7 @@
                                 </x-inputs.label>
                                 <div class="relative">
                                     <x-inputs.text name="sender_business_name" placeholder="Business Doe"
-                                        type="text" />
+                                        type="text" wire:model="sender_business_name"/>
                                 </div>
                             </div>
                             <div class="mt-2">
@@ -76,7 +74,7 @@
                                     Your Email
                                 </x-inputs.label>
                                 <x-inputs.text name="sender_email" placeholder="john.doe@company.com" required
-                                    type="email" />
+                                    type="email" wire:model="sender_email" />
                             </div>
 
                             <div class="relative mt-2">
@@ -84,7 +82,7 @@
                                     Your Phone Number
                                 </x-inputs.label>
                                 <div class="relative">
-                                    <x-inputs.text name="sender_tel" placeholder="+..." required type="tel" />
+                                    <x-inputs.text name="sender_tel" placeholder="+..." required type="tel" wire:model="sender_tel"/>
                                 </div>
                             </div>
                             <div class="relative mt-2">
@@ -92,15 +90,14 @@
                                     Your Website
                                 </x-inputs.label>
                                 <div class="relative">
-                                    <x-inputs.text name="sender_website" placeholder="https://www.yourbusiness.com"
-                                        type="url" />
+                                    <x-inputs.text name="sender_website" placeholder="https://www.yourbusiness.com" type="url" wire:model="sender_website"/>
                                 </div>
                             </div>
                             <div class="mt-2">
                                 <x-inputs.label for="sender_business_number" optional>
                                     Business Number
                                 </x-inputs.label>
-                                <x-inputs.text name="sender_business_number" placeholder="A3Be" type="text" />
+                                <x-inputs.text name="sender_business_number" placeholder="A3Be" type="text" wire:model="sender_business_number"/>
                             </div>
                         </div>
                         {{-- Client --}}
@@ -111,28 +108,26 @@
                                 <x-inputs.label for="client_name">
                                     Client Name/Business name
                                 </x-inputs.label>
-                                <x-inputs.text name="client_name" placeholder="Client Doe" required type="text" />
+                                <x-inputs.text name="client_name" placeholder="Client Doe" required type="text" wire:model="client_name"/>
                             </div>
                             <div class="relative mt-2">
                                 <x-inputs.label for="client_email">
                                     Client Email
                                 </x-inputs.label>
                                 <x-inputs.text name="client_email" placeholder="client@clientcompany.com" required
-                                    type="email" />
+                                    type="email" wire:model="client_email"/>
                             </div>
                             <div class="relative mt-2">
                                 <x-inputs.label for="client_tel">
                                     Client Phone Number
                                 </x-inputs.label>
-                                <div class="relative">
-                                    <x-inputs.text name="client_tel" placeholder="+..." required type="tel" />
-                                </div>
+                                    <x-inputs.text name="client_tel" placeholder="+..." required type="tel" wire:model="client_tel"/>
                             </div>
                             <div class="mt-2">
                                 <x-inputs.label for="client_business_number" optional>
                                     Client Business Number
                                 </x-inputs.label>
-                                <x-inputs.text name="client_business_number" placeholder="A3Be" type="text" />
+                                <x-inputs.text name="client_business_number" placeholder="A3Be" type="text" wire:model="client_business_number"/>
                             </div>
                         </div>
                     </div>
@@ -266,11 +261,11 @@
                             <span class="font-bold text-gray-900">$</span>
                             <p
                                 class='m-0 flex items-center rounded-none border-0 border-b-4 border-gray-800 pb-0 !text-3xl'>
-                                {{ number_format($grandTotal, 2) }}
+                                {{ number_format($grand_total, 2) }}
                             </p>
                         </div>
 
-                        <input name="grand_total" type="number" value="{{ number_format($grandTotal, 2) }}" wire:model="grandTotal" step="0.01" hidden>
+                        <input name="grand_total" type="number" value="{{ number_format($grand_total, 2) }}" wire:model="grand_total" step="0.01" hidden>
                     </div>
 
                     <hr class="my-8 h-1 border-gray-200 bg-gray-200">

@@ -27,7 +27,7 @@ class InvoiceItem extends Model
         'item_shipping' => 'float',
     ];
 
-    public function Invoice()
+    public function invoice()
     {
         $this->belongsTo(Invoice::class);
     }

@@ -40,7 +40,7 @@ class Invoice extends Model
         ];
     }
 
-    public function InvoiceItem()
+    public function items()
     {
         $this->hasMany(InvoiceItem::class);
     }

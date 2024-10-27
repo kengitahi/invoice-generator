@@ -2,20 +2,83 @@
 
 namespace App\Livewire\Pages\Invoices;
 
+use App\Models\Invoice;
+use App\Models\InvoiceItem;
+use Illuminate\Http\Request;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
 class CreateInvoice extends Component
 {
     public $items = [];
-
-    public $grandTotal = 0;
+    
+    public $grand_total = 0;
 
     public $discountError = false;
 
     public $totalError = false;
 
     protected $listeners = ['addLineItem', 'calculateTotal'];
+
+    //From the form
+    public $invoice_number;
+
+    public $invoice_date;
+
+    public $invoice_terms;
+
+    public $sender_name;
+
+    public $sender_business_name;
+
+    public $sender_email;
+
+    public $sender_tel;
+
+    public $sender_website;
+
+    public $sender_business_number;
+
+    public $client_name;
+
+    public $client_email;
+
+    public $client_tel;
+
+    public $client_business_number;
+
+    public $invoice_notes;
+
+    public $invoice_conditions;
+
+    protected $rules = [
+        'items.*.name' => 'required|string',
+        'items.*.description' => 'nullable|string',
+        'items.*.quantity' => 'required|numeric|min:1',
+        'items.*.price' => 'required|numeric|min:0',
+        'items.*.discount' => 'nullable|numeric|min:0|max:100',
+        'items.*.shipping' => 'nullable|numeric|min:0',
+
+        'invoice_number' => ['required', 'string', 'max:255', 'unique:' . Invoice::class],
+        'invoice_date' => ['required', 'date'],
+        'invoice_terms' => ['nullable', 'string', 'max:2000'],
+        'invoice_conditions' => ['nullable', 'string', 'max:2000'],
+        'invoice_notes' => ['nullable', 'string', 'max:2000'],
+
+        'sender_name' => ['required', 'string', 'max:255'],
+        'sender_business_name' => ['string', 'max:255'],
+        'sender_email' => ['required', 'lowercase', 'email:rfc,dns', 'max:255'],
+        'sender_tel' => ['required', 'string', 'max:25'],
+        'sender_website' => ['string', 'max:255'],
+        'sender_business_number' => ['string', 'max:255'],
+
+        'client_name' => ['required', 'string', 'max:255'],
+        'client_email' => ['required', 'email: rfc,dns', 'max:255'],
+        'client_tel' => ['required', 'string', 'max:25'],
+        'client_business_number' => ['string', 'max:255'],
+
+        'grand_total' => ['required'],
+    ];
 
     public function mount()
     {
@@ -40,7 +103,7 @@ class CreateInvoice extends Component
 
     public function calculateTotal($index)
     {
-        if (! isset($this->items[$index])) {
+        if (!isset($this->items[$index])) {
             return;
         }
 
@@ -61,7 +124,7 @@ class CreateInvoice extends Component
         $this->items[$index]['total'] = (float) $subtotal - (float) $discountAmount + (float) $item['shipping'];
 
         // Calculate grand total
-        $this->grandTotal = collect($this->items)->sum('total');
+        $this->grand_total = collect($this->items)->sum('total');
     }
 
     public function removeLineItem($index)
@@ -69,6 +132,55 @@ class CreateInvoice extends Component
         unset($this->items[$index]);
         $this->items = array_values($this->items); // Re-index array
         $this->calculateTotal(0);
+    }
+
+    public function save(Request $request)
+    {
+
+        $this->validate();
+
+        try {
+            $invoice = Invoice::create([
+                'invoice_number' => $this->invoice_number,
+                'invoice_date' => $this->invoice_date,
+                'invoice_terms' => $this->invoice_terms,
+                'invoice_conditions' => $this->invoice_conditions,
+                'invoice_notes' => $this->invoice_notes,
+
+                'sender_name' => $this->sender_name,
+                'sender_business_name' => $this->sender_business_name,
+                'sender_email' => $this->sender_email,
+                'sender_tel' => $this->sender_tel,
+                'sender_website' => $this->sender_website,
+                'sender_business_number' => $this->sender_business_number,
+
+                'client_name' => $this->client_name,
+                'client_email' => $this->client_email,
+                'client_tel' => $this->client_tel,
+                'client_business_number' => $this->client_business_number,
+
+                'grand_total' => $this->grand_total,
+            ]);
+        } catch (\Exception $e) {
+            dd($e->getMessage()); // This will show what's going wrong
+        }
+
+        dd('After creating invoice', $invoice);
+
+        foreach ($this->items as $item) {
+            $invoice->items()->create([
+                'item_name' => $item['name'],
+                'item_description' => $item['description'],
+                'item_quantity' => $item['quantity'],
+                'item_price' => $item['price'],
+                'item_discount' => $item['discount'],
+                'item_shipping' => $item['shipping'],
+            ]);
+        }
+
+        $invoice->save();
+
+        return redirect()->route('invoices.index')->with('success', 'Invoice Created Successfully');
     }
 
     #[Title('Create Invoice')]
