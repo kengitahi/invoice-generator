@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Invoices;
 
 use App\Models\Invoice;
+use App\Models\InvoiceItem;
 use Illuminate\Http\Request;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -137,37 +138,31 @@ class CreateInvoice extends Component
     {
 
         $this->validate();
+        $invoice = Invoice::create([
+            'invoice_number' => $this->invoice_number,
+            'invoice_date' => $this->invoice_date,
+            'invoice_terms' => $this->invoice_terms,
+            'invoice_conditions' => $this->invoice_conditions,
+            'invoice_notes' => $this->invoice_notes,
 
-        try {
-            $invoice = Invoice::create([
-                'invoice_number' => $this->invoice_number,
-                'invoice_date' => $this->invoice_date,
-                'invoice_terms' => $this->invoice_terms,
-                'invoice_conditions' => $this->invoice_conditions,
-                'invoice_notes' => $this->invoice_notes,
+            'sender_name' => $this->sender_name,
+            'sender_business_name' => $this->sender_business_name,
+            'sender_email' => $this->sender_email,
+            'sender_tel' => $this->sender_tel,
+            'sender_website' => $this->sender_website,
+            'sender_business_number' => $this->sender_business_number,
 
-                'sender_name' => $this->sender_name,
-                'sender_business_name' => $this->sender_business_name,
-                'sender_email' => $this->sender_email,
-                'sender_tel' => $this->sender_tel,
-                'sender_website' => $this->sender_website,
-                'sender_business_number' => $this->sender_business_number,
+            'client_name' => $this->client_name,
+            'client_email' => $this->client_email,
+            'client_tel' => $this->client_tel,
+            'client_business_number' => $this->client_business_number,
 
-                'client_name' => $this->client_name,
-                'client_email' => $this->client_email,
-                'client_tel' => $this->client_tel,
-                'client_business_number' => $this->client_business_number,
-
-                'grand_total' => $this->grand_total,
-            ]);
-        } catch (\Exception $e) {
-            dd($e->getMessage()); // This will show what's going wrong
-        }
-
-        dd('After creating invoice', $invoice);
+            'grand_total' => $this->grand_total,
+        ]);
 
         foreach ($this->items as $item) {
-            $invoice->items()->create([
+            InvoiceItem::create([
+                'invoice_id' => $invoice['id'],
                 'item_name' => $item['name'],
                 'item_description' => $item['description'],
                 'item_quantity' => $item['quantity'],
@@ -177,7 +172,9 @@ class CreateInvoice extends Component
             ]);
         }
 
-        $invoice->save();
+        // dd('After creating items', $invoice);
+
+        // $invoice->save();
 
         return redirect()->route('invoices.index')->with('success', 'Invoice Created Successfully');
     }

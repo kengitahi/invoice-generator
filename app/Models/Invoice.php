@@ -42,6 +42,6 @@ class Invoice extends Model
 
     public function items()
     {
-        $this->hasMany(InvoiceItem::class);
+        $this->hasMany(InvoiceItem::class, 'invoice_id');
     }
 }
