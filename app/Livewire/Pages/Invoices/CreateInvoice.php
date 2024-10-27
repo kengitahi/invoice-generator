@@ -3,7 +3,6 @@
 namespace App\Livewire\Pages\Invoices;
 
 use App\Models\Invoice;
-use App\Models\InvoiceItem;
 use Illuminate\Http\Request;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -11,7 +10,7 @@ use Livewire\Component;
 class CreateInvoice extends Component
 {
     public $items = [];
-    
+
     public $grand_total = 0;
 
     public $discountError = false;
@@ -59,7 +58,7 @@ class CreateInvoice extends Component
         'items.*.discount' => 'nullable|numeric|min:0|max:100',
         'items.*.shipping' => 'nullable|numeric|min:0',
 
-        'invoice_number' => ['required', 'string', 'max:255', 'unique:' . Invoice::class],
+        'invoice_number' => ['required', 'string', 'max:255', 'unique:'.Invoice::class],
         'invoice_date' => ['required', 'date'],
         'invoice_terms' => ['nullable', 'string', 'max:2000'],
         'invoice_conditions' => ['nullable', 'string', 'max:2000'],
@@ -103,7 +102,7 @@ class CreateInvoice extends Component
 
     public function calculateTotal($index)
     {
-        if (!isset($this->items[$index])) {
+        if (! isset($this->items[$index])) {
             return;
         }
 
