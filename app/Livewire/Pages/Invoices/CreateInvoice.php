@@ -172,10 +172,6 @@ class CreateInvoice extends Component
             ]);
         }
 
-        // dd('After creating items', $invoice);
-
-        // $invoice->save();
-
         return redirect()->route('invoices.index')->with('success', 'Invoice Created Successfully');
     }
 
