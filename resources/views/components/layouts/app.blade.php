@@ -13,8 +13,6 @@
         @endif
     </title>
 
-    {{-- <script src="//unpkg.com/alpinejs" defer></script> --}}
-
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
     <link

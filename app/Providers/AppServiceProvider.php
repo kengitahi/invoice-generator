@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Invoice;
+use App\Models\User;
+use Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Gate::define('edit-invoice', function (User $user, Invoice $invoice) {
+            return $user->id === $invoice->user_id;
+        });
     }
 }

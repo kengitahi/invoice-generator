@@ -14,7 +14,7 @@ class IndexInvoices extends Component
         $this->invoices = auth()->user()->invoices;
     }
 
-    #[Title('All Invoices')]
+    #[Title('Your Invoices')]
     public function render()
     {
         return view('livewire.pages.invoices.index', ['invoices' => $this->invoices]);

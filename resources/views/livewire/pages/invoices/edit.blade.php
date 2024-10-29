@@ -1,3 +1,12 @@
+@php
+    
+@endphp
+
+<x-app-layout>
+
 <div>
-    {{-- Success is as dangerous as failure. --}}
+    Invoice number: {{$invoice->invoice_number}}
+    <br>
+    Invoice Owner: {{$invoice->user->name}}
 </div>
+</x-app-layout>

@@ -1,0 +1,3 @@
+
+<livewire:partials.invoices.body />
+

@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Invoices;
 
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
+use Auth;
 use Illuminate\Http\Request;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -145,8 +146,8 @@ class CreateInvoice extends Component
     {
 
         $this->validate();
-        $invoice = Invoice::create([
-            'user_id' => auth()->user()->id,
+        $invoice = Auth::user()->invoices()->create([
+            // 'user_id' => auth()->user()->id,
             'invoice_number' => $this->invoice_number,
             'invoice_date' => $this->invoice_date,
             'invoice_terms' => $this->invoice_terms,

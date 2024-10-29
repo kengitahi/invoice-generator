@@ -3,11 +3,10 @@
 namespace App\Livewire\Pages\Invoices;
 
 use App\Models\Invoice;
-use Auth;
-use Illuminate\Http\Request;
 use Livewire\Component;
+use Auth;
 
-class EditInvoice extends Component
+class ViewInvoice extends Component
 {
     public $invoice;
 
@@ -15,13 +14,12 @@ class EditInvoice extends Component
     {
         $this->invoice = Invoice::where('invoice_number', $invoice_number)->first();
     }
-
     public function render()
     {
         if (Auth::user()->id !== $this->invoice->user_id) {
             abort(403);
         }
 
-        return view('livewire.pages.invoices.edit', ['invoice' => $this->invoice]);
+        return view('livewire.pages.invoices.view', ['invoice' => $this->invoice]);
     }
 }
