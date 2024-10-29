@@ -4,8 +4,10 @@ namespace App\Livewire\Pages\Invoices;
 
 use App\Models\Invoice;
 use Auth;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
+#[Layout('layouts.blank')]
 class ViewInvoice extends Component
 {
     public $invoice;

@@ -2,10 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root{
+    background-color: white;
+}
+
 *{
     scroll-behavior: smooth;
 }
-
 
 /* Remove arrow buttons on number input */
 @layer utilities {
@@ -17,5 +20,6 @@
 
     input[type="number"] {
         -moz-appearance: textfield;
+        appearance: textfield;
     }
 }

@@ -7,6 +7,8 @@ use Livewire\Component;
 
 class Body extends Component
 {
+    public $invoice;
+
     #[Layout('layouts.blank')]
     public function render()
     {
