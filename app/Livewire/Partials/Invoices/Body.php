@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Partials\Invoices;
 
-use Livewire\Component;
 use Livewire\Attributes\Layout;
+use Livewire\Component;
 
 class Body extends Component
 {

@@ -3,8 +3,8 @@
 namespace App\Livewire\Pages\Invoices;
 
 use App\Models\Invoice;
-use Livewire\Component;
 use Auth;
+use Livewire\Component;
 
 class ViewInvoice extends Component
 {
@@ -14,6 +14,7 @@ class ViewInvoice extends Component
     {
         $this->invoice = Invoice::where('invoice_number', $invoice_number)->first();
     }
+
     public function render()
     {
         if (Auth::user()->id !== $this->invoice->user_id) {

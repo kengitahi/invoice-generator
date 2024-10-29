@@ -4,7 +4,6 @@ namespace App\Livewire\Pages\Invoices;
 
 use App\Models\Invoice;
 use Auth;
-use Illuminate\Http\Request;
 use Livewire\Component;
 
 class EditInvoice extends Component

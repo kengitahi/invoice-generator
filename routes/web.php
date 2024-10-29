@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\InvoiceController;
 use App\Livewire\Home;
 use App\Livewire\Pages\Contact;
 use App\Livewire\Pages\Invoices\CreateInvoice;
@@ -21,7 +20,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/', IndexInvoices::class)->name('index');
             Route::get('/create', CreateInvoice::class)->name('create');
             Route::get('/{invoice_number}/edit', EditInvoice::class)->name('edit');
-            Route::get('/{invoice_number}/view', ViewInvoice::class)->name('view');            
+            Route::get('/{invoice_number}/view', ViewInvoice::class)->name('view');
         });
     });
 
