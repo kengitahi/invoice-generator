@@ -10,7 +10,3 @@
     </section>
     <livewire:partials.invoices.body :invoice="$invoice"/>
 </div>
-
-
-
-g

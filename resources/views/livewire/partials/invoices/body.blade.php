@@ -194,6 +194,17 @@
 
         <!-- Buttons -->
         <div class="flex flex-col justify-start gap-3 mt-6">
+            <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:bg-blue-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                href="#" wire:navigate>
+                <svg aria-hidden="true" class="size-4 shrink-0" fill="none" height="20" viewBox="0 0 24 24"
+                    width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="m3.5 5.5 7.893 6.036a1 1 0 0 0 1.214 0L20.5 5.5M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"
+                        stroke-linecap="round" stroke-width="2" stroke="currentColor" />
+                </svg>
+                Send
+            </a>
+
             <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-800 bg-white border border-gray-200 rounded-lg shadow-sm gap-x-2 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50" href="#" wire:navigate>
                 <svg class="size-4 shrink-0" fill="none" height="24" stroke-linecap="round"
                     stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"
@@ -204,6 +215,7 @@
                 </svg>
                 Download PDF
             </a>
+
             <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:bg-blue-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                 href="#" wire:navigate>
                 <svg class="size-4 shrink-0" fill="none" height="24" stroke-linecap="round"
@@ -215,16 +227,7 @@
                 </svg>
                 Print
             </a>
-            <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:bg-blue-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
-                href="#" wire:navigate>
-                <svg aria-hidden="true" class="size-4 shrink-0" fill="none" height="20" viewBox="0 0 24 24"
-                    width="20" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="m3.5 5.5 7.893 6.036a1 1 0 0 0 1.214 0L20.5 5.5M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"
-                        stroke-linecap="round" stroke-width="2" stroke="currentColor" />
-                </svg>
-                Send
-            </a>
+
             <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:bg-blue-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                 href="{{route('invoices.edit', $invoice->invoice_number)}}" wire:navigate>
                 <svg class="size-4" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"
@@ -234,7 +237,8 @@
                         stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
                 Edit
-            </a>
+            </a>           
+            
             <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:bg-blue-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                 href="{{route('invoices.index')}}" wire:navigate>
                 <svg class="size-6" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
@@ -243,6 +247,7 @@
                 </svg>
                 Back To Invoices
             </a>
+            
         </div>
         <!-- End Buttons -->
     </div>

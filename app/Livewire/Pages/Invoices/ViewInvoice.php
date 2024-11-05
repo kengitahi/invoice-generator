@@ -12,6 +12,10 @@ class ViewInvoice extends Component
 {
     public $invoice;
 
+    public $title;
+
+    // public $invoice_number;
+
     public function mount($invoice_number)
     {
         $this->invoice = Invoice::where('invoice_number', $invoice_number)->first();
@@ -23,6 +27,6 @@ class ViewInvoice extends Component
             abort(403);
         }
 
-        return view('livewire.pages.invoices.view', ['invoice' => $this->invoice]);
+        return view('livewire.pages.invoices.view', ['invoice' => $this->invoice])->title('Previewing Invoice No: '.$this->invoice->invoice_number);
     }
 }

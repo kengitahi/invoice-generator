@@ -6,7 +6,13 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta content="{{ csrf_token() }}" name="csrf-token">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>
+        @if (isset($title))
+            {{ $title }} - {{ config('app.name') }}
+        @else
+            {{ config('app.name') }}
+        @endif
+    </title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
