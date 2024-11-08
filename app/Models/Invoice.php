@@ -33,14 +33,12 @@ class Invoice extends Model
         'grand_total',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'invoice_number' => 'string',
-            'invoice_date' => 'datetime:Y-m-d',
-            'grand_total' => 'float',
-        ];
-    }
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'invoice_date' => 'datetime',
+        'grand_total' => 'float',
+    ];
 
     public function user()
     {

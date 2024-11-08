@@ -35,7 +35,7 @@
                         </div>
                         <div class="relative mt-4">
                             <x-inputs.label for="invoice_date">
-                                Invoice Date
+                                Invoice Date (Month-Date-Year)
                             </x-inputs.label>
                             <x-inputs.text name="invoice_date" placeholder="10/10/24" required type="date"
                                 wire:model="invoice_date" :value="$invoice_date" />

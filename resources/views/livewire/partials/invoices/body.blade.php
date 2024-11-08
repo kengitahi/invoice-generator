@@ -31,12 +31,12 @@
                         <!-- Grid -->
                         <div class="grid grid-cols-2 gap-3 sm:grid-cols-1 sm:gap-2">
                             <dl class="grid gap-x-3 sm:grid-cols-5">
-                                <dt class="col-span-3 font-semibold text-gray-800">Invoice date:</dt>
-                                <dd class="col-span-2 text-gray-500">03/10/2018</dd>
+                                <dt class="col-span-3 font-semibold text-gray-800">Invoice created on:</dt>
+                                <dd class="col-span-2 text-gray-500">{{ $invoice->created_at->format('jS M, Y') }}</dd>
                             </dl>
                             <dl class="grid gap-x-3 sm:grid-cols-5">
-                                <dt class="col-span-3 font-semibold text-gray-800">Due date:</dt>
-                                <dd class="col-span-2 text-gray-500">03/11/2018</dd>
+                                <dt class="col-span-3 font-semibold text-gray-800">Invoice due date:</dt>
+                                <dd class="col-span-2 text-gray-500">{{ $invoice->invoice_date->format('jS M, Y') }}</dd>
                             </dl>
                         </div>
                         <!-- End Grid -->

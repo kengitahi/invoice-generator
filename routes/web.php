@@ -18,6 +18,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('invoices')->group(function () {
         Route::name('invoices.')->group(function () {
             Route::get('/', IndexInvoices::class)->name('index');
+            Route::view('/search-results', 'livewire.pages.invoices.results')->name('results');
             Route::get('/create', CreateInvoice::class)->name('create');
             Route::get('/{invoice_number}/edit', EditInvoice::class)->name('edit');
             Route::get('/{invoice_number}/view', ViewInvoice::class)->name('view');

@@ -5,8 +5,10 @@ namespace App\Livewire\Pages\Invoices;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
 use Auth;
+use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class CreateInvoice extends Component
 {
@@ -137,14 +139,14 @@ class CreateInvoice extends Component
         $this->grand_total = collect($this->items)->sum('total');
     }
 
-    public function removeLineItem($index)
+    public function removeLineItem($index): void
     {
         unset($this->items[$index]);
         $this->items = array_values($this->items); // Re-index array
         $this->calculateTotal(0);
     }
 
-    public function createInvoice()
+    public function createInvoice(): Redirector
     {
         $this->validate();
         $invoice = Auth::user()->invoices()->create([
@@ -181,17 +183,15 @@ class CreateInvoice extends Component
             ]);
         }
 
-        $this->invoice = $invoice;
-
         if ($this->redirectTo) {
-            return redirect()->route('invoices.view', $this->invoice->invoice_number)->with('createdInvoice', 'Invoice Created Successfully');
+            return redirect()->route('invoices.view', $invoice->invoice_number)->with('createdInvoiceAndRedirected', 'Invoice Created Successfully');
         }
 
         return redirect()->route('invoices.index')->with('createdInvoice', 'Invoice Created Successfully');
     }
 
     #[Title('Create Invoice')]
-    public function render()
+    public function render(): View
     {
         return view('livewire.pages.invoices.create');
     }
