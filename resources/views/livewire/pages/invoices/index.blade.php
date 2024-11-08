@@ -10,7 +10,7 @@
             </h2>
         </x-slot>
 
-        @if (session('success'))
+        @if (session('createdInvoice'))
             <div class="py-4" x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show" x-transition.duration.500ms>
                 <p class="mx-auto my-4 max-w-[80%] rounded-md bg-green-600 px-4 py-2 text-lg font-semibold text-white">
                     You have successfully created an invoice</p>

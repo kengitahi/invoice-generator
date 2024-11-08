@@ -19,7 +19,7 @@
                         </ul>
                     </div>
                 @endif
-                <form class="p-4 border border-gray-300 rounded-md" wire:submit.prevent="save">
+                <form class="p-4 border border-gray-300 rounded-md" wire:submit.prevent="createInvoice">
                     @csrf
                     {{-- Invoice Details --}}
                     <div>
@@ -307,22 +307,39 @@
                     <hr class="h-1 mb-8 bg-gray-200 border-gray-200">
 
                     @if (!$totalError)
-                        {{-- Send button --}}
-                        <div class="flex flex-col justify-end">
-                            <x-buttons.btn btn="primary"
-                                class="group gap-x-1 border-none bg-accent text-lg font-semibold text-black transition duration-300 ease-in-out hover:bg-accent hover:underline !w-fit"
-                                type="submit">
-                                <span>Create Invoice</span>
-                                <svg class="transition duration-300 ease-in-out size-6 group-hover:translate-x-2"
-                                    fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </x-buttons.btn>
-                            <div class="pl-4 mt-2 text-lg font-semibold text-gray-600" wire:loading.delay.long wire:target="save">
-                                We are creating your invoice. You will be redirected in a few seconds.
+                        {{-- Create button --}}
+                        <div class="flex gap-4">
+                            <div class="flex flex-col justify-end">
+                                <x-buttons.btn btn="primary"
+                                    class="group !w-fit gap-x-1 border-none bg-accent text-lg font-semibold text-black transition duration-300 ease-in-out hover:bg-accent hover:underline"
+                                    type="submit">
+                                    <span>Create Invoice</span>
+                                    <svg class="transition duration-300 ease-in-out size-6 group-hover:translate-x-2"
+                                        fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </x-buttons.btn>
                             </div>
+
+                            <div class="flex flex-col justify-end">
+                                <x-buttons.btn btn="primary"
+                                    class="group !w-fit gap-x-1 border-none bg-primary text-lg font-semibold text-white transition duration-300 ease-in-out hover:underline"
+                                    type="submit" wire:click="redirectTo = true">
+                                    <span>Create and View Invoice</span>
+                                    <svg class="transition duration-300 ease-in-out size-6 group-hover:translate-x-2"
+                                        fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </x-buttons.btn>
+                            </div>
+                        </div>
+                        <div class="pl-4 mt-2 text-lg font-semibold text-gray-600" wire:loading.delay.long
+                            wire:target="createInvoice">
+                            We are creating your invoice. You will be redirected in a few seconds.
                         </div>
                     @else
                         <div class="flex justify-end">

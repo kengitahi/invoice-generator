@@ -5,7 +5,6 @@ namespace App\Livewire\Pages\Invoices;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
 use Auth;
-use Illuminate\Http\Request;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -51,6 +50,9 @@ class CreateInvoice extends Component
     public $invoice_notes;
 
     public $invoice_conditions;
+
+    //Which submit button
+    public $redirectTo = null;
 
     protected $rules = [
         'items.*.name' => 'required|string',
@@ -142,9 +144,8 @@ class CreateInvoice extends Component
         $this->calculateTotal(0);
     }
 
-    public function save(Request $request)
+    public function createInvoice()
     {
-
         $this->validate();
         $invoice = Auth::user()->invoices()->create([
             'invoice_number' => $this->invoice_number,
@@ -180,7 +181,13 @@ class CreateInvoice extends Component
             ]);
         }
 
-        return redirect()->route('invoices.index')->with('success', 'Invoice Created Successfully');
+        $this->invoice = $invoice;
+
+        if ($this->redirectTo) {
+            return redirect()->route('invoices.view', $this->invoice->invoice_number)->with('createdInvoice', 'Invoice Created Successfully');
+        }
+
+        return redirect()->route('invoices.index')->with('createdInvoice', 'Invoice Created Successfully');
     }
 
     #[Title('Create Invoice')]
