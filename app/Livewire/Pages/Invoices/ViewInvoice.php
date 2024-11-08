@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Invoices;
 
 use App\Models\Invoice;
 use Auth;
+use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -14,14 +15,12 @@ class ViewInvoice extends Component
 
     public $title;
 
-    // public $invoice_number;
-
-    public function mount($invoice_number)
+    public function mount(int $invoice_number): void
     {
         $this->invoice = Invoice::where('invoice_number', $invoice_number)->first();
     }
 
-    public function render()
+    public function render(): View
     {
         if (Auth::user()->id !== $this->invoice->user_id) {
             abort(403);

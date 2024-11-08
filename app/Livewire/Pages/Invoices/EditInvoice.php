@@ -63,7 +63,7 @@ class EditInvoice extends Component
 
     public $invoice_conditions;
 
-    protected function rules()
+    protected function rules(): array
     {
         return [
             'items.*.name' => 'required|string',

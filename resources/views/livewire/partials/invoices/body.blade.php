@@ -22,48 +22,85 @@
 
                 <!-- Col -->
                 <div class="text-end">
-                    <h2 class="text-2xl font-semibold text-gray-800 md:text-3xl">Invoice #</h2>
-                    <span class="block mt-1 text-gray-500">invoice_number</span>
+                    <h2 class="text-2xl font-semibold text-gray-800 md:text-3xl">
+                        Invoice #{{ $invoice->invoice_number }}
+                    </h2>
 
-                    <address class="mt-4 not-italic text-gray-800">
-                        45 Roker Terrace<br>
-                        Latheronwheel<br>
-                        KW5 8NW, London<br>
-                        United Kingdom<br>
-                    </address>
+                    <!-- Col -->
+                    <div class="mt-4 space-y-2 sm:text-end">
+                        <!-- Grid -->
+                        <div class="grid grid-cols-2 gap-3 sm:grid-cols-1 sm:gap-2">
+                            <dl class="grid gap-x-3 sm:grid-cols-5">
+                                <dt class="col-span-3 font-semibold text-gray-800">Invoice date:</dt>
+                                <dd class="col-span-2 text-gray-500">03/10/2018</dd>
+                            </dl>
+                            <dl class="grid gap-x-3 sm:grid-cols-5">
+                                <dt class="col-span-3 font-semibold text-gray-800">Due date:</dt>
+                                <dd class="col-span-2 text-gray-500">03/11/2018</dd>
+                            </dl>
+                        </div>
+                        <!-- End Grid -->
+                    </div>
+                    <!-- Col -->
+
+                    <!-- Col, sender details -->
+                    <div class="mt-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Sent By:</h3>
+
+                        <h3 class="text-lg font-semibold text-gray-800">
+                            @if ($invoice->sender_name)
+                                {{ $invoice->sender_name }}<br>
+                            @endif
+                        </h3>
+
+                        <address class="mt-2 not-italic text-gray-500">
+                            @if ($invoice->sender_business_name)
+                                {{ $invoice->sender_business_name }}<br>
+                            @endif
+                            @if ($invoice->sender_business_number)
+                                {{ $invoice->sender_business_number }}<br>
+                            @endif
+                            @if ($invoice->sender_email)
+                                {{ $invoice->sender_email }}<br>
+                            @endif
+                            @if ($invoice->sender_tel)
+                                {{ $invoice->sender_tel }}<br>
+                            @endif
+                            @if ($invoice->sender_website)
+                                {{ $invoice->sender_website }}<br>
+                            @endif
+                        </address>
+                    </div>
+
                 </div>
                 <!-- Col -->
             </div>
             <!-- End Grid -->
 
-            <!-- Grid -->
+            <!-- Grid, recipient details -->
             <div class="grid gap-3 mt-8 sm:grid-cols-2">
                 <div>
                     <h3 class="text-lg font-semibold text-gray-800">Bill to:</h3>
-                    <h3 class="text-lg font-semibold text-gray-800">client_name</h3>
+                    <h3 class="text-lg font-semibold text-gray-800">
+                        @if ($invoice->client_name)
+                            {{ $invoice->client_name }}
+                        @endif
+                    </h3>
                     <address class="mt-2 not-italic text-gray-500">
-                        280 Suzanne Throughway,<br>
-                        Breannabury, OR 45801,<br>
-                        United States<br>
+                        @if ($invoice->client_business_name)
+                            {{ $invoice->client_business_name }}<br>
+                        @endif
+                        @if ($invoice->client_business_number)
+                            {{ $invoice->client_business_number }}<br>
+                        @endif
+                        @if ($invoice->client_email)
+                            {{ $invoice->client_email }}<br>
+                        @endif
+                        @if ($invoice->client_tel)
+                            {{ $invoice->client_tel }}<br>
+                        @endif
                     </address>
                 </div>
-
-                <!-- Col -->
-                <div class="space-y-2 sm:text-end">
-                    <!-- Grid -->
-                    <div class="grid grid-cols-2 gap-3 sm:grid-cols-1 sm:gap-2">
-                        <dl class="grid gap-x-3 sm:grid-cols-5">
-                            <dt class="col-span-3 font-semibold text-gray-800">Invoice date:</dt>
-                            <dd class="col-span-2 text-gray-500">03/10/2018</dd>
-                        </dl>
-                        <dl class="grid gap-x-3 sm:grid-cols-5">
-                            <dt class="col-span-3 font-semibold text-gray-800">Due date:</dt>
-                            <dd class="col-span-2 text-gray-500">03/11/2018</dd>
-                        </dl>
-                    </div>
-                    <!-- End Grid -->
-                </div>
-                <!-- Col -->
             </div>
             <!-- End Grid -->
 
@@ -73,72 +110,37 @@
                     <div class="hidden sm:grid sm:grid-cols-5">
                         <div class="text-xs font-medium text-gray-500 uppercase sm:col-span-2">Item</div>
                         <div class="text-xs font-medium text-gray-500 uppercase text-start">Qty</div>
-                        <div class="text-xs font-medium text-gray-500 uppercase text-start">Rate</div>
+                        <div class="text-xs font-medium text-gray-500 uppercase text-start">Price</div>
                         <div class="text-xs font-medium text-gray-500 uppercase text-end">Amount</div>
                     </div>
 
                     <div class="hidden border-b border-gray-200 sm:block"></div>
 
-                    <div class="grid grid-cols-3 gap-2 sm:grid-cols-5">
-                        <div class="col-span-full sm:col-span-2">
-                            <h5 class="text-xs font-medium text-gray-500 uppercase sm:hidden">Item</h5>
-                            <p class="font-medium text-gray-800">Design UX and UI</p>
+                    @foreach ($invoice->items as $item)
+                        <div class="grid grid-cols-3 gap-2 sm:grid-cols-5">
+                            <div class="col-span-full sm:col-span-2">
+                                <h5 class="text-xs font-medium text-gray-500 uppercase sm:hidden">Item name</h5>
+                                <p class="font-medium text-gray-800">{{ $item->item_name }}</p>
+                                <h5 class="mt-2 text-xs font-medium text-gray-500 uppercase sm:hidden">Item description
+                                </h5>
+                                <p class="font-medium text-gray-600 text-md">{{ $item->item_description }}</p>
+                            </div>
+                            <div>
+                                <h5 class="text-xs font-medium text-gray-500 uppercase sm:hidden">Qty</h5>
+                                <p class="text-gray-800">{{ $item->item_quantity }}</p>
+                            </div>
+                            <div>
+                                <h5 class="text-xs font-medium text-gray-500 uppercase sm:hidden">Rate</h5>
+                                <p class="text-gray-800">${{ $item->item_price }}</p>
+                            </div>
+                            <div>
+                                <h5 class="text-xs font-medium text-gray-500 uppercase sm:hidden">Total</h5>
+                                <p class="text-gray-800 sm:text-end">
+                                    ${{ number_format($item->item_quantity * $item->item_price, 2) }}</p>
+                            </div>
                         </div>
-                        <div>
-                            <h5 class="text-xs font-medium text-gray-500 uppercase sm:hidden">Qty</h5>
-                            <p class="text-gray-800">1</p>
-                        </div>
-                        <div>
-                            <h5 class="text-xs font-medium text-gray-500 uppercase sm:hidden">Rate</h5>
-                            <p class="text-gray-800">5</p>
-                        </div>
-                        <div>
-                            <h5 class="text-xs font-medium text-gray-500 uppercase sm:hidden">Amount</h5>
-                            <p class="text-gray-800 sm:text-end">$500</p>
-                        </div>
-                    </div>
+                    @endforeach
 
-                    <div class="border-b border-gray-200 sm:hidden"></div>
-
-                    <div class="grid grid-cols-3 gap-2 sm:grid-cols-5">
-                        <div class="col-span-full sm:col-span-2">
-                            <h5 class="text-xs font-medium text-gray-500 uppercase sm:hidden">Item</h5>
-                            <p class="font-medium text-gray-800">Web project</p>
-                        </div>
-                        <div>
-                            <h5 class="text-xs font-medium text-gray-500 uppercase sm:hidden">Qty</h5>
-                            <p class="text-gray-800">1</p>
-                        </div>
-                        <div>
-                            <h5 class="text-xs font-medium text-gray-500 uppercase sm:hidden">Rate</h5>
-                            <p class="text-gray-800">24</p>
-                        </div>
-                        <div>
-                            <h5 class="text-xs font-medium text-gray-500 uppercase sm:hidden">Amount</h5>
-                            <p class="text-gray-800 sm:text-end">$1250</p>
-                        </div>
-                    </div>
-
-                    <div class="border-b border-gray-200 sm:hidden"></div>
-
-                    <div class="grid grid-cols-3 gap-2 sm:grid-cols-5">
-                        <div class="col-span-full sm:col-span-2">
-                            <h5 class="text-xs font-medium text-gray-500 uppercase sm:hidden">Item</h5>
-                            <p class="font-medium text-gray-800">SEO</p>
-                        </div>
-                        <div>
-                            <h5 class="text-xs font-medium text-gray-500 uppercase sm:hidden">Qty</h5>
-                            <p class="text-gray-800">1</p>
-                        </div>
-                        <div>
-                            <h5 class="text-xs font-medium text-gray-500 uppercase sm:hidden">Rate</h5>
-                            <p class="text-gray-800">6</p>
-                        </div>
-                        <div>
-                            <h5 class="text-xs font-medium text-gray-500 uppercase sm:hidden">Amount</h5>
-                            <p class="text-gray-800 sm:text-end">$2000</p>
-                        </div>
-                    </div>
                 </div>
             </div>
             <!-- End Table -->
@@ -178,17 +180,30 @@
             </div>
             <!-- End Flex -->
 
-            <div class="mt-8 sm:mt-12">
-                <h4 class="text-lg font-semibold text-gray-800">Thank you!</h4>
-                <p class="text-gray-500">If you have any questions concerning this invoice, use the following contact
-                    information:</p>
-                <div class="mt-2">
-                    <p class="block text-sm font-medium text-gray-800">example@site.com</p>
-                    <p class="block text-sm font-medium text-gray-800">+1 (062) 109-9222</p>
+            <div class="mt-8 space-y-4 sm:mt-12">
+                @if ($invoice->invoice_terms)
+                <div>
+                    <h4 class="text-lg font-semibold text-gray-800">Payment Terms</h4>
+                    <p class="text-gray-500">{{ $invoice->invoice_terms }}</p>
                 </div>
+                @endif
+
+                @if ($invoice->invoice_conditions)
+                <div>
+                    <h4 class="text-lg font-semibold text-gray-800">Terms and Conditions</h4>
+                    <p class="text-gray-500">{{ $invoice->invoice_conditions }}</p>
+                </div>
+                @endif
+
+                @if ($invoice->invoice_notes)
+                <div>
+                    <h4 class="text-lg font-semibold text-gray-800">Additional Notes</h4>
+                    <p class="text-gray-500">{{ $invoice->invoice_notes }}</p>
+                </div>
+                @endif
             </div>
 
-            <p class="mt-5 text-sm text-gray-500">© {{ now()->year }} {{ $invoice->client_name }}.</p>
+            <p class="mt-5 text-sm text-gray-500">© {{ $invoice->updated_at->format('Y') }} {{ $invoice->sender_name }}.</p>
         </div>
         <!-- End Card -->
 
@@ -205,7 +220,8 @@
                 Send
             </a>
 
-            <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-800 bg-white border border-gray-200 rounded-lg shadow-sm gap-x-2 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50" href="#" wire:navigate>
+            <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-800 bg-white border border-gray-200 rounded-lg shadow-sm gap-x-2 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                href="#" wire:navigate>
                 <svg class="size-4 shrink-0" fill="none" height="24" stroke-linecap="round"
                     stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"
                     width="24" xmlns="http://www.w3.org/2000/svg">
@@ -229,7 +245,7 @@
             </a>
 
             <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:bg-blue-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
-                href="{{route('invoices.edit', $invoice->invoice_number)}}" wire:navigate>
+                href="{{ route('invoices.edit', $invoice->invoice_number) }}" wire:navigate>
                 <svg class="size-4" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -240,7 +256,7 @@
             </a>
 
             <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:bg-blue-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
-                href="{{route('invoices.index')}}" wire:navigate>
+                href="{{ route('invoices.index') }}" wire:navigate>
                 <svg class="size-6" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" stroke-linecap="round" stroke-linejoin="round" />

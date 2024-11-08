@@ -42,7 +42,7 @@
                         </div>
                         <div class="relative mt-4">
                             <x-inputs.label for="invoice_terms" optional>
-                                Invoice terms
+                                Payment terms
                             </x-inputs.label>
                             <x-inputs.text name="invoice_terms" placeholder="On Receipt, one day, due date, etc."
                                 type="text" wire:model="invoice_terms" :value="$invoice_terms"/>

@@ -1,17 +1,17 @@
 <section>
-    <div class="w-full bg-gradient-to-br from-gray-900 via-black to-gray-800 px-3 antialiased lg:px-6">
+    <div class="w-full px-3 antialiased bg-gradient-to-br from-gray-900 via-black to-gray-800 lg:px-6">
         <div class="mx-auto max-w-7xl">
             <x-partials.header />
         </div>
     </div>
     <section class="w-full px-3 antialiased lg:px-6">
-        <div class="mx-auto flex max-w-7xl flex-col">
-            <div class="mb-8 space-y-8 pt-12 md:px-4 lg:mb-14">
+        <div class="flex flex-col mx-auto max-w-7xl">
+            <div class="pt-12 mb-8 space-y-8 md:px-4 lg:mb-14">
                 <x-typography.section-h2 class="text-gray-900">
                     Create Invoice
                 </x-typography.section-h2>
                 @if ($errors->any())
-                    <div class="rounded-md bg-red-500 p-4">
+                    <div class="p-4 bg-red-500 rounded-md">
                         <ul class="list-disc">
                             @foreach ($errors->all() as $error)
                                 <li class="ml-4 text-lg font-semibold tracking-wider text-white">{{ $error }}</li>
@@ -19,7 +19,7 @@
                         </ul>
                     </div>
                 @endif
-                <form class="rounded-md border border-gray-300 p-4" wire:submit.prevent="save">
+                <form class="p-4 border border-gray-300 rounded-md" wire:submit.prevent="save">
                     @csrf
                     {{-- Invoice Details --}}
                     <div>
@@ -41,17 +41,17 @@
                         </div>
                         <div class="relative mt-4">
                             <x-inputs.label for="invoice_terms" optional>
-                                Invoice terms
+                                Payment terms
                             </x-inputs.label>
                             <x-inputs.text name="invoice_terms" placeholder="On Receipt, one day, due date, etc."
                                 type="text" wire:model="invoice_terms" />
                         </div>
                     </div>
 
-                    <hr class="my-8 h-1 border-gray-200 bg-gray-200">
+                    <hr class="h-1 my-8 bg-gray-200 border-gray-200">
 
                     {{-- Sender and recipient details section --}}
-                    <div class="mt-4 grid space-y-8 md:grid-cols-2 md:space-x-4 md:space-y-0">
+                    <div class="grid mt-4 space-y-8 md:grid-cols-2 md:space-x-4 md:space-y-0">
                         {{-- Sender --}}
                         <div class="">
                             <p class="text-xl font-bold text-gray-900">Your Details (Sender)</p>
@@ -141,7 +141,7 @@
                         </div>
                     </div>
 
-                    <hr class="my-8 h-1 border-gray-200 bg-gray-200">
+                    <hr class="h-1 my-8 bg-gray-200 border-gray-200">
 
                     {{-- Line items --}}
                     <div class="space-y-4">
@@ -152,7 +152,7 @@
                                     <x-inputs.label for="items.{{ $index }}.name">
                                         Item Name
                                     </x-inputs.label>
-                                    <x-inputs.text class="border p-2" name="items.{{ $index }}.name"
+                                    <x-inputs.text class="p-2 border" name="items.{{ $index }}.name"
                                         placeholder="Lawn chair, web development, etc" required type="text"
                                         wire:model="items.{{ $index }}.name" />
                                 </div>
@@ -161,18 +161,18 @@
                                     <x-inputs.label for="items.{{ $index }}.description" optional>
                                         Item Description
                                     </x-inputs.label>
-                                    <x-inputs.textarea class="w-full border p-2"
+                                    <x-inputs.textarea class="w-full p-2 border"
                                         name="items.{{ $index }}.description"
                                         placeholder="Description or additional details" type="text"
                                         wire:model="items.{{ $index }}.description" />
                                 </div>
 
-                                <div class="mt-2 flex flex-col gap-4 md:flex-row md:gap-0 md:space-x-4">
+                                <div class="flex flex-col gap-4 mt-2 md:flex-row md:gap-0 md:space-x-4">
                                     <div class="w-full md:w-1/2">
                                         <x-inputs.label for="items.{{ $index }}.quantity">
                                             Quantity (Number of Items)
                                         </x-inputs.label>
-                                        <x-inputs.text class="border p-2" name="items.{{ $index }}.quantity"
+                                        <x-inputs.text class="p-2 border" name="items.{{ $index }}.quantity"
                                             placeholder="1" required type="number"
                                             wire:change="calculateTotal({{ $index }})"
                                             wire:model="items.{{ $index }}.quantity" />
@@ -181,19 +181,19 @@
                                         <x-inputs.label for="items.{{ $index }}.price">
                                             Price (in currency)
                                         </x-inputs.label>
-                                        <x-inputs.prepend class="border p-2" name="items.{{ $index }}.price"
+                                        <x-inputs.prepend class="p-2 border" name="items.{{ $index }}.price"
                                             placeholder="30" required type="number"
                                             wire:change="calculateTotal({{ $index }})"
                                             wire:model="items.{{ $index }}.price" />
                                     </div>
                                 </div>
 
-                                <div class="mt-2 flex flex-col gap-4 md:flex-row md:gap-0 md:space-x-4">
+                                <div class="flex flex-col gap-4 mt-2 md:flex-row md:gap-0 md:space-x-4">
                                     <div class="w-full md:w-1/2">
                                         <x-inputs.label for="items.{{ $index }}.discount" optional>
                                             Discount (Percentage)
                                         </x-inputs.label>
-                                        <x-inputs.append class="border p-2" name="items.{{ $index }}.discount"
+                                        <x-inputs.append class="p-2 border" name="items.{{ $index }}.discount"
                                             placeholder="20" type="number"
                                             wire:change="calculateTotal({{ $index }})"
                                             wire:model="items.{{ $index }}.discount" />
@@ -205,7 +205,7 @@
                                         <x-inputs.label for="items.{{ $index }}.shipping" optional>
                                             Shipping Cost (in currency)
                                         </x-inputs.label>
-                                        <x-inputs.prepend class="border p-2"
+                                        <x-inputs.prepend class="p-2 border"
                                             name="items.{{ $index }}.shipping" placeholder="3" required
                                             type="number" wire:change="calculateTotal({{ $index }})"
                                             wire:model="items.{{ $index }}.shipping" />
@@ -256,7 +256,7 @@
                     <hr class="my-4 h-[2px] border-gray-200 bg-gray-200">
 
                     {{-- Grand total --}}
-                    <div class="mt-4 flex gap-2 text-xl font-bold text-gray-900">
+                    <div class="flex gap-2 mt-4 text-xl font-bold text-gray-900">
                         <x-inputs.label class="flex flex-col" for="grand_total">
                             <span>
                                 Grand Total:
@@ -280,7 +280,7 @@
                             value="{{ number_format($grand_total, 2) }}" wire:model="grand_total">
                     </div>
 
-                    <hr class="my-8 h-1 border-gray-200 bg-gray-200">
+                    <hr class="h-1 my-8 bg-gray-200 border-gray-200">
 
                     {{-- Additional details section, notes and conditions --}}
                     <div class="mt-4 space-y-4">
@@ -290,7 +290,7 @@
                             <x-inputs.label for="invoice_notes" optional>
                                 Notes
                             </x-inputs.label>
-                            <x-inputs.textarea class="w-full border p-2" name="invoice_notes" placeholder="Thank you"
+                            <x-inputs.textarea class="w-full p-2 border" name="invoice_notes" placeholder="Thank you"
                                 wire:model='invoice_notes' />
                         </div>
 
@@ -298,29 +298,29 @@
                             <x-inputs.label for="invoice_conditions" optional>
                                 Terms and conditions
                             </x-inputs.label>
-                            <x-inputs.textarea class="w-full border p-2" name="invoice_conditions"
+                            <x-inputs.textarea class="w-full p-2 border" name="invoice_conditions"
                                 placeholder="Please make the payment by the due date." type="text"
                                 wire:model='invoice_conditions' />
                         </div>
                     </div>
 
-                    <hr class="mb-8 h-1 border-gray-200 bg-gray-200">
+                    <hr class="h-1 mb-8 bg-gray-200 border-gray-200">
 
                     @if (!$totalError)
                         {{-- Send button --}}
-                        <div class="flex justify-end flex-col">
+                        <div class="flex flex-col justify-end">
                             <x-buttons.btn btn="primary"
                                 class="group gap-x-1 border-none bg-accent text-lg font-semibold text-black transition duration-300 ease-in-out hover:bg-accent hover:underline !w-fit"
                                 type="submit">
                                 <span>Create Invoice</span>
-                                <svg class="size-6 transition duration-300 ease-in-out group-hover:translate-x-2"
+                                <svg class="transition duration-300 ease-in-out size-6 group-hover:translate-x-2"
                                     fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
                             </x-buttons.btn>
-                            <div class="mt-2 text-gray-600 font-semibold text-lg pl-4" wire:loading.delay.long wire:target="save">
+                            <div class="pl-4 mt-2 text-lg font-semibold text-gray-600" wire:loading.delay.long wire:target="save">
                                 We are creating your invoice. You will be redirected in a few seconds.
                             </div>
                         </div>
@@ -328,7 +328,7 @@
                         <div class="flex justify-end">
                             <div class="flex flex-col space-y-2 text-center">
                                 <x-buttons.btn btn="danger"
-                                    class="group gap-x-1 border-none text-lg font-semibold text-white transition duration-300 ease-in-out hover:underline"
+                                    class="text-lg font-semibold text-white transition duration-300 ease-in-out border-none group gap-x-1 hover:underline"
                                     disabled>
                                     Cannot Create Invoice
                                     <svg class="size-6" fill="currentColor" viewBox="0 0 24 24"
