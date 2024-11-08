@@ -1,17 +1,17 @@
 <section>
-    <div class="w-full px-3 antialiased bg-gradient-to-br from-gray-900 via-black to-gray-800 lg:px-6">
+    <div class="w-full bg-gradient-to-br from-gray-900 via-black to-gray-800 px-3 antialiased lg:px-6">
         <div class="mx-auto max-w-7xl">
             <x-partials.header />
         </div>
     </div>
     <section class="w-full px-3 antialiased lg:px-6">
-        <div class="flex flex-col mx-auto max-w-7xl">
-            <div class="pt-12 mb-8 space-y-8 md:px-4 lg:mb-14">
+        <div class="mx-auto flex max-w-7xl flex-col">
+            <div class="mb-8 space-y-8 pt-12 md:px-4 lg:mb-14">
                 <x-typography.section-h2 class="text-gray-900">
                     Edit Invoice No: {{$invoice->invoice_number}}
                 </x-typography.section-h2>
                 @if ($errors->any())
-                    <div class="p-4 bg-red-500 rounded-md">
+                    <div class="rounded-md bg-red-500 p-4">
                         <ul class="list-disc">
                             @foreach ($errors->all() as $error)
                                 <li class="ml-4 text-lg font-semibold tracking-wider text-white">{{ $error }}</li>
@@ -19,8 +19,9 @@
                         </ul>
                     </div>
                 @endif
-                <form wire:submit.prevent="save" class="p-4 border border-gray-300 rounded-md">
+                <form class="rounded-md border border-gray-300 p-4" wire:submit.prevent="update">
                     @csrf
+                    @method('put')
                     {{-- Invoice Details --}}
                     <div>
                         <p class="text-xl font-bold text-gray-900">Invoice Details</p>
@@ -29,27 +30,29 @@
                             <x-inputs.label for="invoice_number">
                                 Invoice Number
                             </x-inputs.label>
-                            <x-inputs.text name="invoice_number" placeholder="INV001" required type="text" wire:model="invoice_number" value="{{$invoice->invoice_number}}"/>
+                            <x-inputs.text name="invoice_number" placeholder="INV001" required type="text"
+                                wire:model="invoice_number" :value="$invoice_number" disabled/>
                         </div>
                         <div class="relative mt-4">
                             <x-inputs.label for="invoice_date">
                                 Invoice Date
                             </x-inputs.label>
-                            <x-inputs.text name="invoice_date" required type="date" wire:model="invoice_date" value="{{$invoice->invoice_date->format('Y-m-d')}}"/>
+                            <x-inputs.text name="invoice_date" placeholder="10/10/24" required type="date"
+                                wire:model="invoice_date" :value="$invoice_date" />
                         </div>
                         <div class="relative mt-4">
                             <x-inputs.label for="invoice_terms" optional>
                                 Invoice terms
                             </x-inputs.label>
                             <x-inputs.text name="invoice_terms" placeholder="On Receipt, one day, due date, etc."
-                                type="text" wire:model="invoice_terms" value="{{$invoice->invoice_terms}}"/>
+                                type="text" wire:model="invoice_terms" :value="$invoice_terms"/>
                         </div>
                     </div>
 
-                    <hr class="h-1 my-8 bg-gray-200 border-gray-200">
+                    <hr class="my-8 h-1 border-gray-200 bg-gray-200">
 
                     {{-- Sender and recipient details section --}}
-                    <div class="grid mt-4 space-y-8 md:grid-cols-2 md:space-x-4 md:space-y-0">
+                    <div class="mt-4 grid space-y-8 md:grid-cols-2 md:space-x-4 md:space-y-0">
                         {{-- Sender --}}
                         <div class="">
                             <p class="text-xl font-bold text-gray-900">Your Details (Sender)</p>
@@ -58,15 +61,16 @@
                                 <x-inputs.label for="sender_name">
                                     Your Name
                                 </x-inputs.label>
-                                <x-inputs.text name="sender_name" placeholder="John Doe" required type="text" wire:model="sender_name" value="{{$invoice->sender_name}}"/>
+                                <x-inputs.text name="sender_name" placeholder="John Doe" required type="text"
+                                    wire:model="sender_name" :value="$sender_name"/>
                             </div>
                             <div class="relative mt-2">
                                 <x-inputs.label for="sender_business_name" optional>
                                     Your Business Name
                                 </x-inputs.label>
                                 <div class="relative">
-                                    <x-inputs.text name="sender_business_name" placeholder="Business Doe"
-                                        type="text" wire:model="sender_business_name" value="{{$invoice->sender_business_name}}"/>
+                                    <x-inputs.text name="sender_business_name" placeholder="Business Doe" type="text"
+                                        wire:model="sender_business_name" :value="$sender_business_name"/>
                                 </div>
                             </div>
                             <div class="mt-2">
@@ -74,7 +78,7 @@
                                     Your Email
                                 </x-inputs.label>
                                 <x-inputs.text name="sender_email" placeholder="john.doe@company.com" required
-                                    type="email" wire:model="sender_email" value="{{$invoice->sender_email}}"/>
+                                    type="email" wire:model="sender_email" :value="$sender_email"/>
                             </div>
 
                             <div class="relative mt-2">
@@ -82,7 +86,8 @@
                                     Your Phone Number
                                 </x-inputs.label>
                                 <div class="relative">
-                                    <x-inputs.text name="sender_tel" placeholder="+..." required type="tel" wire:model="sender_tel" value="{{$invoice->sender_tel}}"/>
+                                    <x-inputs.text name="sender_tel" placeholder="+..." required type="tel"
+                                        wire:model="sender_tel" :value="$sender_tel"/>
                                 </div>
                             </div>
                             <div class="relative mt-2">
@@ -90,14 +95,16 @@
                                     Your Website
                                 </x-inputs.label>
                                 <div class="relative">
-                                    <x-inputs.text name="sender_website" placeholder="https://www.yourbusiness.com" type="url" wire:model="sender_website" value="{{$invoice->sender_website}}"/>
+                                    <x-inputs.text name="sender_website" placeholder="https://www.yourbusiness.com"
+                                        type="url" wire:model="sender_website" :value="$sender_website"/>
                                 </div>
                             </div>
                             <div class="mt-2">
                                 <x-inputs.label for="sender_business_number" optional>
                                     Business Number
                                 </x-inputs.label>
-                                <x-inputs.text name="sender_business_number" placeholder="A3Be" type="text" wire:model="sender_business_number" value="{{$invoice->sender_business_number}}"/>
+                                <x-inputs.text name="sender_business_number" placeholder="A3Be" type="text"
+                                    wire:model="sender_business_number" :value="$sender_business_number"/>
                             </div>
                         </div>
                         {{-- Client --}}
@@ -108,88 +115,92 @@
                                 <x-inputs.label for="client_name">
                                     Client Name/Business name
                                 </x-inputs.label>
-                                <x-inputs.text name="client_name" placeholder="Client Doe" required type="text" wire:model="client_name" value="{{$invoice->client_name}}"/>
+                                <x-inputs.text name="client_name" placeholder="Client Doe" required type="text"
+                                    wire:model="client_name" :value="$client_name"/>
                             </div>
                             <div class="relative mt-2">
                                 <x-inputs.label for="client_email">
                                     Client Email
                                 </x-inputs.label>
                                 <x-inputs.text name="client_email" placeholder="client@clientcompany.com" required
-                                    type="email" wire:model="client_email" value="{{$invoice->client_email}}"/>
+                                    type="email" wire:model="client_email" :value="$client_email"/>
                             </div>
                             <div class="relative mt-2">
                                 <x-inputs.label for="client_tel">
                                     Client Phone Number
                                 </x-inputs.label>
-                                    <x-inputs.text name="client_tel" placeholder="+..." required type="tel" wire:model="client_tel" value="{{$invoice->client_tel}}"/>
+                                <x-inputs.text name="client_tel" placeholder="+..." required type="tel"
+                                    wire:model="client_tel" :value="$client_tel"/>
                             </div>
                             <div class="mt-2">
                                 <x-inputs.label for="client_business_number" optional>
                                     Client Business Number
                                 </x-inputs.label>
-                                <x-inputs.text name="client_business_number" placeholder="A3Be" type="text" wire:model="client_business_number" value="{{$invoice->client_business_number}}"/>
+                                <x-inputs.text name="client_business_number" placeholder="A3Be" type="text"
+                                    wire:model="client_business_number" :value="$client_business_number"/>
                             </div>
                         </div>
                     </div>
 
-                    <hr class="h-1 my-8 bg-gray-200 border-gray-200">
+                    <hr class="my-8 h-1 border-gray-200 bg-gray-200">
 
                     {{-- Line items --}}
                     <div class="space-y-4">
-                        @foreach ($invoice->items as $index => $item)
+                        @foreach ($items as $index => $item)
                             <div class="flex flex-col rounded-md border-[2px] border-gray-300 p-4"
                                 wire:key="item-{{ $item['id'] }}">
+                                @if(isset($item['id']) && is_numeric($item['id']))
+                                    <input type="hidden" wire:model="items.{{ $index }}.id" />
+                                @endif
                                 <div>
                                     <x-inputs.label for="items.{{ $index }}.name">
                                         Item Name
                                     </x-inputs.label>
-                                    <x-inputs.text class="p-2 border" name="items.{{ $index }}.name"
+                                    <x-inputs.text class="border p-2" name="items.{{ $index }}.name"
                                         placeholder="Lawn chair, web development, etc" required type="text"
-                                        wire:model="items.{{ $index }}.name" value="{{$item->item_name}}"/>
+                                        wire:model="items.{{ $index }}.name"/>
                                 </div>
 
                                 <div class="mt-2">
                                     <x-inputs.label for="items.{{ $index }}.description" optional>
                                         Item Description
                                     </x-inputs.label>
-                                    <x-inputs.textarea class="w-full p-2 border"
+                                    <x-inputs.textarea class="w-full border p-2"
                                         name="items.{{ $index }}.description"
                                         placeholder="Description or additional details" type="text"
-                                        wire:model="items.{{ $index }}.description">
-                                        {{$item->item_name}}
-                                    </x-inputs.textarea>
+                                        wire:model="items.{{ $index }}.description" />
                                 </div>
 
-                                <div class="flex flex-col gap-4 mt-2 md:flex-row md:gap-0 md:space-x-4">
+                                <div class="mt-2 flex flex-col gap-4 md:flex-row md:gap-0 md:space-x-4">
                                     <div class="w-full md:w-1/2">
                                         <x-inputs.label for="items.{{ $index }}.quantity">
                                             Quantity (Number of Items)
                                         </x-inputs.label>
-                                        <x-inputs.text class="p-2 border" name="items.{{ $index }}.quantity"
+                                        <x-inputs.text class="border p-2" name="items.{{ $index }}.quantity"
                                             placeholder="1" required type="number"
                                             wire:change="calculateTotal({{ $index }})"
-                                            wire:model="items.{{ $index }}.quantity" value="{{$item->item_quantity}}"/>
+                                            wire:model="items.{{ $index }}.quantity" />
                                     </div>
                                     <div class="w-full md:w-1/2">
                                         <x-inputs.label for="items.{{ $index }}.price">
                                             Price (in currency)
                                         </x-inputs.label>
-                                        <x-inputs.prepend class="p-2 border" name="items.{{ $index }}.price"
+                                        <x-inputs.prepend class="border p-2" name="items.{{ $index }}.price"
                                             placeholder="30" required type="number"
                                             wire:change="calculateTotal({{ $index }})"
-                                            wire:model="items.{{ $index }}.price" value="{{$item->item_price}}"/>
+                                            wire:model="items.{{ $index }}.price" />
                                     </div>
                                 </div>
 
-                                <div class="flex flex-col gap-4 mt-2 md:flex-row md:gap-0 md:space-x-4">
+                                <div class="mt-2 flex flex-col gap-4 md:flex-row md:gap-0 md:space-x-4">
                                     <div class="w-full md:w-1/2">
                                         <x-inputs.label for="items.{{ $index }}.discount" optional>
                                             Discount (Percentage)
                                         </x-inputs.label>
-                                        <x-inputs.append class="p-2 border" name="items.{{ $index }}.discount"
+                                        <x-inputs.append class="border p-2" name="items.{{ $index }}.discount"
                                             placeholder="20" type="number"
                                             wire:change="calculateTotal({{ $index }})"
-                                            wire:model="items.{{ $index }}.discount" value="{{$item->item_discount}}"/>
+                                            wire:model="items.{{ $index }}.discount" />
                                         @if ($discountError)
                                             <p class="mt-2 text-red-500">The discount should be between 0 and 100%</p>
                                         @endif
@@ -198,10 +209,10 @@
                                         <x-inputs.label for="items.{{ $index }}.shipping" optional>
                                             Shipping Cost (in currency)
                                         </x-inputs.label>
-                                        <x-inputs.prepend class="p-2 border"
+                                        <x-inputs.prepend class="border p-2"
                                             name="items.{{ $index }}.shipping" placeholder="3" required
                                             type="number" wire:change="calculateTotal({{ $index }})"
-                                            wire:model="items.{{ $index }}.shipping" value="{{$item->item_shipping}}"/>
+                                            wire:model="items.{{ $index }}.shipping" />
                                     </div>
                                 </div>
 
@@ -216,8 +227,8 @@
 
                                 <div class="flex space-x-4">
                                     <x-buttons.btn btn="danger" class="gap-1 font-semibold"
-                                        disabled="{{ count($invoice->items) <= 1 ? true : false }}"
-                                        title="{{ count($invoice->items) <= 1 ? 'The invoice should have at least one item' : 'Remove this item from the list' }}"
+                                        disabled="{{ count($items) <= 1 ? true : false }}"
+                                        title="{{ count($items) <= 1 ? 'The invoice should have at least one item' : 'Remove this item from the list' }}"
                                         wire:click="removeLineItem({{ $index }})">
                                         Remove This Item
                                         <svg class="size-6" fill="currentColor" viewBox="0 0 24 24"
@@ -232,6 +243,7 @@
                         @endforeach
                     </div>
 
+                    {{-- Add new item button --}}
                     <div class="mt-4">
                         <x-buttons.btn btn="primary" class="gap-1 font-semibold" wire:click="addLineItem">
                             Add New Item
@@ -247,7 +259,8 @@
 
                     <hr class="my-4 h-[2px] border-gray-200 bg-gray-200">
 
-                    <div class="flex gap-2 mt-4 text-xl font-bold text-gray-900">
+                    {{-- Grand total --}}
+                    <div class="mt-4 flex gap-2 text-xl font-bold text-gray-900">
                         <x-inputs.label class="flex flex-col" for="grand_total">
                             <span>
                                 Grand Total:
@@ -267,11 +280,13 @@
                             </p>
                         </div>
 
-                        <input name="grand_total" type="number" value="{{ number_format($grand_total, 2) }}" wire:model="grand_total" step="0.01" hidden>
+                        <input hidden name="grand_total" step="0.01" type="number"
+                            value="{{ number_format($grand_total, 2) }}" wire:model="grand_total">
                     </div>
 
-                    <hr class="h-1 my-8 bg-gray-200 border-gray-200">
+                    <hr class="my-8 h-1 border-gray-200 bg-gray-200">
 
+                    {{-- Additional details section, notes and conditions --}}
                     <div class="mt-4 space-y-4">
                         <p class="text-xl font-bold text-gray-900">Additional Details</p>
                         <hr class="my-4 border-gray-300">
@@ -279,40 +294,45 @@
                             <x-inputs.label for="invoice_notes" optional>
                                 Notes
                             </x-inputs.label>
-                            <x-inputs.textarea class="w-full p-2 border" name="invoice_notes" placeholder="Thank you"
-                                type="text" />
+                            <x-inputs.textarea class="w-full border p-2" name="invoice_notes" placeholder="Thank you"
+                                wire:model='invoice_notes' :value="$invoice_notes"/>
                         </div>
+
                         <div class="mt-2">
                             <x-inputs.label for="invoice_conditions" optional>
                                 Terms and conditions
                             </x-inputs.label>
-                            <x-inputs.textarea class="w-full p-2 border" name="invoice_conditions"
-                                placeholder="Please make the payment by the due date." type="text" />
+                            <x-inputs.textarea class="w-full border p-2" name="invoice_conditions"
+                                placeholder="Please make the payment by the due date." type="text"
+                                wire:model='invoice_conditions' :value="$invoice_conditions"/>
                         </div>
                     </div>
 
-                    <hr class="h-1 mb-8 bg-gray-200 border-gray-200">
+                    <hr class="mb-8 h-1 border-gray-200 bg-gray-200">
 
                     @if (!$totalError)
                         {{-- Send button --}}
-                        <div class="flex justify-end">
+                        <div class="flex justify-end flex-col">
                             <x-buttons.btn btn="primary"
-                                class="text-lg font-semibold text-black transition duration-300 ease-in-out border-none group gap-x-1 bg-accent hover:bg-accent hover:underline"
+                                class="group gap-x-1 border-none bg-accent text-lg font-semibold text-black transition duration-300 ease-in-out hover:bg-accent hover:underline !w-fit"
                                 type="submit">
-                                <span>Create Invoice</span>
-                                <svg class="transition duration-300 ease-in-out size-6 group-hover:translate-x-2"
+                                <span>Update Invoice</span>
+                                <svg class="size-6 transition duration-300 ease-in-out group-hover:translate-x-2"
                                     fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
                             </x-buttons.btn>
+                            <div class="mt-2 text-gray-600 font-semibold text-lg pl-4" wire:loading.delay.long wire:target="save">
+                                We are updating your invoice. You will be redirected in a few seconds.
+                            </div>
                         </div>
                     @else
                         <div class="flex justify-end">
                             <div class="flex flex-col space-y-2 text-center">
                                 <x-buttons.btn btn="danger"
-                                    class="text-lg font-semibold text-white transition duration-300 ease-in-out border-none group gap-x-1 hover:underline"
+                                    class="group gap-x-1 border-none text-lg font-semibold text-white transition duration-300 ease-in-out hover:underline"
                                     disabled>
                                     Cannot Create Invoice
                                     <svg class="size-6" fill="currentColor" viewBox="0 0 24 24"

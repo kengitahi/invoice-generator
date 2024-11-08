@@ -19,8 +19,8 @@
 
                     <h1 class="mt-2 text-lg font-semibold text-blue-600 md:text-xl">Preline Inc.</h1>
                 </div>
-                <!-- Col -->
 
+                <!-- Col -->
                 <div class="text-end">
                     <h2 class="text-2xl font-semibold text-gray-800 md:text-3xl">Invoice #</h2>
                     <span class="block mt-1 text-gray-500">invoice_number</span>
@@ -47,8 +47,8 @@
                         United States<br>
                     </address>
                 </div>
-                <!-- Col -->
 
+                <!-- Col -->
                 <div class="space-y-2 sm:text-end">
                     <!-- Grid -->
                     <div class="grid grid-cols-2 gap-3 sm:grid-cols-1 sm:gap-2">
@@ -237,8 +237,8 @@
                         stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
                 Edit
-            </a>           
-            
+            </a>
+
             <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:bg-blue-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                 href="{{route('invoices.index')}}" wire:navigate>
                 <svg class="size-6" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
@@ -247,9 +247,9 @@
                 </svg>
                 Back To Invoices
             </a>
-            
+
         </div>
         <!-- End Buttons -->
     </div>
 </section>
-<!-- End Invoice -->
+<!-- End Invoice-->

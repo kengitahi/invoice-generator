@@ -36,6 +36,7 @@ class Invoice extends Model
     protected function casts(): array
     {
         return [
+            'invoice_number' => 'string',
             'invoice_date' => 'datetime:Y-m-d',
             'grand_total' => 'float',
         ];

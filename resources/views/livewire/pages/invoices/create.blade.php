@@ -19,7 +19,7 @@
                         </ul>
                     </div>
                 @endif
-                <form wire:submit.prevent="save" class="rounded-md border border-gray-300 p-4">
+                <form class="rounded-md border border-gray-300 p-4" wire:submit.prevent="save">
                     @csrf
                     {{-- Invoice Details --}}
                     <div>
@@ -29,20 +29,22 @@
                             <x-inputs.label for="invoice_number">
                                 Invoice Number
                             </x-inputs.label>
-                            <x-inputs.text name="invoice_number" placeholder="INV001" required type="text" wire:model="invoice_number"/>
+                            <x-inputs.text name="invoice_number" placeholder="INV001" required type="text"
+                                wire:model="invoice_number" />
                         </div>
                         <div class="relative mt-4">
                             <x-inputs.label for="invoice_date">
                                 Invoice Date
                             </x-inputs.label>
-                            <x-inputs.text name="invoice_date" placeholder="10/10/24" required type="date" wire:model="invoice_date"/>
+                            <x-inputs.text name="invoice_date" placeholder="10/10/24" required type="date"
+                                wire:model="invoice_date" />
                         </div>
                         <div class="relative mt-4">
                             <x-inputs.label for="invoice_terms" optional>
                                 Invoice terms
                             </x-inputs.label>
                             <x-inputs.text name="invoice_terms" placeholder="On Receipt, one day, due date, etc."
-                                type="text" wire:model="invoice_terms"/>
+                                type="text" wire:model="invoice_terms" />
                         </div>
                     </div>
 
@@ -58,15 +60,16 @@
                                 <x-inputs.label for="sender_name">
                                     Your Name
                                 </x-inputs.label>
-                                <x-inputs.text name="sender_name" placeholder="John Doe" required type="text" wire:model="sender_name"/>
+                                <x-inputs.text name="sender_name" placeholder="John Doe" required type="text"
+                                    wire:model="sender_name" />
                             </div>
                             <div class="relative mt-2">
                                 <x-inputs.label for="sender_business_name" optional>
                                     Your Business Name
                                 </x-inputs.label>
                                 <div class="relative">
-                                    <x-inputs.text name="sender_business_name" placeholder="Business Doe"
-                                        type="text" wire:model="sender_business_name"/>
+                                    <x-inputs.text name="sender_business_name" placeholder="Business Doe" type="text"
+                                        wire:model="sender_business_name" />
                                 </div>
                             </div>
                             <div class="mt-2">
@@ -82,7 +85,8 @@
                                     Your Phone Number
                                 </x-inputs.label>
                                 <div class="relative">
-                                    <x-inputs.text name="sender_tel" placeholder="+..." required type="tel" wire:model="sender_tel"/>
+                                    <x-inputs.text name="sender_tel" placeholder="+..." required type="tel"
+                                        wire:model="sender_tel" />
                                 </div>
                             </div>
                             <div class="relative mt-2">
@@ -90,14 +94,16 @@
                                     Your Website
                                 </x-inputs.label>
                                 <div class="relative">
-                                    <x-inputs.text name="sender_website" placeholder="https://www.yourbusiness.com" type="url" wire:model="sender_website"/>
+                                    <x-inputs.text name="sender_website" placeholder="https://www.yourbusiness.com"
+                                        type="url" wire:model="sender_website" />
                                 </div>
                             </div>
                             <div class="mt-2">
                                 <x-inputs.label for="sender_business_number" optional>
                                     Business Number
                                 </x-inputs.label>
-                                <x-inputs.text name="sender_business_number" placeholder="A3Be" type="text" wire:model="sender_business_number"/>
+                                <x-inputs.text name="sender_business_number" placeholder="A3Be" type="text"
+                                    wire:model="sender_business_number" />
                             </div>
                         </div>
                         {{-- Client --}}
@@ -108,26 +114,29 @@
                                 <x-inputs.label for="client_name">
                                     Client Name/Business name
                                 </x-inputs.label>
-                                <x-inputs.text name="client_name" placeholder="Client Doe" required type="text" wire:model="client_name"/>
+                                <x-inputs.text name="client_name" placeholder="Client Doe" required type="text"
+                                    wire:model="client_name" />
                             </div>
                             <div class="relative mt-2">
                                 <x-inputs.label for="client_email">
                                     Client Email
                                 </x-inputs.label>
                                 <x-inputs.text name="client_email" placeholder="client@clientcompany.com" required
-                                    type="email" wire:model="client_email"/>
+                                    type="email" wire:model="client_email" />
                             </div>
                             <div class="relative mt-2">
                                 <x-inputs.label for="client_tel">
                                     Client Phone Number
                                 </x-inputs.label>
-                                    <x-inputs.text name="client_tel" placeholder="+..." required type="tel" wire:model="client_tel"/>
+                                <x-inputs.text name="client_tel" placeholder="+..." required type="tel"
+                                    wire:model="client_tel" />
                             </div>
                             <div class="mt-2">
                                 <x-inputs.label for="client_business_number" optional>
                                     Client Business Number
                                 </x-inputs.label>
-                                <x-inputs.text name="client_business_number" placeholder="A3Be" type="text" wire:model="client_business_number"/>
+                                <x-inputs.text name="client_business_number" placeholder="A3Be" type="text"
+                                    wire:model="client_business_number" />
                             </div>
                         </div>
                     </div>
@@ -230,6 +239,7 @@
                         @endforeach
                     </div>
 
+                    {{-- Add new item button --}}
                     <div class="mt-4">
                         <x-buttons.btn btn="primary" class="gap-1 font-semibold" wire:click="addLineItem">
                             Add New Item
@@ -245,6 +255,7 @@
 
                     <hr class="my-4 h-[2px] border-gray-200 bg-gray-200">
 
+                    {{-- Grand total --}}
                     <div class="mt-4 flex gap-2 text-xl font-bold text-gray-900">
                         <x-inputs.label class="flex flex-col" for="grand_total">
                             <span>
@@ -265,11 +276,13 @@
                             </p>
                         </div>
 
-                        <input name="grand_total" type="number" value="{{ number_format($grand_total, 2) }}" wire:model="grand_total" step="0.01" hidden>
+                        <input hidden name="grand_total" step="0.01" type="number"
+                            value="{{ number_format($grand_total, 2) }}" wire:model="grand_total">
                     </div>
 
                     <hr class="my-8 h-1 border-gray-200 bg-gray-200">
 
+                    {{-- Additional details section, notes and conditions --}}
                     <div class="mt-4 space-y-4">
                         <p class="text-xl font-bold text-gray-900">Additional Details</p>
                         <hr class="my-4 border-gray-300">
@@ -278,14 +291,16 @@
                                 Notes
                             </x-inputs.label>
                             <x-inputs.textarea class="w-full border p-2" name="invoice_notes" placeholder="Thank you"
-                                type="text" />
+                                wire:model='invoice_notes' />
                         </div>
+
                         <div class="mt-2">
                             <x-inputs.label for="invoice_conditions" optional>
                                 Terms and conditions
                             </x-inputs.label>
                             <x-inputs.textarea class="w-full border p-2" name="invoice_conditions"
-                                placeholder="Please make the payment by the due date." type="text" />
+                                placeholder="Please make the payment by the due date." type="text"
+                                wire:model='invoice_conditions' />
                         </div>
                     </div>
 
@@ -293,9 +308,9 @@
 
                     @if (!$totalError)
                         {{-- Send button --}}
-                        <div class="flex justify-end">
+                        <div class="flex justify-end flex-col">
                             <x-buttons.btn btn="primary"
-                                class="group gap-x-1 border-none bg-accent text-lg font-semibold text-black transition duration-300 ease-in-out hover:bg-accent hover:underline"
+                                class="group gap-x-1 border-none bg-accent text-lg font-semibold text-black transition duration-300 ease-in-out hover:bg-accent hover:underline !w-fit"
                                 type="submit">
                                 <span>Create Invoice</span>
                                 <svg class="size-6 transition duration-300 ease-in-out group-hover:translate-x-2"
@@ -305,6 +320,9 @@
                                         stroke-linejoin="round" />
                                 </svg>
                             </x-buttons.btn>
+                            <div class="mt-2 text-gray-600 font-semibold text-lg pl-4" wire:loading.delay.long wire:target="save">
+                                We are creating your invoice. You will be redirected in a few seconds.
+                            </div>
                         </div>
                     @else
                         <div class="flex justify-end">

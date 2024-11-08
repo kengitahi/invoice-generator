@@ -147,7 +147,6 @@ class CreateInvoice extends Component
 
         $this->validate();
         $invoice = Auth::user()->invoices()->create([
-            // 'user_id' => auth()->user()->id,
             'invoice_number' => $this->invoice_number,
             'invoice_date' => $this->invoice_date,
             'invoice_terms' => $this->invoice_terms,
