@@ -14,7 +14,6 @@
         @endif
     </title>
 
-
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
@@ -46,6 +45,24 @@
             {{ $slot }}
         </main>
     </div>
+
+    <script>
+    document.addEventListener('livewire:initialized', () => {
+        Livewire.on('profile-updated', () => {
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        });
+    });
+
+    document.addEventListener('livewire:initialized', () => {
+        Livewire.on('password-updated', () => {
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        });
+    });
+</script>
 </body>
 
 </html>
