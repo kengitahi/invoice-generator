@@ -8,20 +8,15 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             @if ($invoices->count() > 0)
                 <div class="flex justify-between">
-                    <form wire:submit="findInvoices" class="flex flex-col gap-2 pb-4">
+                    <form class="flex flex-col gap-2 pb-4" wire:submit="findInvoices">
                         <div class="flex flex-col">
                             <label class="sr-only" for="search">Search</label>
-                            <x-inputs.text
-                                class="max-w-md pt-3 pl-2 text-lg w-96"
-                                id="SearchTerm"
-                                name="SearchTerm"
-                                placeholder="Search..."
-                                wire:model.live.debounce.500ms="SearchTerm"
-                                required
-                            />
-                            <p class="mt-1 text-gray-600 text-md">Enter invoice number, client's name or client's email.</p>
+                            <x-inputs.text class="max-w-md pt-3 pl-2 text-lg w-96" id="SearchTerm" name="SearchTerm"
+                                placeholder="Search..." required wire:model.live.debounce.500ms="SearchTerm" />
+                            <p class="mt-1 text-gray-600 text-md">Enter invoice number, client's name or client's email.
+                            </p>
                         </div>
-                        <x-buttons.btn btn="primary" class="md:w-fit text-md" type="submit">
+                        <x-buttons.btn btn="primary" class="text-md md:w-fit" type="submit">
                             Search Invoices
                         </x-buttons.btn>
                     </form>
@@ -30,19 +25,22 @@
                             class="mt-2 transition duration-300 ease-in-out text-md group h-fit hover:border-transparent"
                             type="primary">
                             Create a New Invoice
-                            <svg class="transition duration-300 ease-in-out size-4 group-hover:translate-x-2" fill="none"
-                                stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" stroke-linecap="round" stroke-linejoin="round" />
+                            <svg class="transition duration-300 ease-in-out size-4 group-hover:translate-x-2"
+                                fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                         </x-links.link>
                         <x-links.link :href="route('invoices.index')"
                             class="gap-2 transition duration-300 ease-in-out text-md group hover:border-transparent"
                             type="primary">
-                                <svg class="size-6 group-hover:-translate-x-2" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                Back to All Invoices
+                            <svg class="size-6 group-hover:-translate-x-2" fill="none" stroke-width="1.5"
+                                stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            Back to All Invoices
                         </x-links.link>
                     </div>
                 </div>
@@ -54,48 +52,51 @@
                 @if (count($invoices) == 0)
                     <div>
                         <p class="mb-2 text-xl font-semibold leading-tight text-gray-800">
-                            Sorry, we could not find any invoices that match your search.                       
+                            Sorry, we could not find any invoices that match your search.
                         </p>
-                        
+
                         <hr class="max-w-md my-4 border-gray-200">
-                            
+
                         <p class="mb-2 text-xl font-semibold leading-tight text-gray-800">
-                            Search again?                           
+                            Search again?
                         </p>
                         <div class="flex justify-between">
-                            <form wire:submit="findInvoices" class="flex flex-col gap-2">
+                            <form class="flex flex-col gap-2" wire:submit="findInvoices">
                                 <div class="flex flex-col">
                                     <label class="sr-only" for="search">Search</label>
-                                    <x-inputs.text
-                                        class="max-w-md pt-3 pl-2 text-lg w-96"
-                                        id="SearchTerm"
-                                        name="SearchTerm"
-                                        placeholder="Search ..."
-                                        wire:model.live.debounce.500ms="SearchTerm"
-                                        required
-                                    />
-                                    <p class="mt-1 text-gray-600 text-md">Enter invoice number, client's name or client's email.</p>
+                                    <x-inputs.text class="max-w-md pt-3 pl-2 text-lg w-96" id="SearchTerm"
+                                        name="SearchTerm" placeholder="Search ..." required
+                                        wire:model.live.debounce.500ms="SearchTerm" />
+                                    <p class="mt-1 text-gray-600 text-md">Enter invoice number, client's name or
+                                        client's email.</p>
                                 </div>
-                                <x-buttons.btn btn="primary" class="md:w-fit text-md" type="submit">
+                                <x-buttons.btn btn="primary" class="flex items-center gap-2 text-md md:w-fit group" type="submit">
+                                    <svg class="transition duration-300 ease-in-out size-4 group-hover:scale-125" fill="none" stroke-width="2" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
                                     Search Again
                                 </x-buttons.btn>
                             </form>
                         </div>
-                        
+
                         <hr class="max-w-md my-4 border-gray-200">
 
                         <p class="mb-2 text-xl font-semibold leading-tight text-gray-800">
                             Or, go back to your invoices?
                         </p>
-                        
+
                         <x-links.link :href="route('invoices.index')"
                             class="gap-2 transition duration-300 ease-in-out text-md group hover:border-transparent"
                             type="primary">
-                                <svg class="size-6 group-hover:-translate-x-2" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                Back to All Invoices
+                    <svg class="transition duration-300 ease-in-out size-6 group-hover:-translate-x-1" fill="none" stroke-width="1.5"
+                                stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            Back to All Invoices
                         </x-links.link>
                     </div>
                 @else
