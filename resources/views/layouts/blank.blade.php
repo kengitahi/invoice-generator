@@ -29,7 +29,6 @@
 
 <body class="font-sans antialiased">
     <main class="min-h-screen bg-gray-100">
-        <p class="font-5xl">Blank</p>
         <!-- Page Content -->
             {{ $slot }}
     </main>

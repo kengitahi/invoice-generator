@@ -8,7 +8,7 @@
             </div>
             {{-- @endif --}}
             <div class="pt-12 md:px-0">
-                <x-typography.section-h2 class="tracking-wide text-gray-900 md:text-lg">
+                <x-typography.section-h2 class="tracking-wide text-gray-900">
                     Previewing Invoice No: {{$invoice->invoice_number}}
                 </x-typography.section-h2>
             </div>

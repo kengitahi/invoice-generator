@@ -12,13 +12,14 @@
                         <div class="flex flex-col">
                             <label class="sr-only" for="search">Search</label>
                             <x-inputs.text
-                                class="w-96 max-w-md pl-2 pt-3 text-lg"
+                                class="max-w-md pt-3 pl-2 text-lg w-96"
                                 id="SearchTerm"
                                 name="SearchTerm"
                                 placeholder="Search..."
                                 wire:model.live.debounce.500ms="SearchTerm"
+                                required
                             />
-                            <p class="text-md mt-1 text-gray-600">Enter invoice number, client's name or client's email.</p>
+                            <p class="mt-1 text-gray-600 text-md">Enter invoice number, client's name or client's email.</p>
                         </div>
                         <x-buttons.btn btn="primary" class="md:w-fit text-md" type="submit">
                             Search Invoices
@@ -26,16 +27,16 @@
                     </form>
                     <div class="flex flex-col gap-4">
                         <x-links.link :href="route('invoices.create')"
-                            class="text-md group mt-2 h-fit transition duration-300 ease-in-out hover:border-transparent"
+                            class="mt-2 transition duration-300 ease-in-out text-md group h-fit hover:border-transparent"
                             type="primary">
                             Create a New Invoice
-                            <svg class="size-4 transition duration-300 ease-in-out group-hover:translate-x-2" fill="none"
+                            <svg class="transition duration-300 ease-in-out size-4 group-hover:translate-x-2" fill="none"
                                 stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </x-links.link>
                         <x-links.link :href="route('invoices.index')"
-                            class="text-md group transition duration-300 ease-in-out hover:border-transparent gap-2"
+                            class="gap-2 transition duration-300 ease-in-out text-md group hover:border-transparent"
                             type="primary">
                                 <svg class="size-6 group-hover:-translate-x-2" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -56,7 +57,7 @@
                             Sorry, we could not find any invoices that match your search.                       
                         </p>
                         
-                        <hr class="my-4 border-gray-200 max-w-md">
+                        <hr class="max-w-md my-4 border-gray-200">
                             
                         <p class="mb-2 text-xl font-semibold leading-tight text-gray-800">
                             Search again?                           
@@ -66,13 +67,14 @@
                                 <div class="flex flex-col">
                                     <label class="sr-only" for="search">Search</label>
                                     <x-inputs.text
-                                        class="w-96 max-w-md pl-2 pt-3 text-lg"
+                                        class="max-w-md pt-3 pl-2 text-lg w-96"
                                         id="SearchTerm"
                                         name="SearchTerm"
                                         placeholder="Search ..."
                                         wire:model.live.debounce.500ms="SearchTerm"
+                                        required
                                     />
-                                    <p class="text-md mt-1 text-gray-600">Enter invoice number, client's name or client's email.</p>
+                                    <p class="mt-1 text-gray-600 text-md">Enter invoice number, client's name or client's email.</p>
                                 </div>
                                 <x-buttons.btn btn="primary" class="md:w-fit text-md" type="submit">
                                     Search Again
@@ -80,14 +82,14 @@
                             </form>
                         </div>
                         
-                        <hr class="my-4 border-gray-200 max-w-md">
+                        <hr class="max-w-md my-4 border-gray-200">
 
                         <p class="mb-2 text-xl font-semibold leading-tight text-gray-800">
                             Or, go back to your invoices?
                         </p>
                         
                         <x-links.link :href="route('invoices.index')"
-                            class="text-md group transition duration-300 ease-in-out hover:border-transparent gap-2"
+                            class="gap-2 transition duration-300 ease-in-out text-md group hover:border-transparent"
                             type="primary">
                                 <svg class="size-6 group-hover:-translate-x-2" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -98,9 +100,9 @@
                     </div>
                 @else
                     <div class="">
-                        <table class="w-full table-auto rounded-md">
+                        <table class="w-full rounded-md table-auto">
                             <thead>
-                                <tr class="bg-gray-100 text-left">
+                                <tr class="text-left bg-gray-100">
                                     <th class="px-4 py-2">Invoice Number</th>
                                     <th class="px-4 py-2">Invoice Date</th>
                                     <th class="px-4 py-2">Client Details</th>
@@ -112,37 +114,37 @@
                             <tbody>
                                 @foreach ($invoices as $invoice)
                                     <tr class="mb-4">
-                                        <td class="border px-4 py-2">
+                                        <td class="px-4 py-2 border">
                                             {{ $invoice->invoice_number }}
                                         </td>
-                                        <td class="border px-4 py-2">
+                                        <td class="px-4 py-2 border">
                                             {{ $invoice->created_at->format('d F, Y') }}
                                         </td>
-                                        <td class="border px-4 py-2">
+                                        <td class="px-4 py-2 border">
                                             {{ $invoice->client_name }}
                                             <br />
                                             <small>
                                                 {{ $invoice->client_email }}
                                             </small>
                                         </td>
-                                        <td class="border px-4 py-2">
+                                        <td class="px-4 py-2 border">
                                             Status
                                             <br />
                                             <small>
                                                 Due on {{ $invoice->invoice_date->format('jS M, Y') }}
                                             </small>
                                         </td>
-                                        <td class="border px-4 py-2">
+                                        <td class="px-4 py-2 border">
                                             ${{ number_format($invoice->grand_total, 2) }}
                                         </td>
-                                        <td class="border px-4 py-2">
+                                        <td class="px-4 py-2 border">
                                             {{ $invoice->updated_at->format('jS M, Y') }}
                                         </td>
                                         <td class="px-4 py-2">
                                             <div class="dropdown relative inline-flex rtl:[--placement:bottom-end]">
                                                 <x-buttons.btn aria-expanded="false" aria-haspopup="menu"
                                                     aria-label="Dropdown"
-                                                    class="dropdown-toggle rounded-md border-none bg-primary/70 hover:bg-primary/90"
+                                                    class="border-none rounded-md dropdown-toggle bg-primary/70 hover:bg-primary/90"
                                                     id="dropdown-default" type="button">
                                                     <svg class="size-6" fill="none" stroke-width="1.5"
                                                         stroke="currentColor" viewBox="0 0 24 24"
@@ -266,7 +268,7 @@
                                                     </li>
 
                                                     <li>
-                                                        <a class="btn dropdown-item my-2 border-none bg-red-600 text-white hover:bg-red-800"
+                                                        <a class="my-2 text-white bg-red-600 border-none btn dropdown-item hover:bg-red-800"
                                                             href="#">
                                                             <svg class="size-6" fill="none" stroke-width="1.5"
                                                                 stroke="currentColor" viewBox="0 0 24 24"

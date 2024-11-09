@@ -18,8 +18,14 @@ class IndexInvoices extends Component
 
     private $invoices;
 
+    protected $rules = [
+        'SearchTerm' => 'required|string|min:1',
+    ];
+
     public function findInvoices()
     {
+        $this->validate($this->rules);
+
         return redirect()->route('invoices.search-results', $this->SearchTerm);
     }
 

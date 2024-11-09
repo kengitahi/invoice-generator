@@ -19,8 +19,14 @@ class SearchResults extends Component
         $this->SearchTerm = $search_term;
     }
 
+    protected $rules = [
+        'SearchTerm' => 'required|string|min:1',
+    ];
+
     public function findInvoices(): RedirectResponse
     {
+        $this->validate($this->rules);
+
         return redirect()->route('invoices.search-results', $this->SearchTerm);
     }
 
