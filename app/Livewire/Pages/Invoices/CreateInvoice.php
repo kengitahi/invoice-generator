@@ -95,7 +95,7 @@ class CreateInvoice extends Component
         'grand_total' => ['required'],
     ];
 
-    public function mount()
+    public function mount(): void
     {
         // Initialize with one empty line item
         $this->addLineItem();
