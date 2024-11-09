@@ -12,7 +12,9 @@ use Livewire\Component;
 
 class SearchResults extends Component
 {
-    public $SearchTerm = '';
+    public $SearchTerm;
+
+    private $invoices;
 
     public function mount($search_term): void
     {
@@ -34,14 +36,22 @@ class SearchResults extends Component
     #[Title('Search Results')]
     public function render(): View
     {
+        if (! isset($this->SearchTerm)) {
+            $this->invoices = Invoice::where('user_id', Auth::user()->id)->paginate(10);
+        } else {
+            $this->invoices = Invoice::where('user_id', Auth::user()->id)
+                ->where(function ($query) {
+                    $query->where('invoice_number', 'like', '%'.$this->SearchTerm.'%')
+                        ->orWhere('client_name', 'like', '%'.$this->SearchTerm.'%')
+                        ->orWhere('client_email', 'like', '%'.$this->SearchTerm.'%');
+                })
+                ->paginate(10);
+        }
+
         return view(
             'livewire.pages.invoices.search-results',
             [
-                'invoices' => Invoice::where('user_id', Auth::user()->id)
-                    ->where('invoice_number', 'like', '%'.$this->SearchTerm.'%')
-                    ->orWhere('client_name', 'like', '%'.$this->SearchTerm.'%')
-                    ->orWhere('client_email', 'like', '%'.$this->SearchTerm.'%')
-                    ->paginate(10),
+                'invoices' => $this->invoices,
             ]
         );
     }
