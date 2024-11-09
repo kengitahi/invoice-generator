@@ -7,7 +7,7 @@
                 </a>
             </div>
             <div class="px-5 py-2">
-                <a href="{{ route('invoices.create') }}" class="text-base leading-6 text-gray-500 hover:text-gray-900">
+                <a href="{{ route('invoices.create') }}" class="text-base leading-6 text-gray-500 hover:text-gray-900" wire:navigate.hover>
                     Create Invoice
                 </a>
             </div>
@@ -17,7 +17,7 @@
                 </a>
             </div>
             <div class="px-5 py-2">
-                <a href="{{ route('contact') }}" class="text-base leading-6 text-gray-500 hover:text-gray-900">
+                <a href="{{ route('contact') }}" class="text-base leading-6 text-gray-500 hover:text-gray-900" wire:navigate.hover>
                     Contact
                 </a>
             </div>

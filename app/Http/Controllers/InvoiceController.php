@@ -32,7 +32,7 @@ class InvoiceController extends Controller
         //Create and store the invoice
         $invoice = Invoice::create($request->all());
 
-        return redirect()->route('invoices.index')->with('success', 'Invoice Created Successfully');
+        return redirect()->route('invoices.index')->with('success', 'Invoice Created below');
     }
 
     /**
