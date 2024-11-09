@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -38,7 +39,7 @@ new class extends Component {
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
-            'newAvatar' => ['nullable', 'image:jpg,jpeg,png', 'max:1024'],
+            'newAvatar' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:1024'],
         ]);
 
         $user->fill($validated);
@@ -48,6 +49,9 @@ new class extends Component {
         }
 
         if ($this->newAvatar) {
+          \Log::info('Mime Type: ' . $this->newAvatar->getMimeType());
+              \Log::info('Extension: ' . $this->newAvatar->getClientOriginalExtension());
+              \Log::info('Size: ' . $this->newAvatar->getSize());
             $user->avatar = $this->updateFile($this->newAvatar, $user->avatar, 'avatars', 'avatar');
         }
 
@@ -137,7 +141,7 @@ new class extends Component {
             <x-input-label :value="__('Add a Profile Picture')" for="avatar" />
             @endif
             <x-text-input class="block w-full mt-1" id="avatar" name="avatar" type="file"
-                wire:model="newAvatar" />
+                wire:model="newAvatar" accept="image/jpeg,image/png,image/webp"/>
             <x-input-error :messages="$errors->get('avatar')" class="mt-2" />
         </div>
 

@@ -20,7 +20,7 @@ new class extends Component {
         id="dropdown-scrollable" type="button">
         <div class="avatar">
             <div class="size-9.5 rounded-full">
-                <img alt="avatar 1" src="https://cdn.flyonui.com/fy-assets/avatar/avatar-1.png" />
+                <img alt="avatar 1" src="{{Storage::url(auth()->user()->avatar)}}" />
             </div>
         </div>
     </button>
@@ -29,7 +29,7 @@ new class extends Component {
         <li class="gap-2 dropdown-header">
             <div class="avatar">
                 <div class="w-10 rounded-full">
-                    <img alt="avatar" src="https://cdn.flyonui.com/fy-assets/avatar/avatar-1.png" />
+                    <img alt="avatar" src="{{Storage::url(auth()->user()->avatar)}}" />
                 </div>
             </div>
             <div>
@@ -46,13 +46,13 @@ new class extends Component {
         <li>
             <a class="dropdown-item" href="{{route('dashboard')}}">
                 <span class="icon-[tabler--settings]"></span>
-                Settings
+                Dashboard
             </a>
         </li>
         <li>
             <a class="dropdown-item" href="{{route('invoices.index')}}">
                 <span class="icon-[tabler--receipt-rupee]"></span>
-                Invoices
+                My Invoices
             </a>
         </li>
         <li class="gap-2 dropdown-footer">

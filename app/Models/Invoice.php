@@ -21,6 +21,7 @@ class Invoice extends Model
         'sender_name',
         'sender_business_name',
         'sender_email',
+        'sender_logo',
         'sender_tel',
         'sender_website',
         'sender_business_number',

@@ -9,7 +9,6 @@ use App\Livewire\Pages\Invoices\SearchResults;
 use App\Livewire\Pages\Invoices\ViewInvoice;
 use App\Livewire\Pages\Payments\CreatePayment;
 use App\Livewire\Pages\Payments\IndexPayments;
-use App\Models\Invoice;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');

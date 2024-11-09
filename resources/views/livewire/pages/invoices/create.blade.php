@@ -80,6 +80,39 @@
                                     type="email" wire:model="sender_email" />
                             </div>
 
+                            <!-- Logo -->
+                            @if(Auth::user()->sender_logo && !$sender_logo)
+                            <div class="mt-4">
+                                  <x-inputs.label :value="__('Current Logo')" for="avatar" />
+                                  <p class="block mb-2 text-sm font-medium text-gray-700">This logo will be shown on the invoice</p>
+                                  <img alt="User Logo" class="block max-h-[200px] rounded-md border-gray-300 shadow-sm"
+                                      src="{{ Storage::url(Auth::user()->sender_logo) }}">
+                              </div>
+                            @endif
+                            <div class="mt-4">
+                              @if(!$sender_logo)
+                              <x-inputs.label :value="__('Choose a Logo')" for="sender_logo" />
+                              @else
+                              <x-inputs.label :value="__('Choose Another Logo')" for="sender_logo" />
+                              @endif
+
+                              @if(Auth::user()->sender_logo && !$sender_logo)
+                              <p class="block mb-2 text-sm font-medium text-gray-700">The logo you choose below will be shown on the invoice instead of the one above</p>
+                              @endif
+
+                              <x-text-input class="block w-full mt-1" id="sender_logo" name="sender_logo" type="file" wire:model="sender_logo" />
+                              <x-input-error :messages="$errors->get('sender_logo')" class="mt-2" />
+                            </div>
+
+                            @if ($sender_logo)
+                                <div class="mt-4">
+                                  <x-inputs.label :value="__('Logo Preview')"/>
+                                    <p class="block mb-2 text-sm font-medium text-gray-700">This logo will be shown on the invoice</p>
+                                    <img class="block max-h-[200px] rounded-md border-gray-300 shadow-sm"
+                                        src="{{ $sender_logo->temporaryUrl() }}">
+                                </div>
+                            @endif
+
                             <div class="relative mt-2">
                                 <x-inputs.label for="sender_tel">
                                     Your Phone Number

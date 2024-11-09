@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('sender_name');
             $table->string('sender_business_name')->nullable();
             $table->string('sender_email')->unique();
+            $table->string('sender_logo')->nullable();
             $table->string('sender_tel');
             $table->string('sender_website')->nullable();
             $table->string('sender_business_number')->nullable();
