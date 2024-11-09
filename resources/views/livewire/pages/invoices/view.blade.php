@@ -6,7 +6,7 @@
                 <p class="px-4 py-2 mx-auto my-4 text-xl font-semibold text-white bg-green-600 rounded-md">
                     You have successfully created the invoice below.</p>
             </div>
-        {{-- @endif --}}
+            {{-- @endif --}}
             <div class="pt-12 md:px-0">
                 <x-typography.section-h2 class="tracking-wide text-gray-900 md:text-lg">
                     Previewing Invoice No: {{$invoice->invoice_number}}

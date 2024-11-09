@@ -6,7 +6,6 @@ use App\Models\Invoice;
 use Auth;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
 use Livewire\Component;
 
 class IndexInvoices extends Component
@@ -15,18 +14,16 @@ class IndexInvoices extends Component
 
     public $ClientDetail;
 
+    public $SearchTerm;
+
     private $invoices;
 
-    protected $InvoiceNumberRules = [
-        'InvoiceNumber' => ['required', 'alpha_num', 'min:1'],
-    ];
-
-    protected $ClientDetailRules = [
-        'ClientDetail' => ['required', 'alpha_num', 'min:1'],
-    ];
+    public function findInvoices()
+    {
+        return redirect()->route('invoices.search-results', $this->SearchTerm);
+    }
 
     #[Layout('layouts.app')]
-    #[Title('Your Invoices')]
     public function render(): View
     {
         if (! isset($this->invoices)) {
@@ -38,6 +35,6 @@ class IndexInvoices extends Component
             [
                 'invoices' => $this->invoices,
             ]
-        );
+        )->title('Your Invoices');
     }
 }
