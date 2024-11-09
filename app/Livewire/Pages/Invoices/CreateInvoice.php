@@ -6,19 +6,19 @@ use App\Models\Invoice;
 use App\Models\InvoiceItem;
 use App\Traits\HasUploadedFile;
 use Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\Features\SupportRedirects\Redirector;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\DB;
 
 class CreateInvoice extends Component
 {
-  use HasUploadedFile, WithFileUploads;
-  
+    use HasUploadedFile, WithFileUploads;
+
     public $items = [];
-    
+
     public $logo;
 
     public $grand_total = 0;
@@ -41,7 +41,7 @@ class CreateInvoice extends Component
     public $sender_business_name;
 
     public $sender_email;
-    
+
     public $sender_logo;
 
     public $sender_tel;
@@ -53,7 +53,6 @@ class CreateInvoice extends Component
     public $client_name;
 
     public $client_email;
-    
 
     public $client_tel;
 
@@ -83,7 +82,7 @@ class CreateInvoice extends Component
         'sender_name' => ['required', 'string', 'max:255'],
         'sender_business_name' => ['string', 'max:255'],
         'sender_email' => ['required', 'lowercase', 'email:rfc,dns', 'max:255'],
-        "sender_logo" => ["nullable", "mimes:jpg,jpeg,png", "max:1024"],
+        'sender_logo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
         'sender_tel' => ['required', 'string', 'max:25'],
         'sender_website' => ['string', 'max:255'],
         'sender_business_number' => ['string', 'max:255'],
@@ -193,27 +192,26 @@ class CreateInvoice extends Component
                 'item_shipping' => $item['shipping'],
             ]);
         }
-        
+
         if ($this->sender_logo) {
-          /**
-           * Store the uploaded avatar
-           *
-           * @param  \Illuminate\Http\UploadedFile  $file
-           * @param  string  $directory
-           * @param  string  $prefix
-           * @param  ?string  $disk
-           */
-           
-          $this->logo = $this->storeFile("logos", $this->sender_logo, 'logo');
-           
-          DB::table('invoices')
-          ->where('id', Auth::user()->id)
-          ->latest()
-          ->update(['sender_logo' => $this->logo]);       
-          
-          DB::table('users')
-          ->where('id', Auth::user()->id)
-          ->update(['sender_logo' => $this->logo]);
+            /**
+             * Store the uploaded avatar
+             *
+             * @param  \Illuminate\Http\UploadedFile  $file
+             * @param  string  $directory
+             * @param  string  $prefix
+             * @param  ?string  $disk
+             */
+            $this->logo = $this->storeFile('logos', $this->sender_logo, 'logo');
+
+            DB::table('invoices')
+                ->where('id', Auth::user()->id)
+                ->latest()
+                ->update(['sender_logo' => $this->logo]);
+
+            DB::table('users')
+                ->where('id', Auth::user()->id)
+                ->update(['sender_logo' => $this->logo]);
         }
 
         if ($this->redirectTo) {
