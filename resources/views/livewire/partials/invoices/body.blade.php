@@ -6,18 +6,7 @@
             <!-- Grid -->
             <div class="flex justify-between">
                 <div>
-                    <svg class="size-10" fill="none" height="26" viewBox="0 0 26 26" width="26"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path class="stroke-blue-600"
-                            d="M1 26V13C1 6.37258 6.37258 1 13 1C19.6274 1 25 6.37258 25 13C25 19.6274 19.6274 25 13 25H12"
-                            stroke-width="2" stroke="currentColor" />
-                        <path class="stroke-blue-600"
-                            d="M5 26V13.16C5 8.65336 8.58172 5 13 5C17.4183 5 21 8.65336 21 13.16C21 17.6666 17.4183 21.32 13 21.32H12"
-                            stroke-width="2" stroke="currentColor" />
-                        <circle class="fill-blue-600" cx="13" cy="13.0214" fill="currentColor" r="5" />
-                    </svg>
-
-                    <h1 class="mt-2 text-lg font-semibold text-blue-600 md:text-xl">Preline Inc.</h1>
+                    <img src="{{ Storage::url($invoice->sender_logo) }}" alt="Invoice number {{$invoice->invoice_number}} logo" class="max-w-[200px] h-auto  rounded-md shadow-md">
                 </div>
 
                 <!-- Col -->
