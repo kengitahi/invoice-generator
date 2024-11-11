@@ -18,11 +18,11 @@ class Invoice extends Model
         'invoice_terms',
         'invoice_conditions',
         'invoice_notes',
+        'invoice_logo',
 
         'sender_name',
         'sender_business_name',
         'sender_email',
-        'sender_logo',
         'sender_tel',
         'sender_website',
         'sender_business_number',

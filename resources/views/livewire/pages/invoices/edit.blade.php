@@ -80,6 +80,39 @@
                                 <x-inputs.text name="sender_email" placeholder="john.doe@company.com" required
                                     type="email" wire:model="sender_email" :value="$sender_email"/>
                             </div>
+                            
+                            <!-- Logo -->
+                            @if($invoice->invoice_logo && !$new_logo)
+                            <div class="mt-4">
+                                  <x-inputs.label :value="__('Current Logo')" for="avatar" />
+                                  <p class="block mb-2 text-sm font-medium text-gray-700">This logo will be shown on the invoice</p>
+                                  <img alt="User Logo" class="block max-h-[200px] rounded-md border-gray-300 shadow-sm"
+                                      src="{{ Storage::url($invoice->invoice_logo) }}">
+                              </div>
+                            @endif
+                            <div class="mt-4">
+                              @if(!$new_logo)
+                              <x-inputs.label :value="__('Choose a Logo')" for="new_logo" />
+                              @else
+                              <x-inputs.label :value="__('Choose Another Logo')" for="new_logo" />
+                              @endif
+
+                              @if($invoice->invoice_logo && !$new_logo)
+                              <p class="block mb-2 text-sm font-medium text-gray-700">The logo you choose below will be shown on the invoice instead of the one above</p>
+                              @endif
+
+                              <x-text-input class="block w-full mt-1" id="new_logo" name="new_logo" type="file" wire:model="new_logo" />
+                              <x-input-error :messages="$errors->get('new_logo')" class="mt-2" />
+                            </div>
+
+                            @if ($new_logo)
+                                <div class="mt-4">
+                                  <x-inputs.label :value="__('Logo Preview')"/>
+                                    <p class="block mb-2 text-sm font-medium text-gray-700">This logo will be shown on the invoice</p>
+                                    <img class="block max-h-[200px] rounded-md border-gray-300 shadow-sm"
+                                        src="{{ $new_logo->temporaryUrl() }}">
+                                </div>
+                            @endif
 
                             <div class="relative mt-2">
                                 <x-inputs.label for="sender_tel">
@@ -280,7 +313,7 @@
                             </p>
                         </div>
 
-                        <input hidden name="grand_total" step="0.01" type="number"
+                        <input hidden name="grand_total" step="0.01" type="text"
                             value="{{ number_format($grand_total, 2) }}" wire:model="grand_total">
                     </div>
 
@@ -327,6 +360,15 @@
                             <div class="mt-2 text-gray-600 font-semibold text-lg pl-4" wire:loading.delay.long wire:target="save">
                                 We are updating your invoice. You will be redirected in a few seconds.
                             </div>
+                            @if ($errors->any())
+                                <div class="rounded-md bg-red-500 p-4 mt-4">
+                                    <ul class="list-disc">
+                                        @foreach ($errors->all() as $error)
+                                            <li class="ml-4 text-lg font-semibold tracking-wider text-white">{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                         </div>
                     @else
                         <div class="flex justify-end">

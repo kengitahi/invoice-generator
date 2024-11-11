@@ -4,17 +4,23 @@ namespace App\Livewire\Pages\Invoices;
 
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
+use App\Traits\HasUploadedFile;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Livewire\Component;
-use Livewire\Features\SupportRedirects\Redirector;
+use Livewire\WithFileUploads;
 
 class EditInvoice extends Component
 {
+    use HasUploadedFile, WithFileUploads;
+
     public $invoice;
 
     public $items = [];
+
+    public $logo;
 
     public $quantity = 1;
 
@@ -39,11 +45,15 @@ class EditInvoice extends Component
 
     public $invoice_terms;
 
+    public $invoice_logo;
+
     public $sender_name;
 
     public $sender_business_name;
 
     public $sender_email;
+
+    public $sender_logo;
 
     public $sender_tel;
 
@@ -62,6 +72,8 @@ class EditInvoice extends Component
     public $invoice_notes;
 
     public $invoice_conditions;
+
+    public $new_logo;
 
     protected function rules(): array
     {
@@ -115,10 +127,12 @@ class EditInvoice extends Component
         $this->invoice_terms = $invoice->invoice_terms;
         $this->invoice_conditions = $invoice->invoice_conditions;
         $this->invoice_notes = $invoice->invoice_notes;
+        $this->invoice_logo = $invoice->invoice_logo;
 
         $this->sender_name = $invoice->sender_name;
         $this->sender_business_name = $invoice->sender_business_name;
         $this->sender_email = $invoice->sender_email;
+        $this->sender_logo = $invoice->sender_logo;
         $this->sender_tel = $invoice->sender_tel;
         $this->sender_website = $invoice->sender_website;
         $this->sender_business_number = $invoice->sender_business_number;
@@ -145,7 +159,7 @@ class EditInvoice extends Component
             })
             ->toArray();
 
-        //Calculate each ite's total on mount
+        //Calculate each item's total on mount
         foreach ($this->items as $index => $item) {
             $this->calculateTotal($index);
         }
@@ -209,7 +223,7 @@ class EditInvoice extends Component
         $this->calculateTotal(0);
     }
 
-    public function update(Request $request): Redirector
+    public function update(Request $request)
     {
         $this->validate();
 
@@ -266,9 +280,28 @@ class EditInvoice extends Component
             ->pluck('id')
             ->filter()
             ->toArray();
+
         InvoiceItem::where('invoice_id', $this->invoice->id)
             ->whereNotIn('id', $itemIds)
             ->delete();
+
+        //Update logo
+        if ($this->new_logo) {
+            /**
+             * Update logo
+             *
+             * @param  \Illuminate\Http\UploadedFile  $file
+             * @param  string  $directory
+             * @param  string  $prefix
+             * @param  ?string  $disk
+             */
+            $this->logo = $this->updateFile($this->new_logo, $this->invoice_logo, 'logos', 'logo');
+
+            DB::table('invoices')
+                ->where('user_id', Auth::user()->id)
+                ->where('invoice_number', $this->invoice_number)
+                ->update(['invoice_logo' => $this->logo]);
+        }
 
         return redirect()
             ->route('invoices.index')

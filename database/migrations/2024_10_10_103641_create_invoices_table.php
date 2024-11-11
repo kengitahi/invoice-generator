@@ -22,12 +22,12 @@ return new class extends Migration
             $table->text('invoice_terms')->nullable();
             $table->text('invoice_conditions')->nullable();
             $table->text('invoice_notes')->nullable();
+            $table->string('invoice_logo')->nullable();
 
             //Sender Details
             $table->string('sender_name');
             $table->string('sender_business_name')->nullable();
             $table->string('sender_email')->unique();
-            $table->string('sender_logo')->nullable();
             $table->string('sender_tel');
             $table->string('sender_website')->nullable();
             $table->string('sender_business_number')->nullable();

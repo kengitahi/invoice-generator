@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-use Livewire\Features\SupportRedirects\Redirector;
 use Livewire\WithFileUploads;
 
 class CreateInvoice extends Component
@@ -35,6 +34,8 @@ class CreateInvoice extends Component
     public $invoice_date;
 
     public $invoice_terms;
+
+    public $invoice_logo;
 
     public $sender_name;
 
@@ -78,6 +79,7 @@ class CreateInvoice extends Component
         'invoice_terms' => ['nullable', 'string', 'max:2000'],
         'invoice_conditions' => ['nullable', 'string', 'max:2000'],
         'invoice_notes' => ['nullable', 'string', 'max:2000'],
+        'invoice_logo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
 
         'sender_name' => ['required', 'string', 'max:255'],
         'sender_business_name' => ['string', 'max:255'],
@@ -156,7 +158,7 @@ class CreateInvoice extends Component
         $this->calculateTotal(0);
     }
 
-    public function createInvoice(): Redirector
+    public function createInvoice()
     {
         $this->validate();
         $invoice = Auth::user()->invoices()->create([
@@ -193,7 +195,7 @@ class CreateInvoice extends Component
             ]);
         }
 
-        if ($this->sender_logo) {
+        if ($this->invoice_logo) {
             /**
              * Store the uploaded avatar
              *
@@ -202,16 +204,21 @@ class CreateInvoice extends Component
              * @param  string  $prefix
              * @param  ?string  $disk
              */
-            $this->logo = $this->storeFile('logos', $this->sender_logo, 'logo');
+            $this->logo = $this->storeFile('logos', $this->invoice_logo, 'logo');
 
             DB::table('invoices')
-                ->where('id', Auth::user()->id)
-                ->latest()
-                ->update(['sender_logo' => $this->logo]);
+                ->where('user_id', Auth::user()->id)
+                ->where('invoice_number', $this->invoice_number)
+                ->update(['invoice_logo' => $this->logo]);
 
             DB::table('users')
                 ->where('id', Auth::user()->id)
                 ->update(['sender_logo' => $this->logo]);
+        } else {
+            DB::table('invoices')
+                ->where('user_id', Auth::user()->id)
+                ->latest()
+                ->update(['invoice_logo' => Auth::user()->sender_logo]);
         }
 
         if ($this->redirectTo) {

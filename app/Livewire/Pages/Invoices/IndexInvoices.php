@@ -16,6 +16,8 @@ class IndexInvoices extends Component
 
     public $SearchTerm;
 
+    public $orderBy; //For ordering functionality later
+
     private $invoices;
 
     protected $rules = [
@@ -33,7 +35,7 @@ class IndexInvoices extends Component
     public function render(): View
     {
         if (! isset($this->invoices)) {
-            $this->invoices = Invoice::where('user_id', Auth::user()->id)->paginate(10);
+            $this->invoices = Invoice::where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->paginate(10);
         }
 
         return view(

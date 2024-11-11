@@ -6,7 +6,7 @@
             <!-- Grid -->
             <div class="flex justify-between">
                 <div>
-                    <img src="{{ Storage::url($invoice->sender_logo) }}" alt="Invoice number {{$invoice->invoice_number}} logo" class="max-w-[200px] h-auto  rounded-md shadow-md">
+                    <img src="{{ Storage::url($invoice->invoice_logo) }}" alt="Invoice number {{$invoice->invoice_number}} logo" class="max-w-[200px] h-auto  rounded-md shadow-md">
                 </div>
 
                 <!-- Col -->
