@@ -207,17 +207,17 @@ class CreateInvoice extends Component
             $this->logo = $this->storeFile('logos', $this->invoice_logo, 'logo');
 
             DB::table('invoices')
-                ->where('user_id', Auth::user()->id)
+                ->where('user_id', Auth::id())
                 ->where('invoice_number', $this->invoice_number)
                 ->update(['invoice_logo' => $this->logo]);
 
             DB::table('users')
-                ->where('id', Auth::user()->id)
+                ->where('id', Auth::id())
                 ->update(['sender_logo' => $this->logo]);
         } else {
             DB::table('invoices')
-                ->where('user_id', Auth::user()->id)
-                ->latest()
+                ->where('user_id', Auth::id())
+                ->where('invoice_number', $this->invoice_number)
                 ->update(['invoice_logo' => Auth::user()->sender_logo]);
         }
 

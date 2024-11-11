@@ -6,7 +6,19 @@
             <!-- Grid -->
             <div class="flex justify-between">
                 <div>
-                    <img src="{{ Storage::url($invoice->invoice_logo) }}" alt="Invoice number {{$invoice->invoice_number}} logo" class="max-w-[200px] h-auto  rounded-md shadow-md">
+                    @if ($invoice->invoice_logo)
+                        <img alt="Invoice number {{ $invoice->invoice_number }} logo"
+                            class="h-auto max-w-[200px] rounded-md shadow-md"
+                            src="{{ Storage::url($invoice->invoice_logo) }}">
+                    @else
+                        <p class="text-gray-800">This invoice does not have a logo. 
+                            <br>
+                            Adding a logo makes your invoice look more professional.</p>
+                        <a class="inline-flex items-center px-3 py-2 font-medium text-gray-800 bg-white border border-gray-200 rounded-lg shadow-sm text-md gap-x-2 hover:bg-primary hover:border-primary hover:text-white focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50 hover:underline"
+                            href="{{ route('invoices.edit', $invoice->invoice_number) }}#new-logo" wire:navigate>
+                            Add one?
+                        </a>
+                    @endif
                 </div>
 
                 <!-- Col -->
@@ -25,7 +37,8 @@
                             </dl>
                             <dl class="grid gap-x-3 sm:grid-cols-5">
                                 <dt class="col-span-3 font-semibold text-gray-800">Invoice due date:</dt>
-                                <dd class="col-span-2 text-gray-500">{{ $invoice->invoice_date->format('jS M, Y') }}</dd>
+                                <dd class="col-span-2 text-gray-500">{{ $invoice->invoice_date->format('jS M, Y') }}
+                                </dd>
                             </dl>
                         </div>
                         <!-- End Grid -->
@@ -171,28 +184,29 @@
 
             <div class="mt-8 space-y-4 sm:mt-12">
                 @if ($invoice->invoice_terms)
-                <div>
-                    <h4 class="text-lg font-semibold text-gray-800">Payment Terms</h4>
-                    <p class="text-gray-500">{{ $invoice->invoice_terms }}</p>
-                </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800">Payment Terms</h4>
+                        <p class="text-gray-500">{{ $invoice->invoice_terms }}</p>
+                    </div>
                 @endif
 
                 @if ($invoice->invoice_conditions)
-                <div>
-                    <h4 class="text-lg font-semibold text-gray-800">Terms and Conditions</h4>
-                    <p class="text-gray-500">{{ $invoice->invoice_conditions }}</p>
-                </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800">Terms and Conditions</h4>
+                        <p class="text-gray-500">{{ $invoice->invoice_conditions }}</p>
+                    </div>
                 @endif
 
                 @if ($invoice->invoice_notes)
-                <div>
-                    <h4 class="text-lg font-semibold text-gray-800">Additional Notes</h4>
-                    <p class="text-gray-500">{{ $invoice->invoice_notes }}</p>
-                </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800">Additional Notes</h4>
+                        <p class="text-gray-500">{{ $invoice->invoice_notes }}</p>
+                    </div>
                 @endif
             </div>
 
-            <p class="mt-5 text-sm text-gray-500">© {{ $invoice->updated_at->format('Y') }} {{ $invoice->sender_name }}.</p>
+            <p class="mt-5 text-sm text-gray-500">© {{ $invoice->updated_at->format('Y') }}
+                {{ $invoice->sender_name }}.</p>
         </div>
         <!-- End Card -->
 
@@ -212,8 +226,8 @@
             <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-800 bg-white border border-gray-200 rounded-lg shadow-sm gap-x-2 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                 href="#" wire:navigate>
                 <svg class="size-4 shrink-0" fill="none" height="24" stroke-linecap="round"
-                    stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"
-                    width="24" xmlns="http://www.w3.org/2000/svg">
+                    stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24" width="24"
+                    xmlns="http://www.w3.org/2000/svg">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                     <polyline points="7 10 12 15 17 10" />
                     <line x1="12" x2="12" y1="15" y2="3" />

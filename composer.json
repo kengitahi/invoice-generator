@@ -17,6 +17,7 @@
         "fakerphp/faker": "^1.23",
         "ibex/crud-generator": "^2.1",
         "itsgoingd/clockwork": "^5.2",
+        "larastan/larastan": "^2.0",
         "laravel/breeze": "^2.2",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",

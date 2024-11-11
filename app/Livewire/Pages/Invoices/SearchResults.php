@@ -37,9 +37,9 @@ class SearchResults extends Component
     public function render(): View
     {
         if (! isset($this->SearchTerm)) {
-            $this->invoices = Invoice::where('user_id', Auth::user()->id)->paginate(10);
+            $this->invoices = Invoice::where('user_id', Auth::id())->paginate(10);
         } else {
-            $this->invoices = Invoice::where('user_id', Auth::user()->id)
+            $this->invoices = Invoice::where('user_id', Auth::id())
                 ->where(function ($query) {
                     $query->where('invoice_number', 'like', '%'.$this->SearchTerm.'%')
                         ->orWhere('client_name', 'like', '%'.$this->SearchTerm.'%')

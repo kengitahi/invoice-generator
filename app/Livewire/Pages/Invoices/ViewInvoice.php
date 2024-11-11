@@ -22,7 +22,7 @@ class ViewInvoice extends Component
 
     public function render(): View
     {
-        if (Auth::user()->id !== $this->invoice->user_id) {
+        if (Auth::id() !== $this->invoice->user_id) {
             abort(403);
         }
 

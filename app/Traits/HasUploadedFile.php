@@ -14,7 +14,7 @@ trait HasUploadedFile
         string $disk = 'public'
     ): string {
         $extension = $file->getClientOriginalExtension();
-        $filename = trim($prefix.'_'.time().'_'.uniqid(8).'.'.$extension, '_');
+        $filename = trim($prefix.'_'.time().'_'.uniqid().'.'.$extension, '_');
 
         return $file->storeAs($directory, $filename, $disk);
     }
