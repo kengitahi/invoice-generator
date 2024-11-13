@@ -9,6 +9,7 @@ use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -35,6 +36,8 @@ class CreateInvoice extends Component
 
     public $invoice_terms;
 
+    #[Validate('max:1024', message: 'The image cannot be larger than 1GB in size.')]
+    #[Validate('mimes:jpg,jpeg,png', message: 'The image should be a JPG, JPEG or PNG.')]
     public $invoice_logo;
 
     public $sender_name;

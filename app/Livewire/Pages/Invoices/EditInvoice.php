@@ -6,9 +6,11 @@ use App\Models\Invoice;
 use App\Models\InvoiceItem;
 use App\Traits\HasUploadedFile;
 use Auth;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -73,6 +75,7 @@ class EditInvoice extends Component
 
     public $invoice_conditions;
 
+    #[Validate('max:1024', message: 'The image cannot be larger than 1GB in size.', as: 'invoice logo')]
     public $new_logo;
 
     protected function rules(): array
@@ -132,7 +135,6 @@ class EditInvoice extends Component
         $this->sender_name = $invoice->sender_name;
         $this->sender_business_name = $invoice->sender_business_name;
         $this->sender_email = $invoice->sender_email;
-        $this->sender_logo = $invoice->sender_logo;
         $this->sender_tel = $invoice->sender_tel;
         $this->sender_website = $invoice->sender_website;
         $this->sender_business_number = $invoice->sender_business_number;
@@ -223,6 +225,9 @@ class EditInvoice extends Component
         $this->calculateTotal(0);
     }
 
+    /**
+     * @return RedirectResponse
+     */
     public function update(Request $request)
     {
         $this->validate();
@@ -298,7 +303,7 @@ class EditInvoice extends Component
             $this->logo = $this->updateFile($this->new_logo, $this->invoice_logo, 'logos', 'logo');
 
             DB::table('invoices')
-                ->where('user_id', Auth::user()->id)
+                ->where('user_id', Auth::id())
                 ->where('invoice_number', $this->invoice_number)
                 ->update(['invoice_logo' => $this->logo]);
         }
@@ -310,7 +315,7 @@ class EditInvoice extends Component
 
     public function render(): View
     {
-        if (Auth::user()->id !== $this->invoice->user_id) {
+        if (Auth::id() !== $this->invoice->user_id) {
             abort(403);
         }
 

@@ -20,7 +20,11 @@ new class extends Component {
         id="dropdown-scrollable" type="button">
         <div class="avatar">
             <div class="size-9.5 rounded-full">
-                <img alt="avatar 1" src="{{Storage::url(auth()->user()->avatar)}}" />
+              @if(auth()->user()->avatar)
+                <img alt="avatar" src="{{Storage::url(auth()->user()->avatar)}}" />
+              @else
+              <img alt="avatar" src="{{ Avatar::create(auth()->user()->name)->toBase64() }}" />
+              @endif              
             </div>
         </div>
     </button>
@@ -29,7 +33,11 @@ new class extends Component {
         <li class="gap-2 dropdown-header">
             <div class="avatar">
                 <div class="w-10 rounded-full">
+                  @if(auth()->user()->avatar)
                     <img alt="avatar" src="{{Storage::url(auth()->user()->avatar)}}" />
+                  @else
+                  <img alt="avatar" src="{{ Avatar::create(auth()->user()->name)->toBase64() }}" />
+                  @endif  
                 </div>
             </div>
             <div>

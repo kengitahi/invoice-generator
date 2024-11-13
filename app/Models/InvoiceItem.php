@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class InvoiceItem extends Model
@@ -27,8 +28,8 @@ class InvoiceItem extends Model
         'item_shipping' => 'float',
     ];
 
-    public function invoice()
+    public function invoice(): BelongsTo
     {
-        $this->belongsTo(Invoice::class);
+        return $this->belongsTo(Invoice::class);
     }
 }
