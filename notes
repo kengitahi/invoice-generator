@@ -1,0 +1,7 @@
+ - create InvoicePDF model
+ - create InvoicePDF migration
+ - create InvoicePDFController ??
+ - create InvoicePDF blade file
+- Add createInvoicePDF() method to CreateInvoice. I want to create a PDF file from the invoice data ecvery time I create an invoice
+- Add editInvoicePDF() method to EditInvoice. I want to edit the PDF every time I edit an invoice
+

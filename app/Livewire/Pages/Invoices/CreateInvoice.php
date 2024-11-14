@@ -4,18 +4,18 @@ namespace App\Livewire\Pages\Invoices;
 
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
+use App\Traits\HasPDFFile;
 use App\Traits\HasUploadedFile;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Livewire\Attributes\Title;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class CreateInvoice extends Component
 {
-    use HasUploadedFile, WithFileUploads;
+    use HasPDFFile, HasUploadedFile, WithFileUploads;
 
     public $items = [];
 
@@ -36,8 +36,6 @@ class CreateInvoice extends Component
 
     public $invoice_terms;
 
-    #[Validate('max:1024', message: 'The image cannot be larger than 1GB in size.')]
-    #[Validate('mimes:jpg,jpeg,png', message: 'The image should be a JPG, JPEG or PNG.')]
     public $invoice_logo;
 
     public $sender_name;
@@ -77,7 +75,12 @@ class CreateInvoice extends Component
         'items.*.discount' => 'nullable|numeric|min:0|max:100',
         'items.*.shipping' => 'nullable|numeric|min:0',
 
-        'invoice_number' => ['required', 'string', 'max:255', 'unique:'.Invoice::class],
+        'invoice_number' => [
+            'required',
+            'string',
+            'max:255',
+            'unique:'.Invoice::class,
+        ],
         'invoice_date' => ['required', 'date'],
         'invoice_terms' => ['nullable', 'string', 'max:2000'],
         'invoice_conditions' => ['nullable', 'string', 'max:2000'],
@@ -148,7 +151,8 @@ class CreateInvoice extends Component
 
         $subtotal = (int) $item['quantity'] * (int) $item['price'];
         $discountAmount = ($subtotal * (float) $item['discount']) / (float) 100;
-        $this->items[$index]['total'] = (float) $subtotal - (float) $discountAmount + (float) $item['shipping'];
+        $this->items[$index]['total'] =
+          (float) $subtotal - (float) $discountAmount + (float) $item['shipping'];
 
         // Calculate grand total
         $this->grand_total = collect($this->items)->sum('total');
@@ -164,27 +168,29 @@ class CreateInvoice extends Component
     public function createInvoice()
     {
         $this->validate();
-        $invoice = Auth::user()->invoices()->create([
-            'invoice_number' => $this->invoice_number,
-            'invoice_date' => $this->invoice_date,
-            'invoice_terms' => $this->invoice_terms,
-            'invoice_conditions' => $this->invoice_conditions,
-            'invoice_notes' => $this->invoice_notes,
+        $invoice = Auth::user()
+            ->invoices()
+            ->create([
+                'invoice_number' => $this->invoice_number,
+                'invoice_date' => $this->invoice_date,
+                'invoice_terms' => $this->invoice_terms,
+                'invoice_conditions' => $this->invoice_conditions,
+                'invoice_notes' => $this->invoice_notes,
 
-            'sender_name' => $this->sender_name,
-            'sender_business_name' => $this->sender_business_name,
-            'sender_email' => $this->sender_email,
-            'sender_tel' => $this->sender_tel,
-            'sender_website' => $this->sender_website,
-            'sender_business_number' => $this->sender_business_number,
+                'sender_name' => $this->sender_name,
+                'sender_business_name' => $this->sender_business_name,
+                'sender_email' => $this->sender_email,
+                'sender_tel' => $this->sender_tel,
+                'sender_website' => $this->sender_website,
+                'sender_business_number' => $this->sender_business_number,
 
-            'client_name' => $this->client_name,
-            'client_email' => $this->client_email,
-            'client_tel' => $this->client_tel,
-            'client_business_number' => $this->client_business_number,
+                'client_name' => $this->client_name,
+                'client_email' => $this->client_email,
+                'client_tel' => $this->client_tel,
+                'client_business_number' => $this->client_business_number,
 
-            'grand_total' => $this->grand_total,
-        ]);
+                'grand_total' => $this->grand_total,
+            ]);
 
         foreach ($this->items as $item) {
             InvoiceItem::create([
@@ -199,6 +205,7 @@ class CreateInvoice extends Component
         }
 
         if ($this->invoice_logo) {
+            $this->validate();
             /**
              * Store the uploaded avatar
              *
@@ -224,11 +231,17 @@ class CreateInvoice extends Component
                 ->update(['invoice_logo' => Auth::user()->sender_logo]);
         }
 
+        $this->createPDF($invoice);
+
         if ($this->redirectTo) {
-            return redirect()->route('invoices.view', $invoice->invoice_number)->with('createdInvoiceAndRedirected', 'Invoice Created Successfully');
+            return redirect()
+                ->route('invoices.view', $invoice->invoice_number)
+                ->with('createdInvoiceAndRedirected', 'Invoice Created Successfully');
         }
 
-        return redirect()->route('invoices.index')->with('createdInvoice', 'Invoice Created Successfully');
+        return redirect()
+            ->route('invoices.index')
+            ->with('createdInvoice', 'Invoice Created Successfully');
     }
 
     #[Title('Create Invoice')]

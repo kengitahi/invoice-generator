@@ -5,6 +5,7 @@ use App\Livewire\Pages\Contact;
 use App\Livewire\Pages\Invoices\CreateInvoice;
 use App\Livewire\Pages\Invoices\EditInvoice;
 use App\Livewire\Pages\Invoices\IndexInvoices;
+use App\Livewire\Pages\Invoices\PDFInvoice;
 use App\Livewire\Pages\Invoices\SearchResults;
 use App\Livewire\Pages\Invoices\ViewInvoice;
 use App\Livewire\Pages\Payments\CreatePayment;
@@ -22,6 +23,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/create', CreateInvoice::class)->name('create');
             Route::get('/{invoice_number}/edit', EditInvoice::class)->name('edit');
             Route::get('/{invoice_number}/view', ViewInvoice::class)->name('view');
+            Route::get('/{invoice_number}/pdf', PDFInvoice::class)->name('pdf');
         });
     });
 
