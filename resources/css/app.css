@@ -1,11 +1,37 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "flyonui/variants.css";
+
+@plugin '@tailwindcss/forms';
+@plugin "flyonui";
+
+@source "../node_modules/flyonui/flyonui.js"; /*Since node_modules is gitignored*/
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+  --font-sans: Josefin Sans, sans-serif;
+  --font-heading: Alike, sans-serif;
+
+  --color-primary: #1a73e8;
+  --color-secondary: #4285f4;
+  --color-accent: #fbbc04;
+  --color-text-primary: #202124;
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
 
 :root {
-    background-color: white;
+  background-color: white;
 }
 
 * {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }

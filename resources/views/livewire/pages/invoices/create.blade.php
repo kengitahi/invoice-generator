@@ -1,5 +1,5 @@
 <section>
-    <div class="w-full px-3 antialiased bg-gradient-to-br from-gray-900 via-black to-gray-800 lg:px-6">
+    <div class="w-full px-3 antialiased bg-linear-to-br from-gray-900 via-black to-gray-800 lg:px-6">
         <div class="mx-auto max-w-7xl">
             <x-partials.header />
         </div>
@@ -85,7 +85,7 @@
                             <div class="mt-4">
                                   <x-inputs.label :value="__('Current Logo')" for="avatar" />
                                   <p class="block mb-2 text-sm font-medium text-gray-700">This logo will be shown on the invoice</p>
-                                  <img alt="User Logo" class="block max-h-[200px] rounded-md border-gray-300 shadow-sm"
+                                  <img alt="User Logo" class="block max-h-[200px] rounded-md border-gray-300 shadow-xs"
                                       src="{{ Storage::url(Auth::user()->sender_logo) }}">
                               </div>
                             @endif
@@ -108,7 +108,7 @@
                                 <div class="mt-4">
                                   <x-inputs.label :value="__('Logo Preview')"/>
                                     <p class="block mb-2 text-sm font-medium text-gray-700">This logo will be shown on the invoice</p>
-                                    <img class="block max-h-[200px] rounded-md border-gray-300 shadow-sm"
+                                    <img class="block max-h-[200px] rounded-md border-gray-300 shadow-xs"
                                         src="{{ $invoice_logo->temporaryUrl() }}">
                                 </div>
                             @endif
@@ -179,7 +179,7 @@
                     {{-- Line items --}}
                     <div class="space-y-4">
                         @foreach ($items as $index => $item)
-                            <div class="flex flex-col rounded-md border-[2px] border-gray-300 p-4"
+                            <div class="flex flex-col rounded-md border-2 border-gray-300 p-4"
                                 wire:key="item-{{ $item['id'] }}">
                                 <div>
                                     <x-inputs.label for="items.{{ $index }}.name">
@@ -301,10 +301,10 @@
                         </x-inputs.label>
 
                         <div
-                            class='has-[:focus]:ring-1 has-[:focus]:ring-primary has-[:focus]:border-transparent has-[:focus]:ring-opacity-90 mt-2 flex w-full items-center border-0 border-gray-400 px-4 text-base focus:border-transparent focus:outline-none focus:ring-1 focus:ring-primary focus:ring-opacity-50'>
+                            class='has-focus:ring-1 has-focus:ring-primary has-focus:border-transparent has-[:focus]:ring-opacity-90 mt-2 flex w-full items-center border-0 border-gray-400 px-4 text-base focus:border-transparent focus:outline-hidden focus:ring-1 focus:ring-primary focus:ring-opacity-50'>
                             <span class="font-bold text-gray-900">$</span>
                             <p
-                                class='m-0 flex items-center rounded-none border-0 border-b-4 border-gray-800 pb-0 !text-3xl'>
+                                class='m-0 flex items-center rounded-none border-0 border-b-4 border-gray-800 pb-0 text-3xl!'>
                                 {{ number_format($grand_total, 2) }}
                             </p>
                         </div>
@@ -344,7 +344,7 @@
                         <div class="flex gap-4">
                             <div class="flex flex-col justify-end">
                                 <x-buttons.btn btn="primary"
-                                    class="group !w-fit gap-x-1 border-none bg-accent text-lg font-semibold text-black transition duration-300 ease-in-out hover:bg-accent hover:underline"
+                                    class="group w-fit! gap-x-1 border-none bg-accent text-lg font-semibold text-black transition duration-300 ease-in-out hover:bg-accent hover:underline"
                                     type="submit">
                                     <span>Create Invoice</span>
                                     <svg class="transition duration-300 ease-in-out size-6 group-hover:translate-x-2"
@@ -358,7 +358,7 @@
 
                             <div class="flex flex-col justify-end">
                                 <x-buttons.btn btn="primary"
-                                    class="group !w-fit gap-x-1 border-none bg-primary text-lg font-semibold text-white transition duration-300 ease-in-out hover:underline"
+                                    class="group w-fit! gap-x-1 border-none bg-primary text-lg font-semibold text-white transition duration-300 ease-in-out hover:underline"
                                     type="submit" wire:click="redirectTo = true">
                                     <span>Create and View Invoice</span>
                                     <svg class="transition duration-300 ease-in-out size-6 group-hover:translate-x-2"

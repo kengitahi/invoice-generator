@@ -4,7 +4,7 @@
         type="button">
         <div class="indicator">
             <span class="size-2 indicator-item rounded-full bg-error"></span>
-            <span class="size-[1.375rem] icon-[tabler--bell] text-base-content"></span>
+            <span class="size-5.5 icon-[tabler--bell] text-base-content"></span>
         </div>
     </button>
     <div aria-labelledby="dropdown-scrollable" aria-orientation="vertical"

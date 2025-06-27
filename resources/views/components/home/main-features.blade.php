@@ -1,6 +1,6 @@
-<section class="w-full bg-gradient-to-br from-gray-900 via-black to-gray-800 px-3 antialiased lg:px-6" id="features">
+<section class="w-full bg-linear-to-br from-gray-900 via-black to-gray-800 px-3 antialiased lg:px-6" id="features">
     <div class="mx-auto flex max-w-7xl flex-col">
-        <div class="container mx-auto mb-8 max-w-screen-lg space-y-4 px-6 pt-20 text-center md:px-4 lg:mb-14">
+        <div class="container mx-auto mb-8 max-w-(--breakpoint-lg) space-y-4 px-6 pt-20 text-center md:px-4 lg:mb-14">
             <x-typography.section-h2>
                 A Suite of Modern Invoicing Tools and Features
             </x-typography.section-h2>
@@ -8,7 +8,7 @@
                 Enhance your business and provide customers and clients with a better invoicing experience.
             </x-typography.section-subheading>
         </div>
-        <div class="container mx-auto mb-20 max-w-screen-lg space-y-4 px-6 md:px-4 lg:mb-16">
+        <div class="container mx-auto mb-20 max-w-(--breakpoint-lg) space-y-4 px-6 md:px-4 lg:mb-16">
             <x-cards.feature href="{{route('invoices.create')}}">
                 <x-slot:image>
                     lady-holding-laptop-3.jpg

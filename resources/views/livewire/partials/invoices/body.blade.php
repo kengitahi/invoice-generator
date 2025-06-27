@@ -1,5 +1,5 @@
 <!-- Invoice -->
-<section class="mx-auto max-w-[85rem] px-4 pb-8 sm:my-10 sm:px-6 lg:px-8">
+<section class="mx-auto max-w-340 px-4 pb-8 sm:my-10 sm:px-6 lg:px-8">
     <div class="flex w-full gap-4 mx-auto">
         <!-- Card -->
         <div class="flex w-full max-w-[80%] flex-col rounded-xl bg-white p-4 shadow-md sm:p-10">
@@ -14,7 +14,7 @@
                         <p class="text-gray-800">This invoice does not have a logo. 
                             <br>
                             Adding a logo makes your invoice look more professional.</p>
-                        <a class="inline-flex items-center px-3 py-2 font-medium text-gray-800 bg-white border border-gray-200 rounded-lg shadow-sm text-md gap-x-2 hover:bg-primary hover:border-primary hover:text-white focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50 hover:underline"
+                        <a class="inline-flex items-center px-3 py-2 font-medium text-gray-800 bg-white border border-gray-200 rounded-lg shadow-xs text-md gap-x-2 hover:bg-primary hover:border-primary hover:text-white focus:bg-gray-50 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50 hover:underline"
                             href="{{ route('invoices.edit', $invoice->invoice_number) }}#new-logo" wire:navigate>
                             Add one?
                         </a>
@@ -212,7 +212,7 @@
 
         <!-- Buttons -->
         <div class="flex flex-col justify-start gap-3 mt-6">
-            <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:bg-blue-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+            <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:bg-blue-700 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50"
                 href="#" wire:navigate>
                 <svg aria-hidden="true" class="size-4 shrink-0" fill="none" height="20" viewBox="0 0 24 24"
                     width="20" xmlns="http://www.w3.org/2000/svg">
@@ -223,7 +223,7 @@
                 Send
             </a>
 
-            <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-800 bg-white border border-gray-200 rounded-lg shadow-sm gap-x-2 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+            <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-800 bg-white border border-gray-200 rounded-lg shadow-xs gap-x-2 hover:bg-gray-50 focus:bg-gray-50 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50"
                 href="#" wire:navigate>
                 <svg class="size-4 shrink-0" fill="none" height="24" stroke-linecap="round"
                     stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24" width="24"
@@ -235,7 +235,7 @@
                 Download PDF
             </a>
 
-            <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:bg-blue-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+            <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:bg-blue-700 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50"
                 href="#" wire:navigate>
                 <svg class="size-4 shrink-0" fill="none" height="24" stroke-linecap="round"
                     stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"
@@ -247,7 +247,7 @@
                 Print
             </a>
 
-            <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:bg-blue-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+            <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:bg-blue-700 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50"
                 href="{{ route('invoices.edit', $invoice->invoice_number) }}" wire:navigate>
                 <svg class="size-4" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
@@ -258,7 +258,7 @@
                 Edit
             </a>
 
-            <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:bg-blue-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+            <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:bg-blue-700 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50"
                 href="{{ route('invoices.index') }}" wire:navigate>
                 <svg class="size-6" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">

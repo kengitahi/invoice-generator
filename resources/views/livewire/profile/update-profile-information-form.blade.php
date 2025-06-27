@@ -112,7 +112,7 @@ new class extends Component {
                         {{ __('Your email address is unverified.') }}
 
                         <button
-                            class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             wire:click.prevent="sendVerification">
                             {{ __('Click here to re-send the verification email.') }}
                         </button>
@@ -129,7 +129,7 @@ new class extends Component {
         @if (auth()->user()->avatar)
             <div class="mt-4">
                 <x-input-label :value="__('Current Profile Picture')" for="avatar" />
-                <img alt="Profile Picture" class="block max-h-[200px] rounded-md border-gray-300 shadow-sm"
+                <img alt="Profile Picture" class="block max-h-[200px] rounded-md border-gray-300 shadow-xs"
                     src="{{ Storage::url(auth()->user()->avatar) }}">
             </div>
         @endif
@@ -150,7 +150,7 @@ new class extends Component {
                 <p class="block mb-2 text-sm font-medium text-gray-700">
                     {{ __('New Profile Picture') }}
                 </p>
-                <img class="block max-h-[200px] rounded-md border-gray-300 shadow-sm"
+                <img class="block max-h-[200px] rounded-md border-gray-300 shadow-xs"
                     src="{{ $newAvatar->temporaryUrl() }}">
             </div>
         @endif

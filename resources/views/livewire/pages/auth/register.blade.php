@@ -97,7 +97,7 @@ new #[Layout("layouts.guest")] class extends Component {
                 <p class="block mb-2 text-sm font-medium text-gray-700">
                     {{ __('Profile Picture Preview') }}
                 </p>
-                <img class="block max-h-[200px] rounded-md border-gray-300 shadow-sm"
+                <img class="block max-h-[200px] rounded-md border-gray-300 shadow-xs"
                     src="{{ $avatar->temporaryUrl() }}">
             </div>
         @endif

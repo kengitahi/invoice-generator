@@ -3,7 +3,7 @@
         class="relative mx-auto flex w-full flex-wrap items-start justify-between font-medium md:h-24 md:items-center md:justify-between">
         <a class="flex w-1/4 items-center space-x-2 py-4 pl-6 pr-4 font-extrabold text-white md:py-0" href="/">
             <span
-                class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-white via-gray-200 to-white text-gray-900">
+                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-white via-gray-200 to-white text-gray-900">
                 <svg class="h-5 w-auto -translate-y-px" fill="none" viewBox="0 0 69 66"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -19,26 +19,26 @@
                 href="/">
                 <span>Home</span>
                 <span
-                    class="absolute bottom-0 left-0 h-px w-full translate-y-px bg-gradient-to-r from-gray-900 via-gray-600 to-gray-900 duration-300 ease-out md:from-gray-700 md:via-gray-400 md:to-gray-700"></span>
+                    class="absolute bottom-0 left-0 h-px w-full translate-y-px bg-linear-to-r from-gray-900 via-gray-600 to-gray-900 duration-300 ease-out md:from-gray-700 md:via-gray-400 md:to-gray-700"></span>
             </a>
             <a class="group relative mx-2 inline-block h-full w-full px-4 py-5 text-center font-medium leading-tight duration-300 ease-out hover:text-white md:w-auto md:px-2 md:py-2 md:text-center lg:mx-3"
                 href="#features">
                 <span>Features</span>
                 <span
-                    class="absolute bottom-0 left-1/2 h-px w-0 translate-y-px bg-gradient-to-r from-gray-900 via-gray-600 to-gray-900 duration-300 ease-out group-hover:left-0 group-hover:w-full md:from-gray-700 md:via-gray-400 md:to-gray-700"></span>
+                    class="absolute bottom-0 left-1/2 h-px w-0 translate-y-px bg-linear-to-r from-gray-900 via-gray-600 to-gray-900 duration-300 ease-out group-hover:left-0 group-hover:w-full md:from-gray-700 md:via-gray-400 md:to-gray-700"></span>
             </a>
             {{-- //TODO: Reroute to login using middleware --}}
             <a class="group relative mx-2 inline-block h-full w-full px-4 py-5 text-center font-medium leading-tight duration-300 ease-out hover:text-white md:w-auto md:px-2 md:py-2 md:text-center lg:mx-3"
                 href="{{ route('invoices.create') }}">
                 <span>Create Invoice</span>
                 <span
-                    class="absolute bottom-0 left-1/2 h-px w-0 translate-y-px bg-gradient-to-r from-gray-900 via-gray-600 to-gray-900 duration-300 ease-out group-hover:left-0 group-hover:w-full md:from-gray-700 md:via-gray-400 md:to-gray-700"></span>
+                    class="absolute bottom-0 left-1/2 h-px w-0 translate-y-px bg-linear-to-r from-gray-900 via-gray-600 to-gray-900 duration-300 ease-out group-hover:left-0 group-hover:w-full md:from-gray-700 md:via-gray-400 md:to-gray-700"></span>
             </a>
             <a class="group relative mx-2 inline-block h-full w-full px-4 py-5 text-center font-medium leading-tight duration-300 ease-out hover:text-white md:w-auto md:px-2 md:py-2 md:text-center lg:mx-3"
                 href="{{ route('contact') }}">
                 <span>Contact</span>
                 <span
-                    class="absolute bottom-0 left-1/2 h-px w-0 translate-y-px bg-gradient-to-r from-gray-900 via-gray-600 to-gray-900 duration-300 ease-out group-hover:left-0 group-hover:w-full md:from-gray-700 md:via-gray-400 md:to-gray-700"></span>
+                    class="absolute bottom-0 left-1/2 h-px w-0 translate-y-px bg-linear-to-r from-gray-900 via-gray-600 to-gray-900 duration-300 ease-out group-hover:left-0 group-hover:w-full md:from-gray-700 md:via-gray-400 md:to-gray-700"></span>
             </a>
         </div>
         <div :class="{ 'flex': showMenu, 'hidden': !showMenu }"

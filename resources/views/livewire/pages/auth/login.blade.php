@@ -49,7 +49,7 @@ new #[Layout('layouts.guest')] class extends Component {
         <!-- Remember Me -->
         <div class="mt-4 block">
             <label class="inline-flex items-center" for="remember">
-                <input class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" id="remember"
+                <input class="rounded-sm border-gray-300 text-indigo-600 shadow-xs focus:ring-indigo-500" id="remember"
                     name="remember" type="checkbox" wire:model="form.remember">
                 <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>

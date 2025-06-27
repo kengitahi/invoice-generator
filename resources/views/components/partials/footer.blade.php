@@ -1,4 +1,4 @@
-<footer class="w-full px-3 py-8 antialiased bg-gradient-to-br from-gray-900 via-black to-gray-800 lg:px-6">
+<footer class="w-full px-3 py-8 antialiased bg-linear-to-br from-gray-900 via-black to-gray-800 lg:px-6">
     <div class="mx-auto max-w-7xl">
         <nav class="flex flex-wrap justify-center -mx-5 -my-2">
             <div class="px-5 py-2">

@@ -5,14 +5,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     addRowButton.addEventListener('click', function () {
         const newRow = document.createElement('div');
-        newRow.className = 'flex flex-col p-4 mt-4 mb-4 border-[2px] border-gray-300 rounded-md item-row';
+        newRow.className = 'flex flex-col p-4 mt-4 mb-4 border-2 border-gray-300 rounded-md item-row';
         newRow.innerHTML = `        
         <div>
             <label class="block text-gray-900 text-md" for="items[${rowCount}][name]">
                 Item Name
             </label>
             <input
-                class="block w-full px-4 py-2 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent focus:ring-opacity-90 "
+                class="block w-full px-4 py-2 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-hidden focus:ring-1 focus:ring-primary focus:border-transparent focus:ring-opacity-90 "
                 name="items[${rowCount}][name]" placeholder="Lawn chair, web development, etc" required type="text" />
         </div>
 
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <small class="text-gray-400">(optional)</small>
             </label>
             <textarea
-                class="block w-full px-4 py-2 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent focus:ring-opacity-90"
+                class="block w-full px-4 py-2 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-hidden focus:ring-1 focus:ring-primary focus:border-transparent focus:ring-opacity-90"
                 name="items[${rowCount}][description]" onInput="this.parentNode.dataset.clonedVal = this.value"
                 placeholder="Description of rendered services or sold item"></textarea>
         </div>
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     Quantity (Number)
                 </label>
                 <input
-                    class="block w-full px-4 py-2 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent focus:ring-opacity-90 "
+                    class="block w-full px-4 py-2 mt-2 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-hidden focus:ring-1 focus:ring-primary focus:border-transparent focus:ring-opacity-90 "
                     name="items[${rowCount}][quantity]" placeholder="1" required type="number" />
             </div>
             
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     Price (in currency)
                 </label>
                 <div
-                    class="flex items-center w-full px-4 mt-2 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent focus:ring-opacity-50 has-[:focus]:ring-1 has-[:focus]:ring-primary has-[:focus]:border-transparent has-[:focus]:ring-opacity-90">
+                    class="flex items-center w-full px-4 mt-2 text-base border border-gray-300 rounded-md focus:outline-hidden focus:ring-1 focus:ring-primary focus:border-transparent focus:ring-opacity-50 has-focus:ring-1 has-focus:ring-primary has-focus:border-transparent has-[:focus]:ring-opacity-90">
                     <span>$</span>
                     <input
                         class="block w-full p-2 text-base placeholder-gray-400 border-0 border-transparent focus:ring-0 focus:ring-transparent"
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <small class="text-gray-400">(optional)</small>
                 </label>
                 <div
-                    class="flex items-center w-full px-4 mt-2 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent focus:ring-opacity-50 has-[:focus]:ring-1 has-[:focus]:ring-primary has-[:focus]:border-transparent has-[:focus]:ring-opacity-90">
+                    class="flex items-center w-full px-4 mt-2 text-base border border-gray-300 rounded-md focus:outline-hidden focus:ring-1 focus:ring-primary focus:border-transparent focus:ring-opacity-50 has-focus:ring-1 has-focus:ring-primary has-focus:border-transparent has-[:focus]:ring-opacity-90">
 
                     <input
                         class="block w-full p-2 text-base placeholder-gray-400 border-0 border-transparent focus:ring-0 focus:ring-transparent"
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <small class="text-gray-400">(optional)</small>
                 </label>
                 <div
-                    class="flex items-center w-full px-4 mt-2 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent focus:ring-opacity-50 has-[:focus]:ring-1 has-[:focus]:ring-primary has-[:focus]:border-transparent has-[:focus]:ring-opacity-90">
+                    class="flex items-center w-full px-4 mt-2 text-base border border-gray-300 rounded-md focus:outline-hidden focus:ring-1 focus:ring-primary focus:border-transparent focus:ring-opacity-50 has-focus:ring-1 has-focus:ring-primary has-focus:border-transparent has-[:focus]:ring-opacity-90">
 
                     <input
                         class="block w-full p-2 text-base placeholder-gray-400 border-0 border-transparent focus:ring-0 focus:ring-transparent"

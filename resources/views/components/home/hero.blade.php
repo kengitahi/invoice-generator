@@ -1,4 +1,4 @@
-<section class="w-full bg-gradient-to-br from-gray-900 via-black to-gray-800 px-3 antialiased lg:px-6">
+<section class="w-full bg-linear-to-br from-gray-900 via-black to-gray-800 px-3 antialiased lg:px-6">
     <div class="mx-auto max-w-7xl">
         <x-partials.header />
         <div class="container mx-auto px-6 py-32 md:px-4 md:text-center">

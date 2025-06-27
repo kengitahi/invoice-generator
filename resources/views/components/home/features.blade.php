@@ -1,8 +1,8 @@
-<section class="w-full px-3 antialiased bg-gradient-to-br from-gray-900 via-black to-gray-800 lg:px-6" id="home-features
+<section class="w-full px-3 antialiased bg-linear-to-br from-gray-900 via-black to-gray-800 lg:px-6" id="home-features
 ">
     <div class="mx-auto max-w-7xl">
         <div class="container px-6 py-20 mx-auto md:px-4">
-            <div class="max-w-screen-lg mb-8 space-y-4 lg:mb-16">
+            <div class="max-w-(--breakpoint-lg) mb-8 space-y-4 lg:mb-16">
                 <x-typography.section-h2>
                     Designed for business teams like yours
                 </x-typography.section-h2>

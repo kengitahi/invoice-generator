@@ -46,7 +46,7 @@
                 </div>
             @endif
 
-            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+            <div class="overflow-hidden bg-white shadow-xs sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     @if (count($invoices) == 0)
                         <div>
@@ -158,12 +158,12 @@
                                                         </span>
                                                     </x-buttons.btn>
                                                     <ul aria-labelledby="dropdown-default" aria-orientation="vertical"
-                                                        class="min-w-60 dropdown-menu hidden border-[1px] bg-white !text-black dropdown-open:opacity-100"
+                                                        class="min-w-60 dropdown-menu hidden border bg-white text-black! dropdown-open:opacity-100"
                                                         role="menu">
                                                         {{-- //TODO:If status == sent but not paid --}}
                                                         {{-- Dispatch event, send mailable, add function to do so? --}}
                                                         <li class="">
-                                                            <a class="dropdown-item !text-black" href="#">
+                                                            <a class="dropdown-item text-black!" href="#">
                                                                 <svg class="size-4" fill="none" stroke-width="2"
                                                                     stroke="currentColor" viewBox="0 0 24 24"
                                                                     xmlns="http://www.w3.org/2000/svg">
@@ -176,7 +176,7 @@
                                                         </li>
     
                                                         <li>
-                                                            <a class="dropdown-item !text-black" href="#">
+                                                            <a class="dropdown-item text-black!" href="#">
                                                                 <svg aria-hidden="true" class="size-4 shrink-0"
                                                                     fill="none" viewBox="0 0 24 24" width="20"
                                                                     xmlns="http://www.w3.org/2000/svg">
@@ -190,7 +190,7 @@
                                                         </li>
     
                                                         <li>
-                                                            <a class="dropdown-item !text-black"
+                                                            <a class="dropdown-item text-black!"
                                                                 href="{{ route('invoices.view', $invoice->invoice_number) }}">
                                                                 <svg class="size-4" fill="none" stroke-width="2"
                                                                     stroke="currentColor" viewBox="0 0 24 24"
@@ -207,7 +207,7 @@
                                                         </li>
     
                                                         <li>
-                                                            <a class="dropdown-item !text-black"
+                                                            <a class="dropdown-item text-black!"
                                                                 href="{{ route('invoices.edit', $invoice->invoice_number) }}">
                                                                 <svg class="size-4" fill="none" stroke-width="2"
                                                                     stroke="currentColor" viewBox="0 0 24 24"
@@ -221,7 +221,7 @@
                                                         </li>
     
                                                         <li>
-                                                            <a class="dropdown-item !text-black" href="#">
+                                                            <a class="dropdown-item text-black!" href="#">
                                                                 <svg class="size-4 shrink-0" fill="none"
                                                                     height="24" stroke-linecap="round"
                                                                     stroke-linejoin="round" stroke-width="2"
@@ -237,7 +237,7 @@
                                                         </li>
     
                                                         <li>
-                                                            <a class="dropdown-item !text-black" href="#">
+                                                            <a class="dropdown-item text-black!" href="#">
                                                                 <svg class="size-4 shrink-0" fill="none"
                                                                     height="24" stroke-linecap="round"
                                                                     stroke-linejoin="round" stroke-width="2"
@@ -254,7 +254,7 @@
     
                                                         {{-- Change status to created or not send --}}
                                                         <li>
-                                                            <a class="dropdown-item !text-black" href="#">
+                                                            <a class="dropdown-item text-black!" href="#">
                                                                 <svg class="size-6" fill="none" stroke-width="1.5"
                                                                     stroke="currentColor" viewBox="0 0 24 24"
                                                                     xmlns="http://www.w3.org/2000/svg">
